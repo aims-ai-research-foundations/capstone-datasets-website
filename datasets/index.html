@@ -1,0 +1,200 @@
+---
+layout: default
+title: Datasets
+description: Browse our curated collection of datasets for AI Research Foundations capstone projects
+---
+
+<div class="page-header">
+  <div class="container">
+    <h1 class="page-header__title">Dataset Catalog</h1>
+    <p class="page-header__description">
+      Browse our curated collection of datasets for AI Research Foundations capstone projects.
+      Filter by country, task, difficulty, or course to find the perfect dataset for your project.
+    </p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="section">
+    <!-- Filters -->
+    <div class="filters" id="filters">
+      <div class="search-box">
+        <svg class="search-box__icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="M21 21l-4.35-4.35"></path>
+        </svg>
+        <input type="text" class="search-box__input" placeholder="Search datasets..." id="search-input">
+      </div>
+    </div>
+
+    <div class="filters">
+      <div class="filters__group" id="country-filters">
+        <span class="text-sm text-gray-500 font-medium" style="padding: 8px 0;">Country:</span>
+        <button class="filters__btn active" data-filter="country" data-value="all">All</button>
+        {% for country in site.project.countries %}
+        <button class="filters__btn" data-filter="country" data-value="{{ country.code }}">
+          {{ country.flag }} {{ country.name }}
+        </button>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="filters">
+      <div class="filters__group" id="difficulty-filters">
+        <span class="text-sm text-gray-500 font-medium" style="padding: 8px 0;">Difficulty:</span>
+        <button class="filters__btn active" data-filter="difficulty" data-value="all">All</button>
+        <button class="filters__btn" data-filter="difficulty" data-value="beginner">Beginner</button>
+        <button class="filters__btn" data-filter="difficulty" data-value="intermediate">Intermediate</button>
+        <button class="filters__btn" data-filter="difficulty" data-value="advanced">Advanced</button>
+      </div>
+    </div>
+
+    <!-- Dataset Grid -->
+    <div class="grid grid--3" id="dataset-grid">
+      {% for dataset in site.data.datasets %}
+      <div class="dataset-card"
+           data-name="{{ dataset.name | downcase }}"
+           data-tagline="{{ dataset.tagline | downcase }}"
+           data-countries="{{ dataset.countries | join: ',' }}"
+           data-difficulty="{{ dataset.difficulty }}"
+           data-tasks="{{ dataset.tasks | join: ',' }}">
+        <div class="dataset-card__header">
+          <h3 class="dataset-card__title">
+            <a href="{{ '/datasets/' | append: dataset.id | append: '/' | relative_url }}">
+              {{ dataset.name }}
+            </a>
+          </h3>
+          <p class="dataset-card__tagline">{{ dataset.tagline }}</p>
+        </div>
+
+        <div class="dataset-card__body">
+          <div class="dataset-card__meta">
+            {% for task in dataset.tasks limit:2 %}
+            <span class="dataset-card__badge dataset-card__badge--task">{{ task }}</span>
+            {% endfor %}
+            <span class="dataset-card__badge dataset-card__badge--size">{{ dataset.size }}</span>
+            <span class="dataset-card__badge dataset-card__badge--license">{{ dataset.license }}</span>
+          </div>
+
+          <div class="dataset-card__languages">
+            {% for lang in dataset.languages limit:4 %}
+            <span class="dataset-card__lang">{{ lang.name }}</span>
+            {% endfor %}
+            {% if dataset.languages.size > 4 %}
+            <span class="dataset-card__lang">+{{ dataset.languages.size | minus: 4 }} more</span>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="dataset-card__footer">
+          <div class="dataset-card__countries">
+            {% for country in dataset.countries limit:4 %}
+              {% case country %}
+                {% when "NG" %}<span title="Nigeria">🇳🇬</span>
+                {% when "KE" %}<span title="Kenya">🇰🇪</span>
+                {% when "GH" %}<span title="Ghana">🇬🇭</span>
+                {% when "ZA" %}<span title="South Africa">🇿🇦</span>
+                {% when "ET" %}<span title="Ethiopia">🇪🇹</span>
+              {% endcase %}
+            {% endfor %}
+          </div>
+          <a href="{{ '/datasets/' | append: dataset.id | append: '/' | relative_url }}" class="btn btn--sm btn--outline">
+            View Details
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div id="no-results" class="text-center mt-8 hidden" style="padding: 48px 0;">
+      <p class="text-gray-500">No datasets found matching your criteria.</p>
+      <button class="btn btn--outline mt-4" onclick="resetFilters()">Reset Filters</button>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const searchInput = document.getElementById('search-input');
+  const datasetGrid = document.getElementById('dataset-grid');
+  const noResults = document.getElementById('no-results');
+  const filterButtons = document.querySelectorAll('.filters__btn');
+
+  let activeFilters = {
+    country: 'all',
+    difficulty: 'all',
+    search: ''
+  };
+
+  // Filter button click handlers
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const filterType = this.dataset.filter;
+      const value = this.dataset.value;
+
+      // Update active state
+      document.querySelectorAll(`[data-filter="${filterType}"]`).forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+
+      // Update filter
+      activeFilters[filterType] = value;
+      applyFilters();
+    });
+  });
+
+  // Search input handler
+  searchInput.addEventListener('input', function() {
+    activeFilters.search = this.value.toLowerCase();
+    applyFilters();
+  });
+
+  function applyFilters() {
+    const cards = datasetGrid.querySelectorAll('.dataset-card');
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      let show = true;
+
+      // Search filter
+      if (activeFilters.search) {
+        const name = card.dataset.name || '';
+        const tagline = card.dataset.tagline || '';
+        if (!name.includes(activeFilters.search) && !tagline.includes(activeFilters.search)) {
+          show = false;
+        }
+      }
+
+      // Country filter
+      if (activeFilters.country !== 'all') {
+        const countries = card.dataset.countries || '';
+        if (!countries.includes(activeFilters.country)) {
+          show = false;
+        }
+      }
+
+      // Difficulty filter
+      if (activeFilters.difficulty !== 'all') {
+        if (card.dataset.difficulty !== activeFilters.difficulty) {
+          show = false;
+        }
+      }
+
+      card.style.display = show ? '' : 'none';
+      if (show) visibleCount++;
+    });
+
+    // Show/hide no results message
+    noResults.classList.toggle('hidden', visibleCount > 0);
+  }
+
+  // Reset filters function
+  window.resetFilters = function() {
+    activeFilters = { country: 'all', difficulty: 'all', search: '' };
+    searchInput.value = '';
+    filterButtons.forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.value === 'all');
+    });
+    applyFilters();
+  };
+});
+</script>

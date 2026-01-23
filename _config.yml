@@ -1,0 +1,90 @@
+# Site settings
+title: "Capstone Datasets"
+description: "Curated datasets for AI Research Foundations capstone projects across Africa"
+url: "https://yassir-249.github.io"
+baseurl: "/capstone-datasets-website"
+logo: "/assets/images/logo.svg"
+
+# Project info
+project:
+  name: "Africa AI Upskilling Initiative"
+  tagline: "Empowering 31,000+ students across Africa with world-class AI education"
+  countries:
+    - name: "Nigeria"
+      code: "NG"
+      flag: "🇳🇬"
+      heis: 10
+      champions: 50
+      students: 11836
+    - name: "South Africa"
+      code: "ZA"
+      flag: "🇿🇦"
+      heis: 10
+      champions: 50
+      students: 7440
+    - name: "Kenya"
+      code: "KE"
+      flag: "🇰🇪"
+      heis: 6
+      champions: 30
+      students: 6617
+    - name: "Ghana"
+      code: "GH"
+      flag: "🇬🇭"
+      heis: 4
+      champions: 16
+      students: 5087
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+
+# Sass settings
+sass:
+  style: compressed
+  sass_dir: _sass
+
+# Collections
+collections:
+  datasets:
+    output: true
+    permalink: /datasets/:name/
+  courses:
+    output: true
+    permalink: /courses/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "datasets"
+    values:
+      layout: "dataset"
+  - scope:
+      path: ""
+      type: "courses"
+    values:
+      layout: "course"
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Exclude from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - PLAN.md
+  - README.md
+  - .git
+  - .gitignore

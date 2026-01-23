@@ -1,0 +1,88 @@
+---
+layout: default
+---
+
+{% assign course = page %}
+
+<div class="course-detail__header" style="background: linear-gradient(135deg, {{ course.color }} 0%, {{ course.color }}dd 100%);">
+  <div class="container">
+    <nav class="page-header__breadcrumb" style="color: rgba(255,255,255,0.7);">
+      <a href="{{ '/' | relative_url }}" style="color: rgba(255,255,255,0.7);">Home</a>
+      <span>/</span>
+      <a href="{{ '/courses/' | relative_url }}" style="color: rgba(255,255,255,0.7);">Courses</a>
+      <span>/</span>
+      <span style="color: rgba(255,255,255,0.9);">Course {{ course.number }}</span>
+    </nav>
+
+    <span class="course-detail__number">Course {{ course.number }}</span>
+    <h1 class="course-detail__title">{{ course.title }}</h1>
+    <p class="course-detail__description">{{ course.description }}</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="section">
+    {% if course.learning_outcomes %}
+    <section class="dataset-detail__section">
+      <h2>Learning Outcomes</h2>
+      <ul>
+        {% for outcome in course.learning_outcomes %}
+        <li>{{ outcome }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+    <section class="dataset-detail__section">
+      <h2>Recommended Datasets</h2>
+      <p class="text-gray-600 mb-6">These datasets are particularly useful for this course's exercises and projects.</p>
+
+      <div class="grid grid--3">
+        {% for dataset in site.data.datasets %}
+          {% if dataset.courses contains course.id %}
+          <div class="dataset-card">
+            <div class="dataset-card__header">
+              <h3 class="dataset-card__title">
+                <a href="{{ '/datasets/' | append: dataset.id | append: '/' | relative_url }}">{{ dataset.name }}</a>
+              </h3>
+              <p class="dataset-card__tagline">{{ dataset.tagline }}</p>
+            </div>
+            <div class="dataset-card__body">
+              <div class="dataset-card__meta">
+                {% for task in dataset.tasks limit:2 %}
+                <span class="dataset-card__badge dataset-card__badge--task">{{ task }}</span>
+                {% endfor %}
+                <span class="dataset-card__badge dataset-card__badge--size">{{ dataset.size }}</span>
+              </div>
+              <div class="dataset-card__languages">
+                {% for lang in dataset.languages limit:4 %}
+                <span class="dataset-card__lang">{{ lang.name }}</span>
+                {% endfor %}
+                {% if dataset.languages.size > 4 %}
+                <span class="dataset-card__lang">+{{ dataset.languages.size | minus: 4 }} more</span>
+                {% endif %}
+              </div>
+            </div>
+            <div class="dataset-card__footer">
+              <div class="dataset-card__countries">
+                {% for country in dataset.countries limit:4 %}
+                  {% case country %}
+                    {% when "NG" %}<span title="Nigeria">🇳🇬</span>
+                    {% when "KE" %}<span title="Kenya">🇰🇪</span>
+                    {% when "GH" %}<span title="Ghana">🇬🇭</span>
+                    {% when "ZA" %}<span title="South Africa">🇿🇦</span>
+                    {% when "ET" %}<span title="Ethiopia">🇪🇹</span>
+                  {% endcase %}
+                {% endfor %}
+              </div>
+              <a href="{{ '/datasets/' | append: dataset.id | append: '/' | relative_url }}" class="btn btn--sm btn--outline">View Details</a>
+            </div>
+          </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+
+    {{ content }}
+  </div>
+</div>

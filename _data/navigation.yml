@@ -1,0 +1,41 @@
+main:
+  - title: "Datasets"
+    url: "/datasets/"
+  - title: "Courses"
+    url: "/courses/"
+  - title: "About"
+    url: "/about/"
+  - title: "Contribute"
+    url: "/contribute/"
+
+footer:
+  - title: "Quick Links"
+    links:
+      - title: "Browse Datasets"
+        url: "/datasets/"
+      - title: "View Courses"
+        url: "/courses/"
+      - title: "Contribute"
+        url: "/contribute/"
+  - title: "Resources"
+    links:
+      - title: "Google Cloud Skills Boost"
+        url: "https://www.cloudskillsboost.google/"
+        external: true
+      - title: "Hugging Face Datasets"
+        url: "https://huggingface.co/datasets"
+        external: true
+      - title: "Masakhane NLP"
+        url: "https://www.masakhane.io/"
+        external: true
+  - title: "Partners"
+    links:
+      - title: "AIMS South Africa"
+        url: "https://www.aims.ac.za/"
+        external: true
+      - title: "FATE Foundation"
+        url: "https://www.fatefoundation.org/"
+        external: true
+      - title: "Google DeepMind"
+        url: "https://deepmind.google/"
+        external: true

@@ -1,0 +1,39 @@
+---
+layout: default
+title: Courses
+description: Browse datasets by course from Google DeepMind's AI Research Foundations curriculum
+---
+
+<div class="page-header">
+  <div class="container">
+    <h1 class="page-header__title">Courses</h1>
+    <p class="page-header__description">
+      Browse datasets aligned with Google DeepMind's AI Research Foundations curriculum.
+      Each course has recommended datasets for hands-on exercises and capstone projects.
+    </p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="section">
+    <div class="grid grid--2">
+      {% for course in site.data.courses %}
+      {% assign course_datasets = site.data.datasets | where_exp: "d", "d.courses contains course.id" %}
+      <a href="{{ '/courses/' | append: course.id | append: '/' | relative_url }}"
+         class="course-card"
+         style="--course-color: {{ course.color }}">
+        <span class="course-card__number">{{ course.number }}</span>
+        <span class="course-card__content">
+          <span class="course-card__title">{{ course.title }}</span>
+          <span class="course-card__datasets">{{ course_datasets.size }} datasets available</span>
+        </span>
+        <span class="course-card__arrow">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M9 18l6-6-6-6"></path>
+          </svg>
+        </span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,161 @@
+---
+layout: default
+---
+
+{% assign dataset = page %}
+
+<div class="dataset-detail__header">
+  <div class="container">
+    <nav class="page-header__breadcrumb">
+      <a href="{{ '/' | relative_url }}">Home</a>
+      <span>/</span>
+      <a href="{{ '/datasets/' | relative_url }}">Datasets</a>
+      <span>/</span>
+      <span>{{ dataset.name }}</span>
+    </nav>
+
+    <h1 class="dataset-detail__title">{{ dataset.name }}</h1>
+    <p class="dataset-detail__tagline">{{ dataset.tagline }}</p>
+
+    <div class="dataset-detail__meta">
+      {% for task in dataset.tasks limit:3 %}
+      <span class="dataset-card__badge dataset-card__badge--task">{{ task }}</span>
+      {% endfor %}
+      <span class="dataset-card__badge dataset-card__badge--size">{{ dataset.size }}</span>
+      <span class="dataset-card__badge dataset-card__badge--license">{{ dataset.license }}</span>
+    </div>
+
+    <div class="dataset-detail__actions">
+      <a href="{{ dataset.source_url }}" class="btn btn--primary" target="_blank" rel="noopener">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+          <polyline points="15,3 21,3 21,9"></polyline>
+          <line x1="10" y1="14" x2="21" y2="3"></line>
+        </svg>
+        Access Dataset
+      </a>
+      {% if dataset.paper_url %}
+      <a href="{{ dataset.paper_url }}" class="btn btn--outline" target="_blank" rel="noopener">
+        Read Paper
+      </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="layout-sidebar">
+    <aside class="sidebar">
+      <div class="sidebar__section">
+        <h3>Languages</h3>
+        <div class="dataset-card__languages">
+          {% for lang in dataset.languages %}
+          <span class="dataset-card__lang">{{ lang.name }}</span>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="sidebar__section">
+        <h3>Countries</h3>
+        <div class="dataset-card__countries">
+          {% for country in dataset.countries %}
+            {% case country %}
+              {% when "NG" %}<span title="Nigeria">🇳🇬</span>
+              {% when "KE" %}<span title="Kenya">🇰🇪</span>
+              {% when "GH" %}<span title="Ghana">🇬🇭</span>
+              {% when "ZA" %}<span title="South Africa">🇿🇦</span>
+              {% when "ET" %}<span title="Ethiopia">🇪🇹</span>
+            {% endcase %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="sidebar__section">
+        <h3>Details</h3>
+        <table>
+          <tr>
+            <td>Format</td>
+            <td>{{ dataset.format | join: ", " }}</td>
+          </tr>
+          <tr>
+            <td>Difficulty</td>
+            <td>{{ dataset.difficulty | capitalize }}</td>
+          </tr>
+          <tr>
+            <td>Compute</td>
+            <td>{{ dataset.compute | capitalize }}</td>
+          </tr>
+          <tr>
+            <td>Colab-friendly</td>
+            <td>{% if dataset.colab_friendly %}Yes{% else %}No{% endif %}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="sidebar__section">
+        <h3>Related Courses</h3>
+        {% for course_id in dataset.courses %}
+          {% assign course = site.data.courses | where: "id", course_id | first %}
+          {% if course %}
+          <a href="{{ '/courses/' | append: course.id | append: '/' | relative_url }}" class="course-card" style="--course-color: {{ course.color }}; margin-bottom: 8px;">
+            <span class="course-card__number">{{ course.number }}</span>
+            <span class="course-card__content">
+              <span class="course-card__title">{{ course.short_title }}</span>
+            </span>
+          </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </aside>
+
+    <div class="dataset-detail__content">
+      <section class="dataset-detail__section">
+        <h2>Description</h2>
+        {{ dataset.description | markdownify }}
+      </section>
+
+      {% if dataset.quickstart %}
+      <section class="dataset-detail__section">
+        <h2>Quick Start</h2>
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">Python</span>
+            <button class="code-block__copy" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre><code>{{ dataset.quickstart }}</code></pre>
+        </div>
+      </section>
+      {% endif %}
+
+      {% if dataset.project_ideas %}
+      <section class="dataset-detail__section">
+        <h2>Project Ideas</h2>
+        <div class="grid grid--2">
+          {% for idea in dataset.project_ideas %}
+          <div class="card">
+            <div class="card__body">
+              <h4>{{ idea.title }}</h4>
+              <p class="text-gray-600">{{ idea.description }}</p>
+              <span class="tag tag--outline">{{ idea.difficulty | capitalize }}</span>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
+      {% if dataset.ethics %}
+      <section class="dataset-detail__section">
+        <h2>Ethical Considerations</h2>
+        <ul>
+          {% for item in dataset.ethics %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+
+      {{ content }}
+    </div>
+  </div>
+</div>

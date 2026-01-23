@@ -1,0 +1,51 @@
+{% comment %}
+  Dataset Card Component
+  Usage: {% include dataset-card.html dataset=dataset %}
+{% endcomment %}
+
+<div class="dataset-card">
+  <div class="dataset-card__header">
+    <h3 class="dataset-card__title">
+      <a href="{{ '/datasets/' | append: include.dataset.id | append: '/' | relative_url }}">
+        {{ include.dataset.name }}
+      </a>
+    </h3>
+    <p class="dataset-card__tagline">{{ include.dataset.tagline }}</p>
+  </div>
+
+  <div class="dataset-card__body">
+    <div class="dataset-card__meta">
+      {% for task in include.dataset.tasks limit:2 %}
+      <span class="dataset-card__badge dataset-card__badge--task">{{ task }}</span>
+      {% endfor %}
+      <span class="dataset-card__badge dataset-card__badge--size">{{ include.dataset.size }}</span>
+      <span class="dataset-card__badge dataset-card__badge--license">{{ include.dataset.license }}</span>
+    </div>
+
+    <div class="dataset-card__languages">
+      {% for lang in include.dataset.languages limit:4 %}
+      <span class="dataset-card__lang">{{ lang.name }}</span>
+      {% endfor %}
+      {% if include.dataset.languages.size > 4 %}
+      <span class="dataset-card__lang">+{{ include.dataset.languages.size | minus: 4 }} more</span>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="dataset-card__footer">
+    <div class="dataset-card__countries">
+      {% for country in include.dataset.countries limit:4 %}
+        {% case country %}
+          {% when "NG" %}<span title="Nigeria">🇳🇬</span>
+          {% when "KE" %}<span title="Kenya">🇰🇪</span>
+          {% when "GH" %}<span title="Ghana">🇬🇭</span>
+          {% when "ZA" %}<span title="South Africa">🇿🇦</span>
+          {% when "ET" %}<span title="Ethiopia">🇪🇹</span>
+        {% endcase %}
+      {% endfor %}
+    </div>
+    <a href="{{ '/datasets/' | append: include.dataset.id | append: '/' | relative_url }}" class="btn btn--sm btn--outline">
+      View Details
+    </a>
+  </div>
+</div>

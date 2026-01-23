@@ -1,0 +1,43 @@
+<header class="header">
+  <div class="container">
+    <div class="header__inner">
+      <a href="{{ '/' | relative_url }}" class="header__logo">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="8" fill="#1E40AF"/>
+          <path d="M8 22L16 10L24 22H8Z" fill="white"/>
+          <circle cx="16" cy="18" r="3" fill="#1E40AF"/>
+        </svg>
+        <span>Capstone Datasets</span>
+      </a>
+
+      <nav class="header__nav">
+        {% for item in site.data.navigation.main %}
+        <a href="{{ item.url | relative_url }}"
+           class="header__link {% if page.url == item.url %}active{% endif %}">
+          {{ item.title }}
+        </a>
+        {% endfor %}
+      </nav>
+
+      <div class="header__actions">
+        <a href="{{ '/datasets/' | relative_url }}" class="btn btn--sm btn--primary hidden md:block">
+          Browse Datasets
+        </a>
+        <button class="header__mobile-toggle" onclick="toggleMobileNav()" aria-label="Toggle menu">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M3 12h18M3 6h18M3 18h18"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav">
+  {% for item in site.data.navigation.main %}
+  <a href="{{ item.url | relative_url }}"
+     class="mobile-nav__link {% if page.url == item.url %}active{% endif %}">
+    {{ item.title }}
+  </a>
+  {% endfor %}
+</nav>
