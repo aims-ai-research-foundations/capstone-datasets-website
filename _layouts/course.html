@@ -3,6 +3,8 @@ layout: default
 ---
 
 {% assign course = page %}
+{% assign course_data = site.data.courses | where: "id", course.id | first %}
+{% assign course_datasets = site.data.datasets | where_exp: "d", "d.courses contains course.id" %}
 
 <div class="course-detail__header" style="background: linear-gradient(135deg, {{ course.color }} 0%, {{ course.color }}dd 100%);">
   <div class="container">
@@ -16,27 +18,93 @@ layout: default
 
     <span class="course-detail__number">Course {{ course.number }}</span>
     <h1 class="course-detail__title">{{ course.title }}</h1>
-    <p class="course-detail__description">{{ course.description }}</p>
+    <p class="course-detail__description">{{ course_data.description | default: course.description }}</p>
+
+    {% if course_data.duration %}
+    <div class="course-detail__meta" style="margin-top: 1rem;">
+      <span style="background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 9999px; font-size: 0.875rem;">
+        Duration: {{ course_data.duration }}
+      </span>
+      <span style="background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 9999px; font-size: 0.875rem; margin-left: 0.5rem;">
+        {{ course_datasets.size }} Datasets
+      </span>
+    </div>
+    {% endif %}
   </div>
 </div>
 
 <div class="container">
   <div class="section">
-    {% if course.learning_outcomes %}
+
+    <!-- Key Topics -->
+    {% if course_data.key_topics %}
+    <section class="dataset-detail__section">
+      <h2>Key Topics</h2>
+      <ul>
+        {% for topic in course_data.key_topics %}
+        <li>{{ topic }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+    <!-- Learning Outcomes -->
+    {% if course_data.learning_outcomes %}
     <section class="dataset-detail__section">
       <h2>Learning Outcomes</h2>
       <ul>
-        {% for outcome in course.learning_outcomes %}
+        {% for outcome in course_data.learning_outcomes %}
         <li>{{ outcome }}</li>
         {% endfor %}
       </ul>
     </section>
     {% endif %}
 
+    <!-- Practical Projects -->
+    {% if course_data.practical_projects %}
+    <section class="dataset-detail__section">
+      <h2>Practical Projects</h2>
+      <ul>
+        {% for project in course_data.practical_projects %}
+        <li>{{ project }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+    <!-- Prerequisites -->
+    {% if course_data.prerequisites %}
+    <section class="dataset-detail__section">
+      <h2>Prerequisites</h2>
+      <ul>
+        {% for prereq in course_data.prerequisites %}
+        <li>{{ prereq }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+    <!-- Capstone Areas (for Course 08) -->
+    {% if course_data.capstone_areas %}
+    <section class="dataset-detail__section">
+      <h2>Capstone Project Areas</h2>
+      <div class="grid grid--2" style="margin-top: 1rem;">
+        {% for area in course_data.capstone_areas %}
+        <div style="background: #f8fafc; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid {{ course.color }};">
+          <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem;">{{ area.title }}</h3>
+          <p style="margin: 0; color: #64748b;">{{ area.description }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
+    <!-- Datasets Section -->
     <section class="dataset-detail__section">
       <h2>Recommended Datasets</h2>
-      <p class="text-gray-600 mb-6">These datasets are particularly useful for this course's exercises and projects.</p>
+      <p class="text-gray-600 mb-6">{{ course_datasets.size }} datasets are aligned with this course for hands-on exercises and projects.</p>
 
+      {% if course_datasets.size > 0 %}
       <div class="grid grid--3">
         {% for dataset in site.data.datasets %}
           {% if dataset.courses contains course.id %}
@@ -72,6 +140,11 @@ layout: default
                     {% when "GH" %}<span title="Ghana">🇬🇭</span>
                     {% when "ZA" %}<span title="South Africa">🇿🇦</span>
                     {% when "ET" %}<span title="Ethiopia">🇪🇹</span>
+                    {% when "RW" %}<span title="Rwanda">🇷🇼</span>
+                    {% when "UG" %}<span title="Uganda">🇺🇬</span>
+                    {% when "TZ" %}<span title="Tanzania">🇹🇿</span>
+                    {% when "SN" %}<span title="Senegal">🇸🇳</span>
+                    {% when "Pan-African" %}<span title="Pan-African">🌍</span>
                   {% endcase %}
                 {% endfor %}
               </div>
@@ -81,6 +154,9 @@ layout: default
           {% endif %}
         {% endfor %}
       </div>
+      {% else %}
+      <p style="color: #64748b;">No datasets are currently tagged for this course. Check the <a href="{{ '/datasets/' | relative_url }}">full dataset catalog</a>.</p>
+      {% endif %}
     </section>
 
     {{ content }}

@@ -1219,3 +1219,173 @@
     - "Data gaps may misrepresent certain regions"
   featured: false
   date_added: "2026-01-23"
+
+# =====================================================
+# Additional Datasets
+# =====================================================
+
+- id: "oscar"
+  name: "OSCAR"
+  tagline: "Open Super-large Crawled Aggregated Corpus"
+  description: |
+    A huge multilingual corpus obtained by language classification and filtering of Common Crawl.
+    Provides data in both original and deduplicated forms, specifically aiming to improve data quality for low-resource languages.
+  source_url: "https://huggingface.co/datasets/oscar-corpus/oscar"
+  source_type: "huggingface"
+  paper_url: "https://arxiv.org/abs/1911.02116"
+  languages:
+    - { code: "amh", name: "Amharic" }
+    - { code: "som", name: "Somali" }
+    - { code: "yor", name: "Yoruba" }
+    - { code: "mlg", name: "Malagasy" }
+    - { code: "swa", name: "Swahili" }
+    - { code: "afr", name: "Afrikaans" }
+  countries: ["Pan-African"]
+  tasks: ["language-modeling", "pretraining"]
+  size: "Millions of sentences"
+  format: ["Text"]
+  license: "CC0 1.0 (Metadata)"
+  difficulty: "intermediate"
+  compute: "high"
+  colab_friendly: false
+  courses: ["01-build-slm"]
+  quickstart: |
+    from datasets import load_dataset
+
+    # Load deduplicated Amharic data
+    dataset = load_dataset("oscar-corpus/oscar", language="am", split="train", streaming=True)
+    print(next(iter(dataset)))
+  project_ideas:
+    - title: "Token Distribution Analysis"
+      description: "Analyze token distribution of Amharic script compared to Latin-script African languages"
+      difficulty: "intermediate"
+    - title: "3-gram Language Model"
+      description: "Build a 3-gram language model for Malagasy"
+      difficulty: "beginner"
+  ethics:
+    - "As a web crawl, it reflects biases of the internet"
+    - "Privacy of individuals mentioned in crawled text is a concern"
+  featured: false
+  date_added: "2026-01-23"
+
+- id: "opus"
+  name: "OPUS Parallel Corpora"
+  tagline: "Open Parallel Corpus Collection"
+  description: |
+    A collection of translated texts from the web. For African languages, the Ubuntu (localization files)
+    and Bible subsets are particularly rich sources of parallel data for training alignment and embeddings.
+  source_url: "https://opus.nlpl.eu/"
+  source_type: "web"
+  languages:
+    - { code: "xho", name: "Xhosa" }
+    - { code: "zul", name: "Zulu" }
+    - { code: "tsn", name: "Tswana" }
+    - { code: "sot", name: "Sotho" }
+    - { code: "swa", name: "Swahili" }
+  countries: ["ZA", "BW", "LS", "KE", "TZ"]
+  tasks: ["machine-translation", "alignment", "embeddings"]
+  size: "Millions of sentence pairs"
+  format: ["Text", "TMX"]
+  license: "Varies by sub-corpus (often open)"
+  difficulty: "beginner"
+  compute: "low"
+  colab_friendly: true
+  courses: ["02-represent-data"]
+  quickstart: |
+    from datasets import load_dataset
+
+    # Load Ubuntu localization corpus
+    dataset = load_dataset("opus_ubuntu", "en-xh", split="train")
+    print(dataset['translation'][:3])
+  project_ideas:
+    - title: "Word2Vec from Bible"
+      description: "Train static word embeddings (Word2Vec) on the Bible corpus in Xhosa"
+      difficulty: "intermediate"
+    - title: "Dictionary Mapping"
+      description: "Create a dictionary mapping between English and Tswana using alignment tools"
+      difficulty: "intermediate"
+  ethics:
+    - "Religious texts have specific domain bias and archaic vocabulary"
+    - "Ubuntu corpus is technical domain-specific"
+  featured: false
+  date_added: "2026-01-23"
+
+- id: "naijarc"
+  name: "NaijaRC"
+  tagline: "Reading Comprehension for Nigerian Languages"
+  description: |
+    A reading comprehension dataset for Nigerian languages (Hausa, Igbo, Yoruba) based on high-school
+    examination questions. Provides a realistic educational benchmark for testing model comprehension.
+  source_url: "https://huggingface.co/datasets/masakhane/naijarc"
+  source_type: "huggingface"
+  paper_url: "https://arxiv.org/abs/2404.xxxxx"
+  languages:
+    - { code: "hau", name: "Hausa" }
+    - { code: "ibo", name: "Igbo" }
+    - { code: "yor", name: "Yoruba" }
+  countries: ["NG"]
+  tasks: ["reading-comprehension", "multiple-choice", "question-answering"]
+  size: "~358 questions (Yoruba subset)"
+  format: ["JSON"]
+  license: "CC-BY-NC 4.0"
+  difficulty: "intermediate"
+  compute: "low"
+  colab_friendly: true
+  courses: ["04-transformer"]
+  quickstart: |
+    from datasets import load_dataset
+
+    dataset = load_dataset("masakhane/naijarc", "yor", split="test")
+    print(dataset['question'][:3])
+  project_ideas:
+    - title: "High School Exam Test"
+      description: "Test if LLMs can pass a Nigerian high school language exam"
+      difficulty: "intermediate"
+    - title: "Cross-lingual Transfer"
+      description: "Compare model performance across Hausa, Igbo, and Yoruba"
+      difficulty: "advanced"
+  ethics:
+    - "Educational data with potential privacy considerations"
+  featured: false
+  date_added: "2026-01-23"
+
+- id: "irokobench"
+  name: "IrokoBench"
+  tagline: "Comprehensive Benchmark for African Languages"
+  description: |
+    A comprehensive benchmark suite for evaluating LLMs on African languages across multiple tasks.
+    Covers translation, classification, QA, and more for systematic model evaluation.
+  source_url: "https://huggingface.co/datasets/masakhane/irokobench"
+  source_type: "huggingface"
+  languages:
+    - { code: "hau", name: "Hausa" }
+    - { code: "ibo", name: "Igbo" }
+    - { code: "yor", name: "Yoruba" }
+    - { code: "swa", name: "Swahili" }
+    - { code: "zul", name: "Zulu" }
+    - { code: "multi", name: "16+ African languages" }
+  countries: ["Pan-African"]
+  tasks: ["benchmarking", "evaluation", "multi-task"]
+  size: "Multiple evaluation sets"
+  format: ["JSON"]
+  license: "CC-BY-4.0"
+  difficulty: "intermediate"
+  compute: "low"
+  colab_friendly: true
+  courses: ["07-accelerate"]
+  quickstart: |
+    from datasets import load_dataset
+
+    # Load specific task subset
+    dataset = load_dataset("masakhane/irokobench", "yor_classification", split="test")
+  project_ideas:
+    - title: "LLM Evaluation"
+      description: "Benchmark popular LLMs (GPT-4, Llama, Gemini) on African languages"
+      difficulty: "intermediate"
+    - title: "Quantization Impact"
+      description: "Measure accuracy degradation when quantizing models using IrokoBench"
+      difficulty: "advanced"
+  ethics:
+    - "Standardized evaluation helps identify model biases"
+  featured: false
+  date_added: "2026-01-23"
