@@ -461,10 +461,20 @@
     flex-wrap: wrap;
     gap: $spacing-2;
     margin-bottom: $spacing-4;
+    // Contain overflow from long badges
+    max-width: 100%;
+    overflow: hidden;
 
     @media (min-width: $breakpoint-md) {
       gap: $spacing-4;
       margin-bottom: $spacing-6;
+      overflow: visible;
+    }
+
+    // Badges inside meta need min-width: 0 to allow shrinking
+    > * {
+      min-width: 0;
+      max-width: 100%;
     }
   }
 
@@ -491,6 +501,10 @@
 
   &__content {
     padding: $spacing-6 0;
+    // Prevent overflow from long content
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 
     @media (min-width: $breakpoint-md) {
       padding: $spacing-8 0;
@@ -499,9 +513,13 @@
 
   &__section {
     margin-bottom: $spacing-6;
+    // Contain any overflow
+    max-width: 100%;
+    overflow: hidden;
 
     @media (min-width: $breakpoint-md) {
       margin-bottom: $spacing-8;
+      overflow: visible;
     }
 
     h2 {

@@ -20,6 +20,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   // Safe area support for notched devices
   padding-bottom: env(safe-area-inset-bottom);
+  // Prevent horizontal overflow on mobile
+  overflow-x: hidden;
 }
 
 // Typography
@@ -69,6 +71,9 @@ code {
   background-color: $gray-100;
   padding: $spacing-1 $spacing-2;
   border-radius: $radius-md;
+  // Allow inline code to wrap on mobile
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 pre {

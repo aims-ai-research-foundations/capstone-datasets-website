@@ -175,8 +175,19 @@
   &__meta {
     display: flex;
     flex-wrap: wrap;
-    gap: $spacing-3;
+    gap: $spacing-2;
     margin-bottom: $spacing-4;
+    // Contain overflow
+    max-width: 100%;
+
+    @media (min-width: $breakpoint-sm) {
+      gap: $spacing-3;
+    }
+
+    // Allow children to shrink
+    > * {
+      min-width: 0;
+    }
   }
 
   &__badge {
@@ -190,7 +201,8 @@
     color: $gray-700;
     border-radius: $radius-md;
     // Prevent long badges from causing overflow on mobile
-    max-width: 100%;
+    // 200px fits comfortably on 320px screens with padding
+    max-width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -648,6 +660,9 @@
 .code-block {
   position: relative;
   margin-bottom: $spacing-4;
+  // Contain overflow
+  max-width: 100%;
+  overflow: hidden;
 
   &__header {
     display: flex;
@@ -692,42 +707,24 @@
     margin: 0;
     padding: $spacing-3;
     border-radius: 0 0 $radius-lg $radius-lg;
-    // Visual scroll indicator - fade effect on right
-    -webkit-mask-image: linear-gradient(to right, black 90%, transparent 100%);
-    mask-image: linear-gradient(to right, black 90%, transparent 100%);
+    // Explicit overflow handling
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 
     @media (min-width: $breakpoint-sm) {
       padding: $spacing-4;
     }
 
-    @media (min-width: $breakpoint-md) {
-      // Remove fade on larger screens where overflow is less likely
-      -webkit-mask-image: none;
-      mask-image: none;
-    }
-
     code {
       font-size: $font-size-xs;
+      // Don't wrap code - let it scroll
+      white-space: pre;
+      word-wrap: normal;
+      overflow-wrap: normal;
 
       @media (min-width: $breakpoint-sm) {
         font-size: $font-size-sm;
       }
-    }
-  }
-
-  // Scroll hint for mobile
-  &::after {
-    content: '→';
-    position: absolute;
-    right: $spacing-2;
-    bottom: $spacing-3;
-    color: $gray-500;
-    font-size: $font-size-sm;
-    opacity: 0.5;
-    pointer-events: none;
-
-    @media (min-width: $breakpoint-md) {
-      display: none;
     }
   }
 }
