@@ -11,6 +11,10 @@ function toggleMobileNav() {
   if (toggle) {
     toggle.setAttribute('aria-expanded', isOpen);
   }
+  // Update aria-hidden for screen readers
+  if (nav) {
+    nav.setAttribute('aria-hidden', !isOpen);
+  }
 
   // Prevent body scroll when nav is open
   document.body.style.overflow = isOpen ? 'hidden' : '';
@@ -22,7 +26,10 @@ function closeMobileNav() {
   const backdrop = document.getElementById('mobile-nav-backdrop');
   const toggle = document.querySelector('.header__mobile-toggle');
 
-  nav.classList.remove('open');
+  if (nav) {
+    nav.classList.remove('open');
+    nav.setAttribute('aria-hidden', 'true');
+  }
   if (backdrop) {
     backdrop.classList.remove('open');
   }
@@ -118,3 +125,4 @@ document.addEventListener('DOMContentLoaded', function() {
     wrapper.appendChild(table);
   });
 });
+

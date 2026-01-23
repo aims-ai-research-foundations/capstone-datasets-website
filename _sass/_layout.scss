@@ -119,11 +119,12 @@
 
   &__link {
     display: block;
-    padding: $spacing-4;
+    padding: $spacing-5 $spacing-4; // Increased vertical padding for better touch targets
     color: $gray-700;
     font-weight: $font-weight-medium;
     text-decoration: none;
     border-bottom: 1px solid $gray-100;
+    min-height: 48px; // Ensure minimum touch target height
 
     &:hover,
     &.active {
@@ -166,10 +167,17 @@
     display: grid;
     gap: $spacing-8;
 
-    @media (min-width: $breakpoint-md) {
+    // Small tablets: 2 columns for better spacing
+    @media (min-width: $breakpoint-sm) {
       grid-template-columns: repeat(2, 1fr);
     }
 
+    // Larger tablets: brand takes more space
+    @media (min-width: $breakpoint-md) {
+      grid-template-columns: 1.5fr 1fr 1fr;
+    }
+
+    // Desktop: full 4-column layout
     @media (min-width: $breakpoint-lg) {
       grid-template-columns: 2fr repeat(3, 1fr);
     }

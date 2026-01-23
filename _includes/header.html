@@ -23,8 +23,8 @@
         <a href="{{ '/datasets/' | relative_url }}" class="btn btn--sm btn--primary hidden md:block">
           Browse Datasets
         </a>
-        <button class="header__mobile-toggle" onclick="toggleMobileNav()" aria-label="Toggle menu">
-          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <button class="header__mobile-toggle" onclick="toggleMobileNav()" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M3 12h18M3 6h18M3 18h18"></path>
           </svg>
         </button>
@@ -35,7 +35,7 @@
 
 <div class="mobile-nav-backdrop" id="mobile-nav-backdrop" onclick="closeMobileNav()"></div>
 
-<nav class="mobile-nav" id="mobile-nav">
+<nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
   {% for item in site.data.navigation.main %}
   <a href="{{ item.url | relative_url }}"
      class="mobile-nav__link {% if page.url == item.url %}active{% endif %}">

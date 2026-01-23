@@ -32,10 +32,11 @@ h1, h2, h3, h4, h5, h6 {
   color: $gray-900;
 }
 
-h1 { font-size: $font-size-4xl; }
-h2 { font-size: $font-size-3xl; }
-h3 { font-size: $font-size-2xl; }
-h4 { font-size: $font-size-xl; }
+// Fluid typography for base headings - scales smoothly across viewports
+h1 { font-size: clamp(1.75rem, 3vw + 1rem, $font-size-4xl); }
+h2 { font-size: clamp(1.5rem, 2.5vw + 0.75rem, $font-size-3xl); }
+h3 { font-size: clamp(1.25rem, 2vw + 0.5rem, $font-size-2xl); }
+h4 { font-size: clamp(1.125rem, 1.5vw + 0.5rem, $font-size-xl); }
 h5 { font-size: $font-size-lg; }
 h6 { font-size: $font-size-base; }
 

@@ -3,7 +3,11 @@
   width: 100%;
   max-width: $container-max-width;
   margin: 0 auto;
-  padding: 0 $container-padding;
+  padding: 0 $spacing-3; // Tighter padding on very small screens
+
+  @media (min-width: $breakpoint-xs) {
+    padding: 0 $container-padding;
+  }
 
   @media (min-width: $breakpoint-md) {
     padding: 0 $spacing-6;
@@ -16,8 +20,8 @@
   align-items: center;
   justify-content: center;
   gap: $spacing-2;
-  padding: $spacing-3 $spacing-6;
-  font-size: $font-size-base;
+  padding: $spacing-2 $spacing-4; // Tighter padding on very small screens
+  font-size: $font-size-sm; // Slightly smaller on very small screens
   font-weight: $font-weight-medium;
   line-height: 1;
   text-decoration: none;
@@ -26,6 +30,11 @@
   cursor: pointer;
   transition: all $transition-fast;
   min-height: 44px; // Touch target minimum
+
+  @media (min-width: $breakpoint-xs) {
+    padding: $spacing-3 $spacing-6;
+    font-size: $font-size-base;
+  }
 
   &:hover {
     text-decoration: none;
@@ -479,14 +488,19 @@
 .grid {
   display: grid;
   grid-template-columns: 1fr; // Explicit mobile default
-  gap: $spacing-4;
+  gap: $spacing-3; // Tighter gap on very small screens
+
+  @media (min-width: $breakpoint-xs) {
+    gap: $spacing-4;
+  }
 
   @media (min-width: $breakpoint-sm) {
     gap: $spacing-6;
   }
 
   &--2 {
-    @media (min-width: $breakpoint-md) {
+    // Start 2 columns earlier for course cards on larger phones
+    @media (min-width: $breakpoint-sm) {
       grid-template-columns: repeat(2, 1fr);
     }
   }
@@ -514,8 +528,13 @@
 .stats {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: $spacing-6;
-  padding: $spacing-6 0;
+  gap: $spacing-4; // Tighter gap on very small screens
+  padding: $spacing-4 0;
+
+  @media (min-width: $breakpoint-xs) {
+    gap: $spacing-6;
+    padding: $spacing-6 0;
+  }
 
   @media (min-width: $breakpoint-sm) {
     display: flex;
@@ -530,26 +549,35 @@
   }
 
   &__number {
-    // Fluid typography: scales smoothly from 1.875rem to 2.25rem
-    font-size: clamp(1.875rem, 3vw + 1rem, 2.25rem);
+    // Fluid typography: scales smoothly from 1.5rem to 2.25rem
+    font-size: clamp(1.5rem, 3vw + 1rem, 2.25rem);
     font-weight: $font-weight-bold;
     color: $primary;
     line-height: 1;
   }
 
   &__label {
-    font-size: $font-size-sm;
+    font-size: $font-size-xs; // Smaller on very small screens
     color: $gray-600;
-    margin-top: $spacing-2;
+    margin-top: $spacing-1;
+
+    @media (min-width: $breakpoint-xs) {
+      font-size: $font-size-sm;
+      margin-top: $spacing-2;
+    }
   }
 }
 
 // Hero
 .hero {
-  padding: $spacing-12 0;
+  padding: $spacing-8 0; // Reduced padding on very small screens
   text-align: center;
   background: linear-gradient(135deg, $primary-dark 0%, $primary 100%);
   color: $white;
+
+  @media (min-width: $breakpoint-xs) {
+    padding: $spacing-12 0;
+  }
 
   @media (min-width: $breakpoint-md) {
     padding: $spacing-16 0;
@@ -594,7 +622,11 @@
 
 // Section
 .section {
-  padding: $spacing-10 0;
+  padding: $spacing-8 0; // Reduced on very small screens
+
+  @media (min-width: $breakpoint-xs) {
+    padding: $spacing-10 0;
+  }
 
   @media (min-width: $breakpoint-md) {
     padding: $spacing-12 0;
@@ -606,18 +638,22 @@
 
   &__header {
     text-align: center;
-    margin-bottom: $spacing-10;
+    margin-bottom: $spacing-6; // Reduced on very small screens
+
+    @media (min-width: $breakpoint-xs) {
+      margin-bottom: $spacing-10;
+    }
   }
 
   &__title {
-    // Fluid typography: scales smoothly from 1.5rem to 1.875rem
-    font-size: clamp(1.5rem, 2vw + 1rem, 1.875rem);
+    // Fluid typography: scales smoothly from 1.25rem to 1.875rem
+    font-size: clamp(1.25rem, 2vw + 1rem, 1.875rem);
     margin-bottom: $spacing-2;
   }
 
   &__subtitle {
-    // Fluid typography: scales smoothly from 1rem to 1.125rem
-    font-size: clamp(1rem, 1vw + 0.75rem, 1.125rem);
+    // Fluid typography: scales smoothly from 0.875rem to 1.125rem
+    font-size: clamp(0.875rem, 1vw + 0.75rem, 1.125rem);
     color: $gray-600;
     max-width: 600px;
     margin: 0 auto;
@@ -689,7 +725,7 @@
   }
 
   &__copy {
-    padding: $spacing-1 $spacing-2;
+    padding: $spacing-2 $spacing-3;
     font-size: $font-size-xs;
     color: $gray-400;
     background-color: transparent;
@@ -697,7 +733,7 @@
     border-radius: $radius-md;
     cursor: pointer;
     transition: all $transition-fast;
-    min-height: 32px; // Touch target
+    min-height: 40px; // Touch target - improved for mobile accessibility
 
     &:hover {
       color: $white;
