@@ -1,7 +1,11 @@
 // Mobile navigation toggle
 function toggleMobileNav() {
   const nav = document.getElementById('mobile-nav');
-  nav.classList.toggle('open');
+  const isOpen = nav.classList.toggle('open');
+  const toggle = document.querySelector('.header__mobile-toggle');
+  if (toggle) {
+    toggle.setAttribute('aria-expanded', isOpen);
+  }
 }
 
 // Close mobile nav when clicking outside
@@ -11,6 +15,22 @@ document.addEventListener('click', function(event) {
 
   if (nav && toggle && !nav.contains(event.target) && !toggle.contains(event.target)) {
     nav.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+});
+
+// Close mobile nav with Escape key
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    const nav = document.getElementById('mobile-nav');
+    const toggle = document.querySelector('.header__mobile-toggle');
+    if (nav && nav.classList.contains('open')) {
+      nav.classList.remove('open');
+      if (toggle) {
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.focus();
+      }
+    }
   }
 });
 
@@ -59,24 +79,6 @@ document.addEventListener('DOMContentLoaded', function() {
       link.classList.add('active');
     }
   });
-});
-
-// Lazy load images
-document.addEventListener('DOMContentLoaded', function() {
-  const images = document.querySelectorAll('img[data-src]');
-
-  const imageObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const img = entry.target;
-        img.src = img.dataset.src;
-        img.removeAttribute('data-src');
-        observer.unobserve(img);
-      }
-    });
-  });
-
-  images.forEach(img => imageObserver.observe(img));
 });
 
 // Add scroll indicator for tables

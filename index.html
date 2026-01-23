@@ -31,15 +31,19 @@ title: Home
         <div class="stats__label">Datasets</div>
       </div>
       <div class="stats__item">
-        <div class="stats__number">4</div>
+        <div class="stats__number">{{ site.project.countries | size }}</div>
         <div class="stats__label">Countries</div>
       </div>
       <div class="stats__item">
-        <div class="stats__number">8</div>
+        <div class="stats__number">{{ site.data.courses | size }}</div>
         <div class="stats__label">Courses</div>
       </div>
       <div class="stats__item">
-        <div class="stats__number">30.9K</div>
+        {% assign total_students = 0 %}
+        {% for country in site.project.countries %}
+          {% assign total_students = total_students | plus: country.students %}
+        {% endfor %}
+        <div class="stats__number">{{ total_students | divided_by: 1000.0 | round: 1 }}K</div>
         <div class="stats__label">Students</div>
       </div>
     </div>
@@ -137,16 +141,16 @@ title: Home
 
     <div class="partners">
       <a href="https://www.aims.ac.za/" target="_blank" rel="noopener">
-        <img src="{{ '/assets/images/partners/aims-logo.png' | relative_url }}" alt="AIMS South Africa" class="partners__logo">
+        <img src="{{ '/assets/images/partners/aims-logo.png' | relative_url }}" alt="AIMS South Africa" class="partners__logo" loading="lazy" width="120" height="56">
       </a>
       <a href="https://www.fatefoundation.org/" target="_blank" rel="noopener">
-        <img src="{{ '/assets/images/partners/fate-logo.png' | relative_url }}" alt="FATE Foundation" class="partners__logo">
+        <img src="{{ '/assets/images/partners/fate-logo.png' | relative_url }}" alt="FATE Foundation" class="partners__logo" loading="lazy" width="120" height="56">
       </a>
       <a href="https://www.google.org/" target="_blank" rel="noopener">
-        <img src="{{ '/assets/images/partners/google-org-logo.png' | relative_url }}" alt="Google.org" class="partners__logo">
+        <img src="{{ '/assets/images/partners/google-org-logo.png' | relative_url }}" alt="Google.org" class="partners__logo" loading="lazy" width="120" height="56">
       </a>
       <a href="https://www.ucl.ac.uk/" target="_blank" rel="noopener">
-        <img src="{{ '/assets/images/partners/ucl-logo.png' | relative_url }}" alt="UCL" class="partners__logo">
+        <img src="{{ '/assets/images/partners/ucl-logo.png' | relative_url }}" alt="UCL" class="partners__logo" loading="lazy" width="120" height="56">
       </a>
     </div>
   </div>

@@ -134,18 +134,7 @@ layout: default
             <div class="dataset-card__footer">
               <div class="dataset-card__countries">
                 {% for country in dataset.countries limit:4 %}
-                  {% case country %}
-                    {% when "NG" %}<span title="Nigeria">🇳🇬</span>
-                    {% when "KE" %}<span title="Kenya">🇰🇪</span>
-                    {% when "GH" %}<span title="Ghana">🇬🇭</span>
-                    {% when "ZA" %}<span title="South Africa">🇿🇦</span>
-                    {% when "ET" %}<span title="Ethiopia">🇪🇹</span>
-                    {% when "RW" %}<span title="Rwanda">🇷🇼</span>
-                    {% when "UG" %}<span title="Uganda">🇺🇬</span>
-                    {% when "TZ" %}<span title="Tanzania">🇹🇿</span>
-                    {% when "SN" %}<span title="Senegal">🇸🇳</span>
-                    {% when "Pan-African" %}<span title="Pan-African">🌍</span>
-                  {% endcase %}
+                  {% include country-flag.html code=country %}
                 {% endfor %}
               </div>
               <a href="{{ '/datasets/' | append: dataset.id | append: '/' | relative_url }}" class="btn btn--sm btn--outline">View Details</a>

@@ -4,6 +4,30 @@ layout: default
 
 {% assign dataset = page %}
 
+<!-- Dataset Schema.org JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Dataset",
+  "name": "{{ dataset.name }}",
+  "description": "{{ dataset.tagline | escape }}",
+  "url": "{{ site.url }}{{ site.baseurl }}{{ page.url }}",
+  "keywords": {{ dataset.tasks | jsonify }},
+  "license": "{{ dataset.license }}",
+  "creator": {
+    "@type": "Organization",
+    "name": "Africa AI Upskilling Initiative"
+  },
+  "distribution": {
+    "@type": "DataDownload",
+    "contentUrl": "{{ dataset.source_url }}",
+    "encodingFormat": "{{ dataset.format | first }}"
+  },
+  "inLanguage": [{% for lang in dataset.languages %}"{{ lang.name }}"{% unless forloop.last %}, {% endunless %}{% endfor %}],
+  "spatialCoverage": [{% for country in dataset.countries %}"{{ country }}"{% unless forloop.last %}, {% endunless %}{% endfor %}]
+}
+</script>
+
 <div class="dataset-detail__header">
   <div class="container">
     <nav class="page-header__breadcrumb">
@@ -59,13 +83,7 @@ layout: default
         <h3>Countries</h3>
         <div class="dataset-card__countries">
           {% for country in dataset.countries %}
-            {% case country %}
-              {% when "NG" %}<span title="Nigeria">🇳🇬</span>
-              {% when "KE" %}<span title="Kenya">🇰🇪</span>
-              {% when "GH" %}<span title="Ghana">🇬🇭</span>
-              {% when "ZA" %}<span title="South Africa">🇿🇦</span>
-              {% when "ET" %}<span title="Ethiopia">🇪🇹</span>
-            {% endcase %}
+            {% include country-flag.html code=country %}
           {% endfor %}
         </div>
       </div>

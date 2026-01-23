@@ -35,13 +35,7 @@
   <div class="dataset-card__footer">
     <div class="dataset-card__countries">
       {% for country in include.dataset.countries limit:4 %}
-        {% case country %}
-          {% when "NG" %}<span title="Nigeria">🇳🇬</span>
-          {% when "KE" %}<span title="Kenya">🇰🇪</span>
-          {% when "GH" %}<span title="Ghana">🇬🇭</span>
-          {% when "ZA" %}<span title="South Africa">🇿🇦</span>
-          {% when "ET" %}<span title="Ethiopia">🇪🇹</span>
-        {% endcase %}
+        {% include country-flag.html code=country %}
       {% endfor %}
     </div>
     <a href="{{ '/datasets/' | append: include.dataset.id | append: '/' | relative_url }}" class="btn btn--sm btn--outline">

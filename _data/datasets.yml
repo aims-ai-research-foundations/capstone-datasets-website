@@ -10,7 +10,7 @@
     Created by auditing mC4 and crawling verified news sources to address quality issues in web-crawled data for low-resource languages.
   source_url: "https://huggingface.co/datasets/castorini/wura"
   source_type: "huggingface"
-  paper_url: "https://arxiv.org/abs/2310.xxxxx"
+  paper_url: "https://aclanthology.org/2023.emnlp-main.11/"
   languages:
     - { code: "amh", name: "Amharic" }
     - { code: "hau", name: "Hausa" }
@@ -518,7 +518,7 @@
     First sentiment analysis dataset for Tunisian Arabizi (Tunisian dialect written in Latin script with numerals).
   source_url: "https://huggingface.co/datasets/chaymafourati/tunizi"
   source_type: "huggingface"
-  paper_url: "https://arxiv.org/abs/2007.xxxxx"
+  paper_url: "https://arxiv.org/abs/2004.14303"
   languages:
     - { code: "tun", name: "Tunisian Arabizi" }
   countries: ["TN"]
@@ -1318,7 +1318,7 @@
     examination questions. Provides a realistic educational benchmark for testing model comprehension.
   source_url: "https://huggingface.co/datasets/masakhane/naijarc"
   source_type: "huggingface"
-  paper_url: "https://arxiv.org/abs/2404.xxxxx"
+  paper_url: "https://arxiv.org/abs/2308.09768"
   languages:
     - { code: "hau", name: "Hausa" }
     - { code: "ibo", name: "Igbo" }

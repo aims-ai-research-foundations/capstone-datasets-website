@@ -19,20 +19,21 @@ description: Browse our curated collection of datasets for AI Research Foundatio
     <!-- Filters -->
     <div class="filters" id="filters">
       <div class="search-box">
-        <svg class="search-box__icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <svg class="search-box__icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
           <circle cx="11" cy="11" r="8"></circle>
           <path d="M21 21l-4.35-4.35"></path>
         </svg>
+        <label for="search-input" class="sr-only">Search datasets</label>
         <input type="text" class="search-box__input" placeholder="Search datasets..." id="search-input">
       </div>
     </div>
 
     <div class="filters">
-      <div class="filters__group" id="country-filters">
+      <div class="filters__group" id="country-filters" role="group" aria-label="Filter by country">
         <span class="text-sm text-gray-500 font-medium" style="padding: 8px 0;">Country:</span>
-        <button class="filters__btn active" data-filter="country" data-value="all">All</button>
+        <button class="filters__btn active" data-filter="country" data-value="all" aria-pressed="true">All</button>
         {% for country in site.project.countries %}
-        <button class="filters__btn" data-filter="country" data-value="{{ country.code }}">
+        <button class="filters__btn" data-filter="country" data-value="{{ country.code }}" aria-pressed="false">
           {{ country.flag }} {{ country.name }}
         </button>
         {% endfor %}
@@ -40,13 +41,32 @@ description: Browse our curated collection of datasets for AI Research Foundatio
     </div>
 
     <div class="filters">
-      <div class="filters__group" id="difficulty-filters">
+      <div class="filters__group" id="difficulty-filters" role="group" aria-label="Filter by difficulty">
         <span class="text-sm text-gray-500 font-medium" style="padding: 8px 0;">Difficulty:</span>
-        <button class="filters__btn active" data-filter="difficulty" data-value="all">All</button>
-        <button class="filters__btn" data-filter="difficulty" data-value="beginner">Beginner</button>
-        <button class="filters__btn" data-filter="difficulty" data-value="intermediate">Intermediate</button>
-        <button class="filters__btn" data-filter="difficulty" data-value="advanced">Advanced</button>
+        <button class="filters__btn active" data-filter="difficulty" data-value="all" aria-pressed="true">All</button>
+        <button class="filters__btn" data-filter="difficulty" data-value="beginner" aria-pressed="false">Beginner</button>
+        <button class="filters__btn" data-filter="difficulty" data-value="intermediate" aria-pressed="false">Intermediate</button>
+        <button class="filters__btn" data-filter="difficulty" data-value="advanced" aria-pressed="false">Advanced</button>
       </div>
+    </div>
+
+    <div class="filters">
+      <div class="filters__group" id="course-filters" role="group" aria-label="Filter by course">
+        <span class="text-sm text-gray-500 font-medium" style="padding: 8px 0;">Course:</span>
+        <button class="filters__btn active" data-filter="course" data-value="all" aria-pressed="true">All</button>
+        {% for course in site.data.courses %}
+        <button class="filters__btn" data-filter="course" data-value="{{ course.id }}" aria-pressed="false" style="font-size: 0.8rem;">
+          {{ course.number }}
+        </button>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Result Count -->
+    <div class="filters" style="justify-content: space-between; align-items: center;">
+      <p id="result-count" class="text-sm text-gray-600" aria-live="polite">
+        Showing <strong>{{ site.data.datasets | size }}</strong> datasets
+      </p>
     </div>
 
     <!-- Dataset Grid -->
@@ -57,7 +77,8 @@ description: Browse our curated collection of datasets for AI Research Foundatio
            data-tagline="{{ dataset.tagline | downcase }}"
            data-countries="{{ dataset.countries | join: ',' }}"
            data-difficulty="{{ dataset.difficulty }}"
-           data-tasks="{{ dataset.tasks | join: ',' }}">
+           data-tasks="{{ dataset.tasks | join: ',' }}"
+           data-courses="{{ dataset.courses | join: ',' }}">
         <div class="dataset-card__header">
           <h3 class="dataset-card__title">
             <a href="{{ '/datasets/' | append: dataset.id | append: '/' | relative_url }}">
@@ -89,13 +110,7 @@ description: Browse our curated collection of datasets for AI Research Foundatio
         <div class="dataset-card__footer">
           <div class="dataset-card__countries">
             {% for country in dataset.countries limit:4 %}
-              {% case country %}
-                {% when "NG" %}<span title="Nigeria">🇳🇬</span>
-                {% when "KE" %}<span title="Kenya">🇰🇪</span>
-                {% when "GH" %}<span title="Ghana">🇬🇭</span>
-                {% when "ZA" %}<span title="South Africa">🇿🇦</span>
-                {% when "ET" %}<span title="Ethiopia">🇪🇹</span>
-              {% endcase %}
+              {% include country-flag.html code=country %}
             {% endfor %}
           </div>
           <a href="{{ '/datasets/' | append: dataset.id | append: '/' | relative_url }}" class="btn btn--sm btn--outline">
@@ -118,11 +133,14 @@ document.addEventListener('DOMContentLoaded', function() {
   const searchInput = document.getElementById('search-input');
   const datasetGrid = document.getElementById('dataset-grid');
   const noResults = document.getElementById('no-results');
+  const resultCount = document.getElementById('result-count');
   const filterButtons = document.querySelectorAll('.filters__btn');
+  const totalDatasets = datasetGrid.querySelectorAll('.dataset-card').length;
 
   let activeFilters = {
     country: 'all',
     difficulty: 'all',
+    course: 'all',
     search: ''
   };
 
@@ -132,9 +150,13 @@ document.addEventListener('DOMContentLoaded', function() {
       const filterType = this.dataset.filter;
       const value = this.dataset.value;
 
-      // Update active state
-      document.querySelectorAll(`[data-filter="${filterType}"]`).forEach(b => b.classList.remove('active'));
+      // Update active state and aria-pressed
+      document.querySelectorAll(`[data-filter="${filterType}"]`).forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
       this.classList.add('active');
+      this.setAttribute('aria-pressed', 'true');
 
       // Update filter
       activeFilters[filterType] = value;
@@ -179,9 +201,24 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }
 
+      // Course filter
+      if (activeFilters.course !== 'all') {
+        const courses = card.dataset.courses || '';
+        if (!courses.includes(activeFilters.course)) {
+          show = false;
+        }
+      }
+
       card.style.display = show ? '' : 'none';
       if (show) visibleCount++;
     });
+
+    // Update result count
+    if (visibleCount === totalDatasets) {
+      resultCount.innerHTML = 'Showing <strong>' + totalDatasets + '</strong> datasets';
+    } else {
+      resultCount.innerHTML = 'Showing <strong>' + visibleCount + '</strong> of ' + totalDatasets + ' datasets';
+    }
 
     // Show/hide no results message
     noResults.classList.toggle('hidden', visibleCount > 0);
@@ -189,10 +226,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Reset filters function
   window.resetFilters = function() {
-    activeFilters = { country: 'all', difficulty: 'all', search: '' };
+    activeFilters = { country: 'all', difficulty: 'all', course: 'all', search: '' };
     searchInput.value = '';
     filterButtons.forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.value === 'all');
+      const isAll = btn.dataset.value === 'all';
+      btn.classList.toggle('active', isAll);
+      btn.setAttribute('aria-pressed', isAll ? 'true' : 'false');
     });
     applyFilters();
   };

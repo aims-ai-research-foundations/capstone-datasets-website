@@ -1,0 +1,20 @@
+{% comment %}
+  Country Flag Component
+  Usage: {% include country-flag.html code=country %}
+  Renders an emoji flag with title for the given country code
+{% endcomment %}
+{% case include.code %}
+  {% when "NG" %}<span title="Nigeria" aria-label="Nigeria">🇳🇬</span>
+  {% when "KE" %}<span title="Kenya" aria-label="Kenya">🇰🇪</span>
+  {% when "GH" %}<span title="Ghana" aria-label="Ghana">🇬🇭</span>
+  {% when "ZA" %}<span title="South Africa" aria-label="South Africa">🇿🇦</span>
+  {% when "ET" %}<span title="Ethiopia" aria-label="Ethiopia">🇪🇹</span>
+  {% when "RW" %}<span title="Rwanda" aria-label="Rwanda">🇷🇼</span>
+  {% when "UG" %}<span title="Uganda" aria-label="Uganda">🇺🇬</span>
+  {% when "TZ" %}<span title="Tanzania" aria-label="Tanzania">🇹🇿</span>
+  {% when "SN" %}<span title="Senegal" aria-label="Senegal">🇸🇳</span>
+  {% when "CM" %}<span title="Cameroon" aria-label="Cameroon">🇨🇲</span>
+  {% when "EG" %}<span title="Egypt" aria-label="Egypt">🇪🇬</span>
+  {% when "MA" %}<span title="Morocco" aria-label="Morocco">🇲🇦</span>
+  {% when "Pan-African" %}<span title="Pan-African" aria-label="Pan-African">🌍</span>
+{% endcase %}

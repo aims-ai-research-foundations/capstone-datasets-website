@@ -1,0 +1,95 @@
+# Centralized country data for the Africa AI Upskilling Initiative
+# Includes all countries referenced in datasets and the initiative
+
+# Primary initiative countries (with full program data)
+- code: "NG"
+  name: "Nigeria"
+  flag: "🇳🇬"
+  region: "West Africa"
+  primary: true
+  heis: 10
+  champions: 50
+  students: 11836
+
+- code: "ZA"
+  name: "South Africa"
+  flag: "🇿🇦"
+  region: "Southern Africa"
+  primary: true
+  heis: 10
+  champions: 50
+  students: 7440
+
+- code: "KE"
+  name: "Kenya"
+  flag: "🇰🇪"
+  region: "East Africa"
+  primary: true
+  heis: 6
+  champions: 30
+  students: 6617
+
+- code: "GH"
+  name: "Ghana"
+  flag: "🇬🇭"
+  region: "West Africa"
+  primary: true
+  heis: 4
+  champions: 16
+  students: 5087
+
+# Secondary countries (datasets available, not primary initiative countries)
+- code: "ET"
+  name: "Ethiopia"
+  flag: "🇪🇹"
+  region: "East Africa"
+  primary: false
+
+- code: "RW"
+  name: "Rwanda"
+  flag: "🇷🇼"
+  region: "East Africa"
+  primary: false
+
+- code: "UG"
+  name: "Uganda"
+  flag: "🇺🇬"
+  region: "East Africa"
+  primary: false
+
+- code: "TZ"
+  name: "Tanzania"
+  flag: "🇹🇿"
+  region: "East Africa"
+  primary: false
+
+- code: "SN"
+  name: "Senegal"
+  flag: "🇸🇳"
+  region: "West Africa"
+  primary: false
+
+- code: "CM"
+  name: "Cameroon"
+  flag: "🇨🇲"
+  region: "Central Africa"
+  primary: false
+
+- code: "EG"
+  name: "Egypt"
+  flag: "🇪🇬"
+  region: "North Africa"
+  primary: false
+
+- code: "MA"
+  name: "Morocco"
+  flag: "🇲🇦"
+  region: "North Africa"
+  primary: false
+
+# Special designations
+- code: "Pan-African"
+  name: "Pan-African"
+  flag: "🌍"
+  region: "Africa-wide"
+  primary: false
