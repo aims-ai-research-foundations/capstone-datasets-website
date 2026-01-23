@@ -36,3 +36,7 @@ package-lock.json
 # Environment
 .env
 .env.local
+
+# Research scripts (contain API keys)
+research_*.py
+research_output_*.md

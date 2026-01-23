@@ -1,400 +1,1221 @@
-# African Languages NLP Datasets
+# =====================================================
+# Course 01: Build Your Own Small Language Model
+# =====================================================
+
+- id: "wura"
+  name: "WURA"
+  tagline: "Web-crawled Unsupervised Representation for Africa"
+  description: |
+    A large-scale, document-level dataset covering 16 African languages and 4 high-resource languages widely spoken in Africa.
+    Created by auditing mC4 and crawling verified news sources to address quality issues in web-crawled data for low-resource languages.
+  source_url: "https://huggingface.co/datasets/castorini/wura"
+  source_type: "huggingface"
+  paper_url: "https://arxiv.org/abs/2310.xxxxx"
+  languages:
+    - { code: "amh", name: "Amharic" }
+    - { code: "hau", name: "Hausa" }
+    - { code: "ibo", name: "Igbo" }
+    - { code: "kin", name: "Kinyarwanda" }
+    - { code: "lug", name: "Luganda" }
+    - { code: "pcm", name: "Nigerian Pidgin" }
+    - { code: "orm", name: "Oromo" }
+    - { code: "swa", name: "Swahili" }
+    - { code: "wol", name: "Wolof" }
+    - { code: "yor", name: "Yoruba" }
+    - { code: "zul", name: "Zulu" }
+  countries: ["NG", "ET", "KE", "RW", "UG", "SN", "ZA"]
+  tasks: ["language-modeling", "pretraining", "masked-language-modeling"]
+  size: "~19GB"
+  format: ["Text", "JSON"]
+  license: "Apache 2.0"
+  difficulty: "intermediate"
+  compute: "medium"
+  colab_friendly: true
+  courses: ["01-build-slm"]
+  quickstart: |
+    from datasets import load_dataset
+
+    # Load Yoruba document-level data
+    dataset = load_dataset("castorini/wura", "yor", split="train")
+    print(dataset['text'][:5])
+  project_ideas:
+    - title: "Train a Small LM from Scratch"
+      description: "Train a unidirectional LSTM or Transformer from scratch on Yoruba text"
+      difficulty: "intermediate"
+    - title: "Compare Data Quality"
+      description: "Compare n-gram perplexity between WURA (curated) and mC4 (raw) for Hausa"
+      difficulty: "intermediate"
+    - title: "Predictive Keyboard"
+      description: "Build a predictive text keyboard for Nigerian Pidgin"
+      difficulty: "beginner"
+  ethics:
+    - "While curated to remove noise, web-crawled data may still contain biases"
+    - "Religious text inclusion can skew domain distribution"
+  featured: true
+  date_added: "2026-01-23"
+
+- id: "mc4-african"
+  name: "mC4 (African Subset)"
+  tagline: "Multilingual Colossal Cleaned Crawled Corpus"
+  description: |
+    A multilingual variant of the C4 dataset, mC4 is a colossal, cleaned version of Common Crawl.
+    Standard for training massive multilingual models like mT5, though requires significant filtering for low-resource languages.
+  source_url: "https://huggingface.co/datasets/allenai/c4"
+  source_type: "huggingface"
+  paper_url: "https://arxiv.org/abs/2010.11934"
+  languages:
+    - { code: "afr", name: "Afrikaans" }
+    - { code: "amh", name: "Amharic" }
+    - { code: "hau", name: "Hausa" }
+    - { code: "ibo", name: "Igbo" }
+    - { code: "mlg", name: "Malagasy" }
+    - { code: "nya", name: "Chichewa" }
+    - { code: "sna", name: "Shona" }
+    - { code: "som", name: "Somali" }
+    - { code: "swa", name: "Swahili" }
+    - { code: "xho", name: "Xhosa" }
+    - { code: "yor", name: "Yoruba" }
+    - { code: "zul", name: "Zulu" }
+  countries: ["Pan-African"]
+  tasks: ["language-modeling", "pretraining"]
+  size: "Terabytes"
+  format: ["Text"]
+  license: "ODC-BY"
+  difficulty: "advanced"
+  compute: "high"
+  colab_friendly: false
+  courses: ["01-build-slm"]
+  quickstart: |
+    from datasets import load_dataset
+
+    # Streaming is recommended due to size
+    dataset = load_dataset("allenai/c4", "sw", split="train", streaming=True)
+    print(next(iter(dataset)))
+  project_ideas:
+    - title: "Data Cleaning Pipeline"
+      description: "Create a cleaning pipeline to filter noise from the Somali subset of mC4"
+      difficulty: "advanced"
+    - title: "Word2Vec Training"
+      description: "Train a Word2Vec model on the Swahili subset"
+      difficulty: "intermediate"
+  ethics:
+    - "Contains toxic content, hate speech, and significant noise"
+    - "African language representation is often lower quality than high-resource languages"
+  featured: false
+  date_added: "2026-01-23"
+
+- id: "masakhanews"
+  name: "MasakhaNEWS"
+  tagline: "News Topic Classification for 16 African Languages"
+  description: |
+    High-quality, human-annotated news articles for topic classification.
+    Excellent for modeling formal language and news domains, offering cleaner data than web crawls.
+  source_url: "https://huggingface.co/datasets/masakhane/masakhanews"
+  source_type: "huggingface"
+  paper_url: "https://arxiv.org/abs/2304.09972"
+  languages:
+    - { code: "amh", name: "Amharic" }
+    - { code: "hau", name: "Hausa" }
+    - { code: "ibo", name: "Igbo" }
+    - { code: "lug", name: "Luganda" }
+    - { code: "swa", name: "Swahili" }
+    - { code: "yor", name: "Yoruba" }
+    - { code: "lin", name: "Lingala" }
+    - { code: "sna", name: "Shona" }
+    - { code: "xho", name: "IsiXhosa" }
+  countries: ["NG", "ET", "KE", "UG", "ZW", "ZA", "CD"]
+  tasks: ["topic-classification", "language-modeling", "text-classification"]
+  size: "~20,000 articles"
+  format: ["JSON", "CSV"]
+  license: "CC-BY-4.0"
+  difficulty: "beginner"
+  compute: "low"
+  colab_friendly: true
+  courses: ["01-build-slm", "03-neural-networks"]
+  quickstart: |
+    from datasets import load_dataset
+
+    dataset = load_dataset("masakhane/masakhanews", "hau", split="train")
+    print(dataset['text'][:3], dataset['label'][:3])
+  project_ideas:
+    - title: "Domain-Specific LM"
+      description: "Train a domain-specific language model for African news"
+      difficulty: "intermediate"
+    - title: "Headline Generator"
+      description: "Generate news headlines using n-grams based on body text"
+      difficulty: "beginner"
+    - title: "News Classifier"
+      description: "Train a classifier to categorize Swahili news articles"
+      difficulty: "beginner"
+  ethics:
+    - "News data may contain political biases specific to region and publication time"
+  featured: true
+  date_added: "2026-01-23"
+
+- id: "naijavoices"
+  name: "NaijaVoices"
+  tagline: "Culturally Rich Nigerian Language Dataset"
+  description: |
+    Expert-curated text and speech in Nigerian languages. Offers authentic, culturally rich sentences
+    distinct from religious or news texts often found online. Uses a community-benefiting data farming approach.
+  source_url: "https://huggingface.co/datasets/naijavoices/naijavoices-dataset"
+  source_type: "huggingface"
+  languages:
+    - { code: "ibo", name: "Igbo" }
+    - { code: "hau", name: "Hausa" }
+    - { code: "yor", name: "Yoruba" }
+  countries: ["NG"]
+  tasks: ["language-modeling", "asr", "speech-recognition"]
+  size: "1,800 hours of speech"
+  format: ["Audio", "Text"]
+  license: "CC BY-NC-SA 4.0"
+  difficulty: "intermediate"
+  compute: "medium"
+  colab_friendly: true
+  courses: ["01-build-slm"]
+  quickstart: |
+    from datasets import load_dataset
+
+    # Requires approval on HuggingFace
+    dataset = load_dataset("naijavoices/naijavoices-dataset", split="train", streaming=True)
+    print(next(iter(dataset))['transcript'])
+  project_ideas:
+    - title: "Conversational Text Generator"
+      description: "Build a conversational text generator for Nigerian languages"
+      difficulty: "intermediate"
+    - title: "Code-Switching Analysis"
+      description: "Analyze code-switching patterns in Nigerian text"
+      difficulty: "advanced"
+  ethics:
+    - "Non-commercial license; users must register"
+    - "Uses data farming approach that benefits the community"
+  featured: false
+  date_added: "2026-01-23"
+
+# =====================================================
+# Course 02: Represent Your Language Data
+# =====================================================
+
+- id: "mafand-mt"
+  name: "MAFAND-MT"
+  tagline: "Machine Translation for 21 African Languages"
+  description: |
+    High-quality parallel corpus for Machine Translation in the news domain.
+    Contains translations from English/French to various African languages, ideal for learning text alignment and cross-lingual embeddings.
+  source_url: "https://huggingface.co/datasets/masakhane/mafand"
+  source_type: "huggingface"
+  paper_url: "https://arxiv.org/abs/2204.06487"
+  languages:
+    - { code: "bam", name: "Bambara" }
+    - { code: "ewe", name: "Ewe" }
+    - { code: "fon", name: "Fon" }
+    - { code: "hau", name: "Hausa" }
+    - { code: "ibo", name: "Igbo" }
+    - { code: "lug", name: "Luganda" }
+    - { code: "wol", name: "Wolof" }
+    - { code: "zul", name: "Zulu" }
+    - { code: "yor", name: "Yoruba" }
+  countries: ["Pan-African"]
+  tasks: ["machine-translation", "alignment", "cross-lingual-embeddings"]
+  size: "~5k-30k sentences per language"
+  format: ["JSON", "TSV"]
+  license: "CC-BY-4.0-NC"
+  difficulty: "intermediate"
+  compute: "medium"
+  colab_friendly: true
+  courses: ["02-represent-data", "04-transformer"]
+  quickstart: |
+    from datasets import load_dataset
+
+    dataset = load_dataset("masakhane/mafand", "en-yor", split="train")
+    print(dataset['translation'][:3])
+  project_ideas:
+    - title: "BPE Tokenizer Comparison"
+      description: "Train a BPE tokenizer on target African languages and compare vocabulary sizes"
+      difficulty: "intermediate"
+    - title: "Cross-lingual Embedding Visualization"
+      description: "Visualize cross-lingual word embeddings using PCA"
+      difficulty: "intermediate"
+  ethics:
+    - "News domain data; non-commercial license"
+  featured: true
+  date_added: "2026-01-23"
+
+- id: "cc100"
+  name: "CC-100"
+  tagline: "Common Crawl Corpus for 100+ Languages"
+  description: |
+    Constructed from Common Crawl snapshots, used to train XLM-R.
+    Excellent for training monolingual tokenizers and embeddings due to its volume.
+  source_url: "http://data.statmt.org/cc-100/"
+  source_type: "web"
+  languages:
+    - { code: "amh", name: "Amharic" }
+    - { code: "hau", name: "Hausa" }
+    - { code: "ibo", name: "Igbo" }
+    - { code: "som", name: "Somali" }
+    - { code: "swa", name: "Swahili" }
+    - { code: "xho", name: "Xhosa" }
+    - { code: "yor", name: "Yoruba" }
+    - { code: "zul", name: "Zulu" }
+  countries: ["Pan-African"]
+  tasks: ["tokenization", "pretraining", "embeddings"]
+  size: "Massive (varies by language)"
+  format: ["Text"]
+  license: "Common Crawl Terms"
+  difficulty: "intermediate"
+  compute: "high"
+  colab_friendly: false
+  courses: ["02-represent-data"]
+  quickstart: |
+    from tokenizers import ByteLevelBPETokenizer
+
+    tokenizer = ByteLevelBPETokenizer()
+    tokenizer.train(["amharic.txt"], vocab_size=52000)
+  project_ideas:
+    - title: "WordPiece for Amharic"
+      description: "Train a WordPiece tokenizer for Amharic and analyze Ge'ez script handling"
+      difficulty: "intermediate"
+    - title: "Tokenizer Comparison"
+      description: "Compare BPE vs Unigram tokenization on Zulu (agglutinative language)"
+      difficulty: "advanced"
+  ethics:
+    - "Web-crawled data contains noise and potential bias"
+  featured: false
+  date_added: "2026-01-23"
+
+- id: "flores-200"
+  name: "FLORES-200"
+  tagline: "Professional Translations for 200 Languages"
+  description: |
+    A many-to-many evaluation dataset covering 200 languages with professional translations.
+    Gold standard for evaluating embeddings and alignment quality.
+  source_url: "https://huggingface.co/datasets/facebook/flores"
+  source_type: "huggingface"
+  paper_url: "https://arxiv.org/abs/2207.04672"
+  languages:
+    - { code: "multi", name: "20+ African languages including Dinka, Nuer, Kanuri" }
+  countries: ["Pan-African"]
+  tasks: ["translation-evaluation", "embeddings", "alignment"]
+  size: "3,001 sentences per language"
+  format: ["JSON"]
+  license: "CC-BY-SA 4.0"
+  difficulty: "intermediate"
+  compute: "low"
+  colab_friendly: true
+  courses: ["02-represent-data"]
+  quickstart: |
+    from datasets import load_dataset
+
+    dataset = load_dataset("facebook/flores", "all")
+  project_ideas:
+    - title: "Embedding Evaluation"
+      description: "Evaluate cosine similarity between English and Dinka sentence embeddings"
+      difficulty: "intermediate"
+    - title: "Alignment Fine-tuning"
+      description: "Fine-tune a multilingual model to align Kanuri and English"
+      difficulty: "advanced"
+  ethics:
+    - "High quality but limited domain (Wikipedia-based)"
+  featured: true
+  date_added: "2026-01-23"
+
+- id: "universal-dependencies"
+  name: "Universal Dependencies"
+  tagline: "Grammar Annotation for African Languages"
+  description: |
+    Framework for consistent annotation of grammar (POS, morphology, syntax).
+    Crucial for understanding linguistic structure and embeddings.
+  source_url: "https://universaldependencies.org/"
+  source_type: "web"
+  languages:
+    - { code: "amh", name: "Amharic" }
+    - { code: "bam", name: "Bambara" }
+    - { code: "cop", name: "Coptic" }
+    - { code: "hau", name: "Hausa" }
+    - { code: "ibo", name: "Igbo" }
+    - { code: "yor", name: "Yoruba" }
+    - { code: "wol", name: "Wolof" }
+  countries: ["NG", "ET", "SN", "ML"]
+  tasks: ["pos-tagging", "dependency-parsing", "morphology"]
+  size: "Small, high-quality treebanks"
+  format: ["CoNLL-U"]
+  license: "CC-BY-SA 4.0"
+  difficulty: "advanced"
+  compute: "low"
+  colab_friendly: true
+  courses: ["02-represent-data"]
+  quickstart: |
+    from datasets import load_dataset
+
+    dataset = load_dataset("universal_dependencies", "wol_wtb", split="train")
+    print(dataset['tokens'][:3])
+  project_ideas:
+    - title: "Dependency Visualization"
+      description: "Visualize dependency trees for Yoruba sentences"
+      difficulty: "intermediate"
+    - title: "POS Tagger"
+      description: "Train a POS tagger using embeddings"
+      difficulty: "intermediate"
+  ethics:
+    - "Highly curated academic data"
+  featured: false
+  date_added: "2026-01-23"
+
+# =====================================================
+# Course 03: Design and Train Neural Networks
+# =====================================================
+
 - id: "masakhaner-v2"
   name: "MasakhaNER 2.0"
-  tagline: "Named Entity Recognition for 21 African Languages"
+  tagline: "Named Entity Recognition for 20 African Languages"
   description: |
-    MasakhaNER 2.0 is a comprehensive named entity recognition dataset covering 21 African languages.
-    It includes annotations for Person (PER), Organization (ORG), Location (LOC), and Date (DATE) entities.
-    Created by the Masakhane community, it represents a significant resource for African language NLP research.
+    The largest human-annotated NER dataset for African languages. Identifies Person, Organization,
+    Location, and Date entities in news text. Created by the Masakhane community.
   source_url: "https://huggingface.co/datasets/masakhane/masakhaner2"
   source_type: "huggingface"
   paper_url: "https://arxiv.org/abs/2210.12391"
   languages:
-    - { code: "swa", name: "Swahili" }
-    - { code: "yor", name: "Yoruba" }
+    - { code: "bam", name: "Bambara" }
+    - { code: "ewe", name: "Ewe" }
+    - { code: "fon", name: "Fon" }
     - { code: "hau", name: "Hausa" }
     - { code: "ibo", name: "Igbo" }
-    - { code: "amh", name: "Amharic" }
+    - { code: "kin", name: "Kinyarwanda" }
+    - { code: "lug", name: "Luganda" }
+    - { code: "mos", name: "Mossi" }
+    - { code: "nya", name: "Chichewa" }
+    - { code: "sna", name: "Shona" }
+    - { code: "swa", name: "Swahili" }
+    - { code: "twi", name: "Twi" }
+    - { code: "wol", name: "Wolof" }
+    - { code: "xho", name: "Xhosa" }
+    - { code: "yor", name: "Yoruba" }
     - { code: "zul", name: "Zulu" }
-  countries: ["KE", "NG", "GH", "ZA", "ET"]
+  countries: ["Pan-African (20 countries)"]
   tasks: ["named-entity-recognition", "sequence-labeling", "token-classification"]
-  size: "50MB"
+  size: "~9,000-10,000 sentences per language"
   format: ["JSON", "CoNLL"]
-  license: "CC-BY-4.0"
+  license: "CC-BY-4.0-NC"
   difficulty: "intermediate"
   compute: "low"
   colab_friendly: true
-  courses: ["02-represent-data", "05-finetune", "08-capstone"]
+  courses: ["03-neural-networks"]
   quickstart: |
     from datasets import load_dataset
 
-    # Load Swahili subset
-    dataset = load_dataset("masakhane/masakhaner2", "swa")
-
-    # View a sample
-    print(dataset['train'][0])
-    # Output: {'tokens': ['Waziri', 'wa', ...], 'ner_tags': [1, 0, ...]}
-
-    # Get label names
-    print(dataset['train'].features['ner_tags'].feature.names)
+    dataset = load_dataset("masakhane/masakhaner2", "bam", split="train")
+    print(dataset['tokens'][:3], dataset['ner_tags'][:3])
   project_ideas:
-    - title: "Multilingual News NER System"
-      description: "Build a system that extracts named entities from African news articles across multiple languages"
+    - title: "Bi-LSTM-CRF NER"
+      description: "Train a Bi-LSTM-CRF model for NER in Bambara"
       difficulty: "intermediate"
-    - title: "Cross-lingual Transfer Study"
-      description: "Investigate how NER knowledge transfers between related African languages"
+    - title: "Zero-Shot Transfer"
+      description: "Compare zero-shot transfer from Yoruba to Fon using BERT"
       difficulty: "advanced"
   ethics:
-    - "Geographic bias towards regions with more annotators"
-    - "Entity categories based on Western NER conventions may not cover all local contexts"
-    - "Performance varies significantly across languages"
+    - "Participatory design ensures local context is respected"
   featured: true
-  date_added: "2026-01-20"
+  date_added: "2026-01-23"
 
 - id: "afrisenti"
   name: "AfriSenti"
   tagline: "Sentiment Analysis for 14 African Languages"
   description: |
-    AfriSenti is a multilingual sentiment analysis dataset for 14 African languages.
-    It contains Twitter data annotated for positive, negative, and neutral sentiment.
-    The dataset enables research on sentiment analysis in low-resource African languages.
+    Large-scale sentiment analysis dataset of 110,000+ annotated tweets.
+    Captures African social media nuances including code-switching and local slang.
   source_url: "https://huggingface.co/datasets/masakhane/afrisenti"
   source_type: "huggingface"
   paper_url: "https://arxiv.org/abs/2302.08956"
   languages:
-    - { code: "swa", name: "Swahili" }
-    - { code: "yor", name: "Yoruba" }
-    - { code: "hau", name: "Hausa" }
     - { code: "amh", name: "Amharic" }
+    - { code: "hau", name: "Hausa" }
+    - { code: "ibo", name: "Igbo" }
+    - { code: "kin", name: "Kinyarwanda" }
+    - { code: "swa", name: "Swahili" }
+    - { code: "tir", name: "Tigrinya" }
     - { code: "twi", name: "Twi" }
+    - { code: "yor", name: "Yoruba" }
     - { code: "pcm", name: "Nigerian Pidgin" }
-  countries: ["KE", "NG", "GH", "ET", "ZA"]
+  countries: ["NG", "ET", "KE", "GH", "RW"]
   tasks: ["sentiment-analysis", "text-classification"]
-  size: "25MB"
+  size: "110,000+ tweets"
   format: ["CSV", "JSON"]
   license: "CC-BY-4.0"
+  difficulty: "intermediate"
+  compute: "low"
+  colab_friendly: true
+  courses: ["03-neural-networks"]
+  quickstart: |
+    from datasets import load_dataset
+
+    dataset = load_dataset("masakhane/afrisenti", "hau", split="train")
+    print(dataset[:3])
+  project_ideas:
+    - title: "Election Sentiment"
+      description: "Build a sentiment classifier for Nigerian elections"
+      difficulty: "intermediate"
+    - title: "Code-Switching Impact"
+      description: "Analyze code-switching impact on classification accuracy"
+      difficulty: "advanced"
+  ethics:
+    - "Social media data contains toxicity"
+    - "User privacy is anonymized"
+  featured: true
+  date_added: "2026-01-23"
+
+- id: "afrihate"
+  name: "AfriHate"
+  tagline: "Hate Speech Detection for 15 African Languages"
+  description: |
+    Multilingual dataset for hate speech and abusive language detection.
+    Tweets annotated by native speakers with socio-cultural context.
+  source_url: "https://huggingface.co/datasets/afrihate/afrihate"
+  source_type: "huggingface"
+  languages:
+    - { code: "ara", name: "Algerian Arabic" }
+    - { code: "amh", name: "Amharic" }
+    - { code: "hau", name: "Hausa" }
+    - { code: "ibo", name: "Igbo" }
+    - { code: "kin", name: "Kinyarwanda" }
+    - { code: "som", name: "Somali" }
+    - { code: "swa", name: "Swahili" }
+    - { code: "tir", name: "Tigrinya" }
+    - { code: "twi", name: "Twi" }
+    - { code: "xho", name: "Xhosa" }
+    - { code: "yor", name: "Yoruba" }
+    - { code: "zul", name: "Zulu" }
+  countries: ["Pan-African"]
+  tasks: ["hate-speech-detection", "text-classification", "safety"]
+  size: "~45,000 examples"
+  format: ["JSON", "CSV"]
+  license: "Apache 2.0"
+  difficulty: "intermediate"
+  compute: "low"
+  colab_friendly: true
+  courses: ["03-neural-networks", "06-align"]
+  quickstart: |
+    from datasets import load_dataset
+
+    dataset = load_dataset("afrihate/afrihate", "hau", split="train")
+  project_ideas:
+    - title: "Hate Speech Classifier"
+      description: "Train BERT classifier for hate speech in Kinyarwanda"
+      difficulty: "intermediate"
+    - title: "Feature Analysis"
+      description: "Investigate linguistic features correlating with abusive labels"
+      difficulty: "advanced"
+  ethics:
+    - "Contains offensive content"
+    - "Use strictly for safety research"
+  featured: false
+  date_added: "2026-01-23"
+
+- id: "tunizi"
+  name: "Tunizi"
+  tagline: "Tunisian Arabizi Sentiment Analysis"
+  description: |
+    First sentiment analysis dataset for Tunisian Arabizi (Tunisian dialect written in Latin script with numerals).
+  source_url: "https://huggingface.co/datasets/chaymafourati/tunizi"
+  source_type: "huggingface"
+  paper_url: "https://arxiv.org/abs/2007.xxxxx"
+  languages:
+    - { code: "tun", name: "Tunisian Arabizi" }
+  countries: ["TN"]
+  tasks: ["sentiment-analysis", "text-classification"]
+  size: "~3,000 sentences"
+  format: ["CSV"]
+  license: "MIT"
   difficulty: "beginner"
   compute: "low"
   colab_friendly: true
-  courses: ["02-represent-data", "03-neural-networks", "05-finetune", "08-capstone"]
+  courses: ["03-neural-networks"]
   quickstart: |
     from datasets import load_dataset
 
-    # Load Hausa sentiment data
-    dataset = load_dataset("masakhane/afrisenti", "hau")
-
-    # View a sample
-    print(dataset['train'][0])
-    # Output: {'text': '...', 'label': 1}
-
-    # Label mapping: 0=negative, 1=neutral, 2=positive
+    dataset = load_dataset("chaymafourati/tunizi", split="train")
   project_ideas:
-    - title: "Social Media Sentiment Monitor"
-      description: "Build a dashboard that tracks sentiment about key topics in African social media"
+    - title: "Arabizi Tokenization"
+      description: "Handle Arabizi (numbers as letters) in tokenization"
       difficulty: "intermediate"
-    - title: "Multilingual Sentiment API"
-      description: "Create an API that provides sentiment analysis for multiple African languages"
+    - title: "Dialect Comparison"
+      description: "Compare MSA-trained model vs Tunizi-trained model"
       difficulty: "intermediate"
   ethics:
-    - "Twitter data may not represent general population sentiment"
-    - "Urban bias in social media data"
-    - "Potential for misuse in surveillance"
-  featured: true
-  date_added: "2026-01-20"
+    - "Social media data privacy considerations"
+  featured: false
+  date_added: "2026-01-23"
 
-- id: "mafand-mt"
-  name: "MAFAND-MT"
-  tagline: "Machine Translation for African Languages"
+# =====================================================
+# Course 04: Assemble Your Transformer Architecture
+# =====================================================
+
+- id: "afriqa"
+  name: "AfriQA"
+  tagline: "Cross-lingual Question Answering for 10 African Languages"
   description: |
-    MAFAND-MT is a machine translation dataset covering 21 African languages paired with English and French.
-    It provides parallel corpora for training and evaluating translation systems for African languages.
-  source_url: "https://huggingface.co/datasets/masakhane/mafand"
+    First cross-lingual Open-Retrieval QA dataset for African languages.
+    12,000+ examples where answers might be in different language than question.
+  source_url: "https://huggingface.co/datasets/masakhane/afriqa"
   source_type: "huggingface"
-  paper_url: "https://arxiv.org/abs/2204.06487"
+  paper_url: "https://arxiv.org/abs/2305.06897"
   languages:
-    - { code: "swa", name: "Swahili" }
-    - { code: "yor", name: "Yoruba" }
+    - { code: "bem", name: "Bemba" }
+    - { code: "fon", name: "Fon" }
     - { code: "hau", name: "Hausa" }
-    - { code: "zul", name: "Zulu" }
     - { code: "ibo", name: "Igbo" }
-  countries: ["KE", "NG", "GH", "ZA"]
-  tasks: ["machine-translation", "sequence-to-sequence"]
-  size: "100MB"
-  format: ["JSON", "TSV"]
-  license: "CC-BY-4.0"
-  difficulty: "intermediate"
+    - { code: "kin", name: "Kinyarwanda" }
+    - { code: "swa", name: "Swahili" }
+    - { code: "twi", name: "Twi" }
+    - { code: "wol", name: "Wolof" }
+    - { code: "yor", name: "Yoruba" }
+    - { code: "zul", name: "Zulu" }
+  countries: ["ZM", "BJ", "NG", "RW", "KE", "GH", "SN", "ZA"]
+  tasks: ["question-answering", "cross-lingual", "reading-comprehension"]
+  size: "12,000+ QA pairs"
+  format: ["JSON"]
+  license: "CC-BY-4.0-NC"
+  difficulty: "advanced"
   compute: "medium"
   colab_friendly: true
-  courses: ["04-transformer", "05-finetune", "08-capstone"]
+  courses: ["04-transformer"]
   quickstart: |
     from datasets import load_dataset
 
-    # Load English-Swahili translation data
-    dataset = load_dataset("masakhane/mafand", "en-swa")
-
-    # View a sample
-    print(dataset['train'][0])
-    # Output: {'translation': {'en': '...', 'swa': '...'}}
+    dataset = load_dataset("masakhane/afriqa", "bem", split="train")
+    print(dataset['question'][:3], dataset['answers'][:3])
   project_ideas:
-    - title: "Bidirectional Translation App"
-      description: "Build a mobile-friendly translation app between English and an African language"
-      difficulty: "intermediate"
-    - title: "Document Translation Pipeline"
-      description: "Create a system for translating documents while preserving formatting"
+    - title: "Retrieval-based QA"
+      description: "Build retrieval-based QA for Bemba using English documents"
       difficulty: "advanced"
+    - title: "mBERT Fine-tuning"
+      description: "Fine-tune mBERT for answer span extraction in Yoruba"
+      difficulty: "intermediate"
   ethics:
-    - "Translation quality varies by language pair"
-    - "May not handle code-switching well"
-    - "Domain-specific terminology may be missing"
+    - "Ensures African languages are first-class citizens in QA"
   featured: true
-  date_added: "2026-01-20"
+  date_added: "2026-01-23"
 
-- id: "xlsum-african"
-  name: "XL-Sum (African Languages)"
-  tagline: "Summarization Dataset for African Languages"
+- id: "xlsum"
+  name: "XL-Sum"
+  tagline: "Abstractive Summarization for African Languages"
   description: |
-    XL-Sum is a comprehensive multilingual summarization dataset. This subset focuses on African languages
-    including Swahili, Hausa, Yoruba, Igbo, and Amharic. It contains news articles with human-written summaries.
-  source_url: "https://huggingface.co/datasets/csebuetnlp/xlsum"
+    Large-scale abstractive summarization dataset from BBC News.
+    High-quality article-summary pairs for many African languages.
+  source_url: "https://huggingface.co/datasets/GEM/xlsum"
   source_type: "huggingface"
   paper_url: "https://arxiv.org/abs/2106.13822"
   languages:
-    - { code: "swa", name: "Swahili" }
-    - { code: "hau", name: "Hausa" }
-    - { code: "yor", name: "Yoruba" }
-    - { code: "ibo", name: "Igbo" }
     - { code: "amh", name: "Amharic" }
-  countries: ["KE", "NG", "ET"]
-  tasks: ["summarization", "text-generation"]
-  size: "200MB"
+    - { code: "hau", name: "Hausa" }
+    - { code: "ibo", name: "Igbo" }
+    - { code: "run", name: "Kirundi" }
+    - { code: "pcm", name: "Nigerian Pidgin" }
+    - { code: "orm", name: "Oromo" }
+    - { code: "som", name: "Somali" }
+    - { code: "swa", name: "Swahili" }
+    - { code: "tir", name: "Tigrinya" }
+    - { code: "yor", name: "Yoruba" }
+  countries: ["Pan-African"]
+  tasks: ["summarization", "text-generation", "sequence-to-sequence"]
+  size: "6k-7k pairs per language"
   format: ["JSON"]
-  license: "CC-BY-NC-SA-4.0"
+  license: "CC-BY-NC-SA 4.0"
   difficulty: "intermediate"
   compute: "medium"
   colab_friendly: true
-  courses: ["04-transformer", "05-finetune", "08-capstone"]
+  courses: ["04-transformer"]
   quickstart: |
     from datasets import load_dataset
 
-    # Load Swahili summarization data
-    dataset = load_dataset("csebuetnlp/xlsum", "swahili")
-
-    # View a sample
-    print(dataset['train'][0])
-    # Output: {'text': '...', 'summary': '...'}
+    dataset = load_dataset("GEM/xlsum", "igbo", split="train")
+    print(dataset['text'][:2], dataset['target'][:2])
   project_ideas:
-    - title: "News Digest Generator"
-      description: "Build a system that generates daily news digests in African languages"
+    - title: "mT5 Summarization"
+      description: "Fine-tune mT5 to summarize Igbo news articles"
       difficulty: "intermediate"
-  ethics:
-    - "News sources may have editorial biases"
-    - "Summaries reflect source article perspectives"
-  featured: false
-  date_added: "2026-01-20"
-
-# Tabular/Structured Datasets
-- id: "world-bank-africa"
-  name: "World Bank Africa Development Indicators"
-  tagline: "Economic and Social Indicators for African Countries"
-  description: |
-    Comprehensive development indicators for African countries from the World Bank Open Data portal.
-    Includes GDP, population, education, health, and infrastructure metrics spanning several decades.
-  source_url: "https://data.worldbank.org/region/sub-saharan-africa"
-  source_type: "api"
-  languages:
-    - { code: "eng", name: "English" }
-  countries: ["NG", "KE", "GH", "ZA"]
-  tasks: ["tabular-analysis", "time-series", "regression"]
-  size: "50MB"
-  format: ["CSV", "JSON", "Excel"]
-  license: "CC-BY-4.0"
-  difficulty: "beginner"
-  compute: "low"
-  colab_friendly: true
-  courses: ["01-build-slm", "03-neural-networks", "08-capstone"]
-  quickstart: |
-    import pandas as pd
-    import wbgapi as wb
-
-    # Get GDP data for African countries
-    df = wb.data.DataFrame('NY.GDP.MKTP.CD',
-                           economy=['NGA', 'KEN', 'GHA', 'ZAF'],
-                           time=range(2010, 2024))
-    print(df.head())
-  project_ideas:
-    - title: "Economic Forecasting Model"
-      description: "Build a model to forecast GDP growth for African countries"
-      difficulty: "intermediate"
-    - title: "Development Dashboard"
-      description: "Create an interactive dashboard visualizing development indicators"
+    - title: "ROUGE Evaluation"
+      description: "Evaluate ROUGE scores on Amharic text"
       difficulty: "beginner"
   ethics:
-    - "Data collection methods may vary by country"
-    - "Some indicators may have reporting gaps"
+    - "BBC data represents specific editorial viewpoint"
   featured: true
-  date_added: "2026-01-20"
+  date_added: "2026-01-23"
 
-- id: "africa-health-data"
-  name: "WHO Africa Health Statistics"
-  tagline: "Health Indicators and Disease Data for Africa"
+- id: "belebele"
+  name: "Belebele"
+  tagline: "Reading Comprehension for 122 Language Variants"
   description: |
-    Health statistics from the World Health Organization for African countries.
-    Includes disease prevalence, healthcare access, mortality rates, and health infrastructure data.
-  source_url: "https://www.who.int/data/gho"
-  source_type: "api"
-  languages:
-    - { code: "eng", name: "English" }
-  countries: ["NG", "KE", "GH", "ZA"]
-  tasks: ["tabular-analysis", "classification", "time-series"]
-  size: "30MB"
-  format: ["CSV", "JSON"]
-  license: "CC-BY-NC-3.0"
-  difficulty: "beginner"
-  compute: "low"
-  colab_friendly: true
-  courses: ["03-neural-networks", "08-capstone"]
-  quickstart: |
-    import pandas as pd
-
-    # Load health indicator data
-    url = "https://ghoapi.azureedge.net/api/..."
-    df = pd.read_json(url)
-    print(df.head())
-  project_ideas:
-    - title: "Disease Outbreak Predictor"
-      description: "Build a model to predict disease outbreak risks in African regions"
-      difficulty: "advanced"
-    - title: "Healthcare Access Analyzer"
-      description: "Analyze factors affecting healthcare access across Africa"
-      difficulty: "intermediate"
-  ethics:
-    - "Health data requires careful handling"
-    - "Data gaps in conflict-affected regions"
-  featured: false
-  date_added: "2026-01-20"
-
-- id: "fao-africa-agriculture"
-  name: "FAO Africa Agricultural Data"
-  tagline: "Crop Production and Food Security Data"
-  description: |
-    Agricultural statistics from the Food and Agriculture Organization covering African countries.
-    Includes crop production, livestock, land use, food prices, and food security indicators.
-  source_url: "https://www.fao.org/faostat/en/#data"
-  source_type: "api"
-  languages:
-    - { code: "eng", name: "English" }
-  countries: ["NG", "KE", "GH", "ZA"]
-  tasks: ["tabular-analysis", "regression", "time-series"]
-  size: "80MB"
-  format: ["CSV", "JSON"]
-  license: "CC-BY-NC-SA-3.0"
-  difficulty: "beginner"
-  compute: "low"
-  colab_friendly: true
-  courses: ["03-neural-networks", "08-capstone"]
-  quickstart: |
-    import pandas as pd
-
-    # Load crop production data
-    df = pd.read_csv("fao_crop_production.csv")
-
-    # Filter for African countries
-    africa_df = df[df['Area'].isin(['Nigeria', 'Kenya', 'Ghana', 'South Africa'])]
-    print(africa_df.head())
-  project_ideas:
-    - title: "Crop Yield Predictor"
-      description: "Build a model to predict crop yields based on weather and historical data"
-      difficulty: "intermediate"
-    - title: "Food Security Early Warning"
-      description: "Create an early warning system for food security risks"
-      difficulty: "advanced"
-  ethics:
-    - "Data collection varies by country capacity"
-    - "Smallholder farms may be underrepresented"
-  featured: false
-  date_added: "2026-01-20"
-
-# Text Corpora
-- id: "cc100-african"
-  name: "CC-100 (African Languages)"
-  tagline: "Web-crawled Text Corpus for African Languages"
-  description: |
-    CC-100 is a large-scale web-crawled corpus covering 100+ languages. This subset focuses on African languages
-    including Swahili, Yoruba, Hausa, Amharic, and others. Useful for pre-training language models.
-  source_url: "https://huggingface.co/datasets/cc100"
+    Multiple-choice machine reading comprehension dataset spanning 122 language variants.
+    Fully parallel, based on FLORES-200 passages.
+  source_url: "https://huggingface.co/datasets/facebook/belebele"
   source_type: "huggingface"
-  paper_url: "https://arxiv.org/abs/1911.00359"
+  paper_url: "https://arxiv.org/abs/2308.16884"
+  languages:
+    - { code: "bam", name: "Bambara" }
+    - { code: "wol", name: "Wolof" }
+    - { code: "yor", name: "Yoruba" }
+    - { code: "zul", name: "Zulu" }
+    - { code: "multi", name: "Many more African languages" }
+  countries: ["Pan-African"]
+  tasks: ["reading-comprehension", "multiple-choice", "evaluation"]
+  size: "900 questions per language"
+  format: ["JSON"]
+  license: "CC-BY-SA 4.0"
+  difficulty: "intermediate"
+  compute: "low"
+  colab_friendly: true
+  courses: ["04-transformer"]
+  quickstart: |
+    from datasets import load_dataset
+
+    dataset = load_dataset("facebook/belebele", split="eng_Latn")
+  project_ideas:
+    - title: "Zero-Shot LLM Evaluation"
+      description: "Evaluate zero-shot Llama-3 on Wolof reading comprehension"
+      difficulty: "intermediate"
+    - title: "Human vs Machine"
+      description: "Compare human vs machine performance on Zulu"
+      difficulty: "advanced"
+  ethics:
+    - "Parallel nature allows rigorous cross-language bias testing"
+  featured: false
+  date_added: "2026-01-23"
+
+- id: "kenswquad"
+  name: "KenSwQuAD"
+  tagline: "Swahili Question Answering Dataset"
+  description: |
+    Question Answering dataset for Swahili, annotated from raw story texts.
+    Addresses the lack of QA resources for Swahili in East Africa.
+  source_url: "https://huggingface.co/datasets/lighteval/KenSwQuAD"
+  source_type: "huggingface"
+  paper_url: "https://arxiv.org/abs/2205.02674"
   languages:
     - { code: "swa", name: "Swahili" }
+  countries: ["KE", "TZ"]
+  tasks: ["question-answering"]
+  size: "7,526 QA pairs"
+  format: ["JSON"]
+  license: "CC-BY 4.0"
+  difficulty: "intermediate"
+  compute: "low"
+  colab_friendly: true
+  courses: ["04-transformer", "07-accelerate"]
+  quickstart: |
+    # Requires LightEval wrapper or custom loading
+  project_ideas:
+    - title: "Swahili QA Bot"
+      description: "Train a Swahili QA bot for local stories"
+      difficulty: "intermediate"
+    - title: "CPU-Optimized QA"
+      description: "Optimize for CPU-only inference"
+      difficulty: "advanced"
+  ethics:
+    - "Community-sourced data"
+  featured: false
+  date_added: "2026-01-23"
+
+# =====================================================
+# Course 05: Finetune Your Model
+# =====================================================
+
+- id: "afriinstruct"
+  name: "AfriInstruct"
+  tagline: "Instruction Tuning for African Languages"
+  description: |
+    Dataset specialized for instruction-tuning multiple African languages.
+    Bridges the gap between high-resource and African language LLM performance.
+  source_url: "https://huggingface.co/datasets/llama-lang-adapt/AfriInstruct-Data"
+  source_type: "huggingface"
+  languages:
+    - { code: "hau", name: "Hausa" }
+    - { code: "ibo", name: "Igbo" }
     - { code: "yor", name: "Yoruba" }
-    - { code: "amh", name: "Amharic" }
-  countries: ["KE", "NG", "ET"]
-  tasks: ["language-modeling", "pretraining"]
-  size: "5GB+"
-  format: ["Text"]
-  license: "Common Crawl Terms"
+    - { code: "swa", name: "Swahili" }
+    - { code: "zul", name: "Zulu" }
+    - { code: "multi", name: "13+ African languages" }
+  countries: ["Pan-African"]
+  tasks: ["instruction-tuning", "fine-tuning", "llm"]
+  size: "Millions of tokens"
+  format: ["JSON"]
+  license: "CC-BY-4.0"
   difficulty: "advanced"
   compute: "high"
   colab_friendly: false
-  courses: ["01-build-slm", "02-represent-data"]
+  courses: ["05-finetune"]
   quickstart: |
     from datasets import load_dataset
 
-    # Load Swahili corpus (streaming for large data)
-    dataset = load_dataset("cc100", lang="sw", streaming=True)
-
-    # Get samples
-    for sample in dataset['train'].take(5):
-        print(sample['text'][:200])
+    dataset = load_dataset("llama-lang-adapt/AfriInstruct-Data", split="train")
+    print(dataset['instruction'][:3], dataset['output'][:3])
   project_ideas:
-    - title: "African Language Model"
-      description: "Pre-train a small language model on African language data"
+    - title: "Hausa Instruction Following"
+      description: "Fine-tune Llama-2-7B to follow instructions in Hausa"
+      difficulty: "advanced"
+    - title: "Cross-lingual Tax"
+      description: "Evaluate cross-lingual instruction tuning tax"
       difficulty: "advanced"
   ethics:
-    - "Web-crawled data may contain biases"
-    - "Quality varies across sources"
-    - "May contain inappropriate content"
-  featured: false
-  date_added: "2026-01-20"
+    - "Derived from other datasets; inherits their biases"
+  featured: true
+  date_added: "2026-01-23"
 
-- id: "wikipedia-african"
-  name: "Wikipedia (African Languages)"
-  tagline: "Wikipedia Articles in African Languages"
+- id: "inkuba-instruct"
+  name: "Inkuba Instruct"
+  tagline: "Multi-task Instruction Data by Lelapa AI"
   description: |
-    Wikipedia dumps for African language editions. Provides clean, encyclopedic text for language modeling,
-    information extraction, and other NLP tasks.
-  source_url: "https://huggingface.co/datasets/wikimedia/wikipedia"
+    Developed by Lelapa AI, compiles downstream tasks for five African languages.
+    Integrates MT, NER, POS, and Sentiment data for instruction fine-tuning.
+  source_url: "https://huggingface.co/datasets/lelapa/Inkuba-instruct"
   source_type: "huggingface"
   languages:
     - { code: "swa", name: "Swahili" }
     - { code: "yor", name: "Yoruba" }
+    - { code: "xho", name: "IsiXhosa" }
     - { code: "hau", name: "Hausa" }
-    - { code: "ibo", name: "Igbo" }
-    - { code: "amh", name: "Amharic" }
-  countries: ["KE", "NG", "ET"]
-  tasks: ["language-modeling", "information-extraction"]
-  size: "500MB"
+    - { code: "zul", name: "IsiZulu" }
+  countries: ["NG", "KE", "ZA"]
+  tasks: ["instruction-tuning", "multi-task", "fine-tuning"]
+  size: "62M Swahili, 6M Yoruba samples"
   format: ["JSON"]
-  license: "CC-BY-SA-3.0"
-  difficulty: "beginner"
-  compute: "low"
-  colab_friendly: true
-  courses: ["01-build-slm", "02-represent-data", "08-capstone"]
+  license: "CC BY-NC 4.0"
+  difficulty: "advanced"
+  compute: "high"
+  colab_friendly: false
+  courses: ["05-finetune"]
   quickstart: |
     from datasets import load_dataset
 
-    # Load Swahili Wikipedia
-    dataset = load_dataset("wikimedia/wikipedia", "20231101.sw")
-
-    # View a sample article
-    print(dataset['train'][0]['title'])
-    print(dataset['train'][0]['text'][:500])
+    dataset = load_dataset("lelapa/Inkuba-instruct", "swahili_train", split="train")
   project_ideas:
-    - title: "African Knowledge Base"
-      description: "Extract structured information from African language Wikipedia articles"
+    - title: "TinyLlama for Zulu"
+      description: "Fine-tune TinyLlama for Zulu instruction following"
+      difficulty: "advanced"
+  ethics:
+    - "Non-commercial license"
+  featured: false
+  date_added: "2026-01-23"
+
+- id: "afrimed-qa"
+  name: "AfriMed-QA"
+  tagline: "Pan-African Medical Question Answering"
+  description: |
+    15,000+ medical questions sourced from medical schools and clinicians across 16 African countries.
+    Crucial for adapting models to the African healthcare context.
+  source_url: "https://huggingface.co/datasets/intronhealth/afrimedqa_v2"
+  source_type: "huggingface"
+  languages:
+    - { code: "eng", name: "English (African context)" }
+  countries: ["16 African countries"]
+  tasks: ["medical-qa", "domain-adaptation", "healthcare"]
+  size: "15,000+ QA pairs"
+  format: ["JSON"]
+  license: "CC BY-NC-SA 4.0"
+  difficulty: "advanced"
+  compute: "medium"
+  colab_friendly: true
+  courses: ["05-finetune", "08-capstone"]
+  quickstart: |
+    from datasets import load_dataset
+
+    # Requires access approval
+    dataset = load_dataset("intronhealth/afrimedqa_v2", split="train")
+  project_ideas:
+    - title: "Malaria Treatment QA"
+      description: "Fine-tune medical LLM for Malaria treatment guidelines in Nigeria"
+      difficulty: "advanced"
+    - title: "Medical Bias Evaluation"
+      description: "Evaluate bias in Western medical models vs AfriMed-QA"
+      difficulty: "advanced"
+  ethics:
+    - "Medical data is sensitive"
+    - "Dataset is anonymized but requires strict usage terms"
+  featured: true
+  date_added: "2026-01-23"
+
+- id: "aya-dataset"
+  name: "Aya Dataset"
+  tagline: "Multilingual Instruction Dataset from Cohere"
+  description: |
+    Massive multilingual instruction fine-tuning dataset with human-annotated
+    and translated instructions for many African languages.
+  source_url: "https://huggingface.co/datasets/cohere/aya_dataset"
+  source_type: "huggingface"
+  languages:
+    - { code: "multi", name: "65 languages including African LRLs" }
+  countries: ["Global (including Africa)"]
+  tasks: ["instruction-following", "multilingual", "fine-tuning"]
+  size: "204k human annotations, millions translated"
+  format: ["JSON"]
+  license: "Apache 2.0"
+  difficulty: "intermediate"
+  compute: "medium"
+  colab_friendly: true
+  courses: ["05-finetune"]
+  quickstart: |
+    from datasets import load_dataset
+
+    dataset = load_dataset("cohere/aya_dataset", split="train")
+  project_ideas:
+    - title: "Yoruba Assistant"
+      description: "Fine-tune a model to act as helpful assistant in Yoruba"
       difficulty: "intermediate"
   ethics:
-    - "Wikipedia editors may not represent all perspectives"
-    - "Article coverage varies by topic and region"
+    - "Participatory design mitigates some bias"
+    - "Translation artifacts may remain"
   featured: false
-  date_added: "2026-01-20"
+  date_added: "2026-01-23"
+
+# =====================================================
+# Course 06: Align Your Model
+# =====================================================
+
+- id: "afristereo"
+  name: "AfriStereo"
+  tagline: "African Stereotype Evaluation Dataset"
+  description: |
+    First open-source African stereotype dataset grounded in local socio-cultural contexts.
+    Stereotype-antistereotype pairs for evaluating bias in models.
+  source_url: "https://arxiv.org/abs/2511.22016"
+  source_type: "arxiv"
+  languages:
+    - { code: "eng", name: "English (African context)" }
+    - { code: "fra", name: "French" }
+  countries: ["NG", "KE", "SN"]
+  tasks: ["bias-evaluation", "stereotypes", "safety"]
+  size: "~5,000 pairs"
+  format: ["JSON"]
+  license: "Open Source"
+  difficulty: "intermediate"
+  compute: "low"
+  colab_friendly: true
+  courses: ["06-align"]
+  quickstart: |
+    # Dataset coming soon on HuggingFace
+  project_ideas:
+    - title: "LLM Bias Comparison"
+      description: "Evaluate GPT-4 vs Llama-2 on African gender stereotypes"
+      difficulty: "intermediate"
+    - title: "Reward Model Training"
+      description: "Train reward model to penalize stereotyping"
+      difficulty: "advanced"
+  ethics:
+    - "Contains offensive stereotypes for evaluation purposes"
+  featured: false
+  date_added: "2026-01-23"
+
+- id: "oasst1"
+  name: "OASST1"
+  tagline: "OpenAssistant Conversations for RLHF"
+  description: |
+    Human-generated, human-annotated assistant-style conversation corpus with quality ratings.
+    Useful for training reward models.
+  source_url: "https://huggingface.co/datasets/OpenAssistant/oasst1"
+  source_type: "huggingface"
+  languages:
+    - { code: "multi", name: "35 languages (Multilingual)" }
+  countries: ["Global"]
+  tasks: ["rlhf", "dialogue", "preference-data"]
+  size: "161k messages"
+  format: ["JSON"]
+  license: "Apache 2.0"
+  difficulty: "advanced"
+  compute: "medium"
+  colab_friendly: true
+  courses: ["06-align"]
+  quickstart: |
+    from datasets import load_dataset
+
+    dataset = load_dataset("OpenAssistant/oasst1", split="train")
+  project_ideas:
+    - title: "Swahili RLHF"
+      description: "Translate OASST1 prompts to Swahili for RLHF dataset"
+      difficulty: "advanced"
+    - title: "Cross-lingual Reward Model"
+      description: "Train reward model on English, test transfer to African languages"
+      difficulty: "advanced"
+  ethics:
+    - "User-generated content"
+  featured: false
+  date_added: "2026-01-23"
+
+# =====================================================
+# Course 07: Accelerate Your Model
+# =====================================================
+
+- id: "sib-200"
+  name: "SIB-200"
+  tagline: "Benchmark for 200+ Languages"
+  description: |
+    Large-scale benchmark for topic classification in 200+ languages.
+    Excellent for benchmarking compressed models.
+  source_url: "https://huggingface.co/datasets/Davlan/sib200"
+  source_type: "huggingface"
+  languages:
+    - { code: "multi", name: "200+ including many African LRLs" }
+  countries: ["Global"]
+  tasks: ["topic-classification", "benchmarking", "evaluation"]
+  size: "Based on FLORES-200"
+  format: ["JSON"]
+  license: "CC-BY-SA 4.0"
+  difficulty: "intermediate"
+  compute: "low"
+  colab_friendly: true
+  courses: ["07-accelerate"]
+  quickstart: |
+    from datasets import load_dataset
+
+    dataset = load_dataset("Davlan/sib200", "hau_Latn", split="test")
+  project_ideas:
+    - title: "Quantization Benchmark"
+      description: "Quantize AfroXLMR to 8-bit and benchmark accuracy loss"
+      difficulty: "intermediate"
+    - title: "Speed Comparison"
+      description: "Compare mBERT vs DistilmBERT inference speed"
+      difficulty: "beginner"
+  ethics:
+    - "None significant"
+  featured: false
+  date_added: "2026-01-23"
+
+- id: "afrispeech-200"
+  name: "AfriSpeech-200"
+  tagline: "Pan-African Speech Corpus"
+  description: |
+    200-hour Pan-African speech corpus. Useful for benchmarking ASR model efficiency
+    on mobile devices with 120 African accents.
+  source_url: "https://huggingface.co/datasets/intronhealth/afrispeech-200"
+  source_type: "huggingface"
+  languages:
+    - { code: "eng", name: "English (120 African accents)" }
+  countries: ["13 African countries"]
+  tasks: ["asr", "speech-recognition", "benchmarking"]
+  size: "200 hours"
+  format: ["Audio"]
+  license: "CC BY-NC-SA 4.0"
+  difficulty: "advanced"
+  compute: "high"
+  colab_friendly: false
+  courses: ["07-accelerate"]
+  quickstart: |
+    from datasets import load_dataset
+
+    dataset = load_dataset("intronhealth/afrispeech-200", split="test")
+  project_ideas:
+    - title: "Raspberry Pi ASR"
+      description: "Deploy quantized ASR model on Raspberry Pi with AfriSpeech"
+      difficulty: "advanced"
+  ethics:
+    - "Clinical data privacy (curated)"
+  featured: false
+  date_added: "2026-01-23"
+
+# =====================================================
+# Course 08: Capstone Projects
+# =====================================================
+
+- id: "financial-inclusion"
+  name: "Financial Inclusion in Africa"
+  tagline: "Bank Account Prediction Dataset"
+  description: |
+    Classification dataset to predict who in Africa is most likely to have a bank account.
+    Demographics from Kenya, Rwanda, Tanzania, Uganda.
+  source_url: "https://zindi.africa/competitions/financial-inclusion-in-africa"
+  source_type: "zindi"
+  languages:
+    - { code: "eng", name: "English (Metadata)" }
+  countries: ["KE", "RW", "TZ", "UG"]
+  tasks: ["classification", "tabular", "financial"]
+  size: "~33,000 rows"
+  format: ["CSV"]
+  license: "Public (Zindi Terms)"
+  difficulty: "beginner"
+  compute: "low"
+  colab_friendly: true
+  courses: ["08-capstone"]
+  quickstart: |
+    import pandas as pd
+
+    df = pd.read_csv("Train.csv")
+    print(df.head())
+  project_ideas:
+    - title: "Credit Scoring Proxy"
+      description: "Build credit scoring proxy for unbanked populations"
+      difficulty: "intermediate"
+    - title: "Gender Disparity Analysis"
+      description: "Analyze gender disparity in financial access"
+      difficulty: "beginner"
+  ethics:
+    - "Financial data is sensitive"
+    - "Audit models for rural/female population bias"
+  featured: true
+  date_added: "2026-01-23"
+
+- id: "africa-climate"
+  name: "African Climate Change"
+  tagline: "Temperature Data for 5 African Countries"
+  description: |
+    Historical daily temperature data (1980-2023) for Egypt, Tunisia, Cameroon, Senegal, Angola.
+    Supports climate resilience projects.
+  source_url: "https://www.kaggle.com/datasets/nadiatriki/africa-climate-change"
+  source_type: "kaggle"
+  languages:
+    - { code: "num", name: "Numeric" }
+  countries: ["EG", "TN", "CM", "SN", "AO"]
+  tasks: ["time-series", "forecasting", "regression"]
+  size: "Daily records (1980-2023)"
+  format: ["CSV"]
+  license: "Open"
+  difficulty: "intermediate"
+  compute: "low"
+  colab_friendly: true
+  courses: ["08-capstone"]
+  quickstart: |
+    import pandas as pd
+
+    df = pd.read_csv("Africa_climate_change.csv")
+  project_ideas:
+    - title: "Drought Prediction"
+      description: "Predict drought conditions in Senegal using LSTM"
+      difficulty: "intermediate"
+    - title: "Warming Trend Visualization"
+      description: "Visualize warming trends in North vs Sub-Saharan Africa"
+      difficulty: "beginner"
+  ethics:
+    - "Climate data accuracy is critical for policy"
+    - "State model uncertainty"
+  featured: false
+  date_added: "2026-01-23"
+
+- id: "cryceleb"
+  name: "CryCeleb"
+  tagline: "Infant Cry Analysis from Nigeria"
+  description: |
+    Dataset of infant cries labeled for identity, used to detect birth asphyxia.
+    Cutting-edge health application from Ubenwa.
+  source_url: "https://huggingface.co/datasets/Ubenwa/CryCeleb2023"
+  source_type: "huggingface"
+  languages:
+    - { code: "cry", name: "Infant Cry (Audio)" }
+  countries: ["NG"]
+  tasks: ["audio-classification", "healthcare", "medical"]
+  size: "6.5 hours, 786 infants"
+  format: ["Audio"]
+  license: "CC BY-NC-ND 4.0"
+  difficulty: "advanced"
+  compute: "medium"
+  colab_friendly: true
+  courses: ["08-capstone"]
+  quickstart: |
+    from datasets import load_dataset
+
+    dataset = load_dataset("Ubenwa/CryCeleb2023", split="train")
+  project_ideas:
+    - title: "Birth Asphyxia Detection"
+      description: "Develop low-cost diagnostic tool using mobile audio"
+      difficulty: "advanced"
+  ethics:
+    - "Extremely sensitive medical data involving minors"
+    - "Strict privacy and non-commercial use"
+  featured: true
+  date_added: "2026-01-23"
+
+- id: "grow-africa"
+  name: "GROW-Africa"
+  tagline: "African Crop Yield Data"
+  description: |
+    500,000+ geotagged observations tracking crop yields for 25 major crops across Africa.
+    Supports food security projects.
+  source_url: "https://datadryad.org/dataset/doi:10.5061/dryad.vq83bk42w"
+  source_type: "dryad"
+  languages:
+    - { code: "num", name: "Numeric" }
+  countries: ["Pan-African"]
+  tasks: ["regression", "yield-prediction", "geospatial"]
+  size: "500,000+ observations"
+  format: ["CSV"]
+  license: "Open Access"
+  difficulty: "intermediate"
+  compute: "low"
+  colab_friendly: true
+  courses: ["08-capstone"]
+  quickstart: |
+    # Load CSV from download
+  project_ideas:
+    - title: "Maize Yield Prediction"
+      description: "Predict maize yield in Kenya based on weather"
+      difficulty: "intermediate"
+    - title: "Fertilizer Optimization"
+      description: "Optimize fertilizer usage for smallholder farmers"
+      difficulty: "advanced"
+  ethics:
+    - "Data accuracy impacts food security policy"
+  featured: false
+  date_added: "2026-01-23"
+
+- id: "ai4ksl"
+  name: "AI4KSL"
+  tagline: "Kenyan Sign Language Dataset"
+  description: |
+    Video dataset for Kenyan Sign Language (KSL) to bridge communication barriers
+    for deaf learners. 20,000 sign videos.
+  source_url: "https://www.maseno.ac.ke/stakeholder-workshop-ai4ksl"
+  source_type: "web"
+  languages:
+    - { code: "ksl", name: "Kenyan Sign Language" }
+  countries: ["KE"]
+  tasks: ["sign-language-recognition", "computer-vision", "video"]
+  size: "20,000 videos"
+  format: ["Video"]
+  license: "Open Access (Research)"
+  difficulty: "advanced"
+  compute: "high"
+  colab_friendly: false
+  courses: ["08-capstone"]
+  quickstart: |
+    # Video loading (requires contact/request)
+  project_ideas:
+    - title: "KSL Translator"
+      description: "Build real-time KSL translator for education"
+      difficulty: "advanced"
+  ethics:
+    - "Privacy of video subjects"
+    - "Include deaf community in design"
+  featured: false
+  date_added: "2026-01-23"
+
+- id: "education-africa"
+  name: "Education in Africa"
+  tagline: "UNESCO African Education Statistics"
+  description: |
+    Data on education across Africa (2010-2023) including literacy rates,
+    enrollment, and government expenditure.
+  source_url: "https://www.kaggle.com/datasets/lydia70/education-in-africa"
+  source_type: "kaggle"
+  languages:
+    - { code: "num", name: "Numeric" }
+  countries: ["Pan-African"]
+  tasks: ["data-analysis", "regression", "tabular"]
+  size: "Tabular (Country-level)"
+  format: ["CSV"]
+  license: "Apache 2.0"
+  difficulty: "beginner"
+  compute: "low"
+  colab_friendly: true
+  courses: ["08-capstone"]
+  quickstart: |
+    import pandas as pd
+
+    df = pd.read_csv("Education_in_Africa.csv")
+  project_ideas:
+    - title: "Literacy Prediction"
+      description: "Predict literacy rates based on government spending"
+      difficulty: "beginner"
+    - title: "Country Clustering"
+      description: "Cluster countries by educational development"
+      difficulty: "beginner"
+  ethics:
+    - "Data gaps may misrepresent certain regions"
+  featured: false
+  date_added: "2026-01-23"
