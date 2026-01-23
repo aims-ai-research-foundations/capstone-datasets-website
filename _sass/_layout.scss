@@ -315,9 +315,13 @@
     font-size: $font-size-sm;
     color: $gray-500;
     margin-bottom: $spacing-4;
+    // Prevent overflow on mobile
+    flex-wrap: wrap;
+    overflow: hidden;
 
     a {
       color: $gray-500;
+      white-space: nowrap;
 
       &:hover {
         color: $primary;
@@ -326,6 +330,22 @@
 
     span {
       color: $gray-400;
+
+      // Last span (current page) can truncate
+      &:last-child {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 200px;
+
+        @media (min-width: $breakpoint-sm) {
+          max-width: 300px;
+        }
+
+        @media (min-width: $breakpoint-md) {
+          max-width: none;
+        }
+      }
     }
   }
 }
@@ -343,6 +363,23 @@
 
   @media (min-width: $breakpoint-lg) {
     grid-template-columns: 280px 1fr;
+  }
+
+  // Mobile: content first, sidebar second (reverse visual order)
+  > .dataset-detail__content {
+    order: 1;
+
+    @media (min-width: $breakpoint-lg) {
+      order: 2;
+    }
+  }
+
+  > .sidebar {
+    order: 2;
+
+    @media (min-width: $breakpoint-lg) {
+      order: 1;
+    }
   }
 }
 
@@ -367,27 +404,54 @@
       margin-bottom: $spacing-3;
     }
   }
+
+  // Languages container with scroll for many items
+  &__languages {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-2;
+    max-height: 200px;
+    overflow-y: auto;
+
+    @media (min-width: $breakpoint-lg) {
+      max-height: 150px;
+    }
+  }
+
+  // Table in sidebar needs overflow protection
+  table {
+    font-size: $font-size-sm;
+
+    td, th {
+      padding: $spacing-2 $spacing-3;
+    }
+  }
 }
 
 // Dataset detail
 .dataset-detail {
   &__header {
-    padding: $spacing-8 0;
+    padding: $spacing-6 0;
     background-color: $gray-50;
     border-bottom: 1px solid $gray-200;
-  }
-
-  &__title {
-    font-size: $font-size-2xl;
-    margin-bottom: $spacing-2;
 
     @media (min-width: $breakpoint-md) {
-      font-size: $font-size-3xl;
+      padding: $spacing-8 0;
     }
   }
 
+  &__title {
+    // Fluid typography: scales smoothly from 1.25rem to 1.875rem
+    font-size: clamp(1.25rem, 2vw + 0.75rem, 1.875rem);
+    margin-bottom: $spacing-2;
+    // Handle long dataset names
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
   &__tagline {
-    font-size: $font-size-lg;
+    // Fluid typography: scales smoothly
+    font-size: clamp(0.95rem, 1vw + 0.5rem, 1.125rem);
     color: $gray-600;
     margin-bottom: $spacing-4;
   }
@@ -406,22 +470,50 @@
 
   &__actions {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: $spacing-3;
+
+    @media (min-width: $breakpoint-sm) {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    // Full-width buttons on mobile
+    .btn {
+      width: 100%;
+      justify-content: center;
+
+      @media (min-width: $breakpoint-sm) {
+        width: auto;
+      }
+    }
   }
 
   &__content {
-    padding: $spacing-8 0;
+    padding: $spacing-6 0;
+
+    @media (min-width: $breakpoint-md) {
+      padding: $spacing-8 0;
+    }
   }
 
   &__section {
-    margin-bottom: $spacing-8;
+    margin-bottom: $spacing-6;
+
+    @media (min-width: $breakpoint-md) {
+      margin-bottom: $spacing-8;
+    }
 
     h2 {
-      font-size: $font-size-xl;
-      margin-bottom: $spacing-4;
+      // Fluid typography for section headings
+      font-size: clamp(1.1rem, 1.5vw + 0.5rem, 1.25rem);
+      margin-bottom: $spacing-3;
       padding-bottom: $spacing-2;
       border-bottom: 1px solid $gray-200;
+
+      @media (min-width: $breakpoint-md) {
+        margin-bottom: $spacing-4;
+      }
     }
   }
 }

@@ -641,14 +641,22 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: $spacing-2 $spacing-4;
+    padding: $spacing-2 $spacing-3;
     background-color: $gray-800;
     border-radius: $radius-lg $radius-lg 0 0;
+
+    @media (min-width: $breakpoint-sm) {
+      padding: $spacing-2 $spacing-4;
+    }
   }
 
   &__lang {
-    font-size: $font-size-sm;
+    font-size: $font-size-xs;
     color: $gray-400;
+
+    @media (min-width: $breakpoint-sm) {
+      font-size: $font-size-sm;
+    }
   }
 
   &__copy {
@@ -660,6 +668,7 @@
     border-radius: $radius-md;
     cursor: pointer;
     transition: all $transition-fast;
+    min-height: 32px; // Touch target
 
     &:hover {
       color: $white;
@@ -669,7 +678,45 @@
 
   pre {
     margin: 0;
+    padding: $spacing-3;
     border-radius: 0 0 $radius-lg $radius-lg;
+    // Visual scroll indicator - fade effect on right
+    -webkit-mask-image: linear-gradient(to right, black 90%, transparent 100%);
+    mask-image: linear-gradient(to right, black 90%, transparent 100%);
+
+    @media (min-width: $breakpoint-sm) {
+      padding: $spacing-4;
+    }
+
+    @media (min-width: $breakpoint-md) {
+      // Remove fade on larger screens where overflow is less likely
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+
+    code {
+      font-size: $font-size-xs;
+
+      @media (min-width: $breakpoint-sm) {
+        font-size: $font-size-sm;
+      }
+    }
+  }
+
+  // Scroll hint for mobile
+  &::after {
+    content: '→';
+    position: absolute;
+    right: $spacing-2;
+    bottom: $spacing-3;
+    color: $gray-500;
+    font-size: $font-size-sm;
+    opacity: 0.5;
+    pointer-events: none;
+
+    @media (min-width: $breakpoint-md) {
+      display: none;
+    }
   }
 }
 
