@@ -109,8 +109,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const tables = document.querySelectorAll('table');
 
   tables.forEach(table => {
+    // Skip tables already wrapped
+    if (table.parentNode.classList.contains('table-wrapper')) return;
+
     const wrapper = document.createElement('div');
-    wrapper.style.overflowX = 'auto';
+    wrapper.className = 'table-wrapper';
     table.parentNode.insertBefore(wrapper, table);
     wrapper.appendChild(table);
   });

@@ -115,7 +115,7 @@ layout: default
         {% for course_id in dataset.courses %}
           {% assign course = site.data.courses | where: "id", course_id | first %}
           {% if course %}
-          <a href="{{ '/courses/' | append: course.id | append: '/' | relative_url }}" class="course-card" style="--course-color: {{ course.color }}; margin-bottom: 8px;">
+          <a href="{{ '/courses/' | append: course.id | append: '/' | relative_url }}" class="course-card mb-2" style="--course-color: {{ course.color }};">
             <span class="course-card__number">{{ course.number }}</span>
             <span class="course-card__content">
               <span class="course-card__title">{{ course.short_title }}</span>

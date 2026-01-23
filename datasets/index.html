@@ -30,7 +30,7 @@ description: Browse our curated collection of datasets for AI Research Foundatio
 
     <div class="filters">
       <div class="filters__group" id="country-filters" role="group" aria-label="Filter by country">
-        <span class="text-sm text-gray-500 font-medium" style="padding: 8px 0;">Country:</span>
+        <span class="filters__label">Country:</span>
         <button class="filters__btn active" data-filter="country" data-value="all" aria-pressed="true">All</button>
         {% for country in site.project.countries %}
         <button class="filters__btn" data-filter="country" data-value="{{ country.code }}" aria-pressed="false">
@@ -42,7 +42,7 @@ description: Browse our curated collection of datasets for AI Research Foundatio
 
     <div class="filters">
       <div class="filters__group" id="difficulty-filters" role="group" aria-label="Filter by difficulty">
-        <span class="text-sm text-gray-500 font-medium" style="padding: 8px 0;">Difficulty:</span>
+        <span class="filters__label">Difficulty:</span>
         <button class="filters__btn active" data-filter="difficulty" data-value="all" aria-pressed="true">All</button>
         <button class="filters__btn" data-filter="difficulty" data-value="beginner" aria-pressed="false">Beginner</button>
         <button class="filters__btn" data-filter="difficulty" data-value="intermediate" aria-pressed="false">Intermediate</button>
@@ -52,10 +52,10 @@ description: Browse our curated collection of datasets for AI Research Foundatio
 
     <div class="filters">
       <div class="filters__group" id="course-filters" role="group" aria-label="Filter by course">
-        <span class="text-sm text-gray-500 font-medium" style="padding: 8px 0;">Course:</span>
+        <span class="filters__label">Course:</span>
         <button class="filters__btn active" data-filter="course" data-value="all" aria-pressed="true">All</button>
         {% for course in site.data.courses %}
-        <button class="filters__btn" data-filter="course" data-value="{{ course.id }}" aria-pressed="false" style="font-size: 0.8rem;">
+        <button class="filters__btn" data-filter="course" data-value="{{ course.id }}" aria-pressed="false">
           {{ course.number }}
         </button>
         {% endfor %}
@@ -63,7 +63,7 @@ description: Browse our curated collection of datasets for AI Research Foundatio
     </div>
 
     <!-- Result Count -->
-    <div class="filters" style="justify-content: space-between; align-items: center;">
+    <div class="filters">
       <p id="result-count" class="text-sm text-gray-600" aria-live="polite">
         Showing <strong>{{ site.data.datasets | size }}</strong> datasets
       </p>
@@ -121,7 +121,7 @@ description: Browse our curated collection of datasets for AI Research Foundatio
       {% endfor %}
     </div>
 
-    <div id="no-results" class="text-center mt-8 hidden" style="padding: 48px 0;">
+    <div id="no-results" class="no-results hidden">
       <p class="text-gray-500">No datasets found matching your criteria.</p>
       <button class="btn btn--outline mt-4" onclick="resetFilters()">Reset Filters</button>
     </div>

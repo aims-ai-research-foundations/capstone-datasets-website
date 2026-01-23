@@ -21,11 +21,11 @@ layout: default
     <p class="course-detail__description">{{ course_data.description | default: course.description }}</p>
 
     {% if course_data.duration %}
-    <div class="course-detail__meta" style="margin-top: 1rem;">
-      <span style="background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 9999px; font-size: 0.875rem;">
+    <div class="course-detail__meta mt-4">
+      <span class="course-badge">
         Duration: {{ course_data.duration }}
       </span>
-      <span style="background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 9999px; font-size: 0.875rem; margin-left: 0.5rem;">
+      <span class="course-badge">
         {{ course_datasets.size }} Datasets
       </span>
     </div>
@@ -88,11 +88,11 @@ layout: default
     {% if course_data.capstone_areas %}
     <section class="dataset-detail__section">
       <h2>Capstone Project Areas</h2>
-      <div class="grid grid--2" style="margin-top: 1rem;">
+      <div class="grid grid--2 mt-4">
         {% for area in course_data.capstone_areas %}
-        <div style="background: #f8fafc; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid {{ course.color }};">
-          <h3 style="margin: 0 0 0.5rem 0; font-size: 1.1rem;">{{ area.title }}</h3>
-          <p style="margin: 0; color: #64748b;">{{ area.description }}</p>
+        <div class="course-info-box" style="--course-color: {{ course.color }};">
+          <h3>{{ area.title }}</h3>
+          <p>{{ area.description }}</p>
         </div>
         {% endfor %}
       </div>
@@ -144,7 +144,7 @@ layout: default
         {% endfor %}
       </div>
       {% else %}
-      <p style="color: #64748b;">No datasets are currently tagged for this course. Check the <a href="{{ '/datasets/' | relative_url }}">full dataset catalog</a>.</p>
+      <p class="text-gray-500">No datasets are currently tagged for this course. Check the <a href="{{ '/datasets/' | relative_url }}">full dataset catalog</a>.</p>
       {% endif %}
     </section>
 

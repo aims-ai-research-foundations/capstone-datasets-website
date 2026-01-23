@@ -113,6 +113,17 @@ th {
   background-color: $gray-50;
 }
 
+// Responsive table wrapper
+.table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: $spacing-4;
+
+  table {
+    margin-bottom: 0;
+  }
+}
+
 // Forms
 input, textarea, select {
   font-family: inherit;
@@ -194,4 +205,28 @@ button {
 // Remove default focus outline when not using keyboard
 :focus:not(:focus-visible) {
   outline: none;
+}
+
+// Skip link for accessibility
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: 9999;
+  background-color: $primary;
+  color: $white;
+  padding: $spacing-3 $spacing-4;
+  text-decoration: none;
+  font-weight: $font-weight-medium;
+
+  &:focus {
+    left: $spacing-4;
+    top: $spacing-4;
+    width: auto;
+    height: auto;
+    overflow: visible;
+  }
 }

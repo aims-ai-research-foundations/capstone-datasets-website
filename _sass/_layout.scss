@@ -294,16 +294,8 @@
   }
 
   &__title {
-    font-size: $font-size-2xl;
+    font-size: clamp(1.5rem, 3vw + 1rem, 2.25rem);
     margin-bottom: $spacing-2;
-
-    @media (min-width: $breakpoint-md) {
-      font-size: $font-size-3xl;
-    }
-
-    @media (min-width: $breakpoint-lg) {
-      font-size: $font-size-4xl;
-    }
   }
 
   &__description {
@@ -341,8 +333,13 @@
 // Sidebar layout
 .layout-sidebar {
   display: grid;
-  gap: $spacing-8;
-  padding: $spacing-8 0;
+  gap: $spacing-6;
+  padding: $spacing-6 0;
+
+  @media (min-width: $breakpoint-md) {
+    gap: $spacing-8;
+    padding: $spacing-8 0;
+  }
 
   @media (min-width: $breakpoint-lg) {
     grid-template-columns: 280px 1fr;
@@ -352,8 +349,10 @@
 .sidebar {
   @media (min-width: $breakpoint-lg) {
     position: sticky;
-    top: 88px;
+    top: 80px; // 64px header + 16px gap
     height: fit-content;
+    max-height: calc(100vh - 96px);
+    overflow-y: auto;
   }
 
   &__section {
@@ -396,8 +395,13 @@
   &__meta {
     display: flex;
     flex-wrap: wrap;
-    gap: $spacing-4;
-    margin-bottom: $spacing-6;
+    gap: $spacing-2;
+    margin-bottom: $spacing-4;
+
+    @media (min-width: $breakpoint-md) {
+      gap: $spacing-4;
+      margin-bottom: $spacing-6;
+    }
   }
 
   &__actions {
@@ -425,8 +429,12 @@
 // Course detail
 .course-detail {
   &__header {
-    padding: $spacing-8 0;
+    padding: $spacing-6 0;
     color: $white;
+
+    @media (min-width: $breakpoint-md) {
+      padding: $spacing-8 0;
+    }
 
     h1 {
       color: $white;
