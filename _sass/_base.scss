@@ -172,3 +172,26 @@ button {
   .md\:block { display: block; }
   .md\:hidden { display: none; }
 }
+
+// Accessibility: Respect user's motion preferences
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// Accessibility: Better focus states for keyboard navigation
+:focus-visible {
+  outline: 2px solid $primary;
+  outline-offset: 2px;
+}
+
+// Remove default focus outline when not using keyboard
+:focus:not(:focus-visible) {
+  outline: none;
+}

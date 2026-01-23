@@ -1,21 +1,45 @@
 // Mobile navigation toggle
 function toggleMobileNav() {
   const nav = document.getElementById('mobile-nav');
+  const backdrop = document.getElementById('mobile-nav-backdrop');
   const isOpen = nav.classList.toggle('open');
   const toggle = document.querySelector('.header__mobile-toggle');
+
+  if (backdrop) {
+    backdrop.classList.toggle('open', isOpen);
+  }
   if (toggle) {
     toggle.setAttribute('aria-expanded', isOpen);
   }
+
+  // Prevent body scroll when nav is open
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+
+// Close mobile nav helper
+function closeMobileNav() {
+  const nav = document.getElementById('mobile-nav');
+  const backdrop = document.getElementById('mobile-nav-backdrop');
+  const toggle = document.querySelector('.header__mobile-toggle');
+
+  nav.classList.remove('open');
+  if (backdrop) {
+    backdrop.classList.remove('open');
+  }
+  if (toggle) {
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+  document.body.style.overflow = '';
 }
 
 // Close mobile nav when clicking outside
 document.addEventListener('click', function(event) {
   const nav = document.getElementById('mobile-nav');
+  const backdrop = document.getElementById('mobile-nav-backdrop');
   const toggle = document.querySelector('.header__mobile-toggle');
 
   if (nav && toggle && !nav.contains(event.target) && !toggle.contains(event.target)) {
-    nav.classList.remove('open');
-    toggle.setAttribute('aria-expanded', 'false');
+    closeMobileNav();
   }
 });
 
@@ -23,11 +47,10 @@ document.addEventListener('click', function(event) {
 document.addEventListener('keydown', function(event) {
   if (event.key === 'Escape') {
     const nav = document.getElementById('mobile-nav');
-    const toggle = document.querySelector('.header__mobile-toggle');
     if (nav && nav.classList.contains('open')) {
-      nav.classList.remove('open');
+      closeMobileNav();
+      const toggle = document.querySelector('.header__mobile-toggle');
       if (toggle) {
-        toggle.setAttribute('aria-expanded', 'false');
         toggle.focus();
       }
     }

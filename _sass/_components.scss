@@ -489,14 +489,11 @@
   }
 
   &__number {
-    font-size: $font-size-3xl;
+    // Fluid typography: scales smoothly from 1.875rem to 2.25rem
+    font-size: clamp(1.875rem, 3vw + 1rem, 2.25rem);
     font-weight: $font-weight-bold;
     color: $primary;
     line-height: 1;
-
-    @media (min-width: $breakpoint-md) {
-      font-size: $font-size-4xl;
-    }
   }
 
   &__label {
@@ -518,31 +515,20 @@
   }
 
   &__title {
-    font-size: $font-size-2xl; // 1.5rem on mobile
+    // Fluid typography: scales smoothly from 1.5rem to 3rem
+    font-size: clamp(1.5rem, 4vw + 0.5rem, 3rem);
     color: $white;
     margin-bottom: $spacing-4;
-
-    @media (min-width: $breakpoint-sm) {
-      font-size: $font-size-3xl;
-    }
-
-    @media (min-width: $breakpoint-md) {
-      font-size: $font-size-4xl;
-    }
-
-    @media (min-width: $breakpoint-lg) {
-      font-size: $font-size-5xl;
-    }
   }
 
   &__subtitle {
-    font-size: $font-size-base; // 1rem on mobile
+    // Fluid typography: scales smoothly from 1rem to 1.125rem
+    font-size: clamp(1rem, 1.5vw + 0.5rem, 1.125rem);
     opacity: 0.9;
     max-width: 600px;
     margin: 0 auto $spacing-6;
 
     @media (min-width: $breakpoint-md) {
-      font-size: $font-size-lg;
       margin: 0 auto $spacing-8;
     }
   }
@@ -583,23 +569,17 @@
   }
 
   &__title {
-    font-size: $font-size-2xl;
+    // Fluid typography: scales smoothly from 1.5rem to 1.875rem
+    font-size: clamp(1.5rem, 2vw + 1rem, 1.875rem);
     margin-bottom: $spacing-2;
-
-    @media (min-width: $breakpoint-md) {
-      font-size: $font-size-3xl;
-    }
   }
 
   &__subtitle {
-    font-size: $font-size-base;
+    // Fluid typography: scales smoothly from 1rem to 1.125rem
+    font-size: clamp(1rem, 1vw + 0.75rem, 1.125rem);
     color: $gray-600;
     max-width: 600px;
     margin: 0 auto;
-
-    @media (min-width: $breakpoint-md) {
-      font-size: $font-size-lg;
-    }
   }
 }
 
