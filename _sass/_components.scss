@@ -25,6 +25,7 @@
   border-radius: $radius-lg;
   cursor: pointer;
   transition: all $transition-fast;
+  min-height: 44px; // Touch target minimum
 
   &:hover {
     text-decoration: none;
@@ -71,13 +72,20 @@
   }
 
   &--sm {
+    min-height: 40px;
     padding: $spacing-2 $spacing-4;
     font-size: $font-size-sm;
   }
 
   &--lg {
+    min-height: 48px;
     padding: $spacing-4 $spacing-8;
     font-size: $font-size-lg;
+
+    @media (max-width: $breakpoint-sm) {
+      padding: $spacing-3 $spacing-6;
+      font-size: $font-size-base;
+    }
   }
 }
 
@@ -89,9 +97,12 @@
   overflow: hidden;
   transition: box-shadow $transition-normal, transform $transition-normal;
 
-  &:hover {
-    box-shadow: $shadow-lg;
-    transform: translateY(-2px);
+  // Only apply hover effects on devices with hover capability
+  @media (hover: hover) {
+    &:hover {
+      box-shadow: $shadow-lg;
+      transform: translateY(-2px);
+    }
   }
 
   &__header {
@@ -121,10 +132,13 @@
   overflow: hidden;
   transition: all $transition-normal;
 
-  &:hover {
-    border-color: $primary-light;
-    box-shadow: $shadow-lg;
-    transform: translateY(-4px);
+  // Only apply hover effects on devices with hover capability
+  @media (hover: hover) {
+    &:hover {
+      border-color: $primary-light;
+      box-shadow: $shadow-lg;
+      transform: translateY(-4px);
+    }
   }
 
   &__header {
@@ -209,11 +223,17 @@
 
   &__footer {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
+    gap: $spacing-3;
     padding: $spacing-4 $spacing-5;
     background-color: $gray-50;
     border-top: 1px solid $gray-100;
+
+    @media (min-width: $breakpoint-sm) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
   }
 
   &__countries {
@@ -261,10 +281,14 @@
   }
 
   &__title {
-    font-size: $font-size-base;
+    font-size: $font-size-sm;
     font-weight: $font-weight-semibold;
     color: $gray-900;
     margin: 0 0 $spacing-1;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: $font-size-base;
+    }
   }
 
   &__datasets {
@@ -319,7 +343,11 @@
 .search-box {
   position: relative;
   width: 100%;
-  max-width: 400px;
+
+  // Add max-width only on larger screens
+  @media (min-width: $breakpoint-md) {
+    max-width: 400px;
+  }
 
   &__input {
     width: 100%;
@@ -359,8 +387,26 @@
 
   &__group {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: $spacing-2;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: $spacing-2;
+
+    // Hide scrollbar but keep functionality
+    &::-webkit-scrollbar {
+      height: 4px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: $gray-300;
+      border-radius: 2px;
+    }
+
+    @media (min-width: $breakpoint-md) {
+      flex-wrap: wrap;
+      overflow-x: visible;
+      padding-bottom: 0;
+    }
   }
 
   &__btn {
@@ -373,6 +419,12 @@
     border-radius: $radius-full;
     cursor: pointer;
     transition: all $transition-fast;
+    white-space: nowrap;
+    min-height: 44px; // Touch target fix
+
+    @media (min-width: $breakpoint-md) {
+      min-height: auto;
+    }
 
     &:hover {
       border-color: $primary;
@@ -419,21 +471,32 @@
 
 // Stats
 .stats {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: $spacing-8;
-  padding: $spacing-8 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-6;
+  padding: $spacing-6 0;
+
+  @media (min-width: $breakpoint-sm) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: $spacing-8;
+    padding: $spacing-8 0;
+  }
 
   &__item {
     text-align: center;
   }
 
   &__number {
-    font-size: $font-size-4xl;
+    font-size: $font-size-3xl;
     font-weight: $font-weight-bold;
     color: $primary;
     line-height: 1;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: $font-size-4xl;
+    }
   }
 
   &__label {
@@ -445,29 +508,42 @@
 
 // Hero
 .hero {
-  padding: $spacing-16 0;
+  padding: $spacing-12 0;
   text-align: center;
   background: linear-gradient(135deg, $primary-dark 0%, $primary 100%);
   color: $white;
 
+  @media (min-width: $breakpoint-md) {
+    padding: $spacing-16 0;
+  }
+
   &__title {
-    font-size: $font-size-4xl;
+    font-size: $font-size-2xl; // 1.5rem on mobile
     color: $white;
     margin-bottom: $spacing-4;
 
+    @media (min-width: $breakpoint-sm) {
+      font-size: $font-size-3xl;
+    }
+
     @media (min-width: $breakpoint-md) {
+      font-size: $font-size-4xl;
+    }
+
+    @media (min-width: $breakpoint-lg) {
       font-size: $font-size-5xl;
     }
   }
 
   &__subtitle {
-    font-size: $font-size-lg;
+    font-size: $font-size-base; // 1rem on mobile
     opacity: 0.9;
     max-width: 600px;
-    margin: 0 auto $spacing-8;
+    margin: 0 auto $spacing-6;
 
     @media (min-width: $breakpoint-md) {
-      font-size: $font-size-xl;
+      font-size: $font-size-lg;
+      margin: 0 auto $spacing-8;
     }
   }
 
@@ -491,7 +567,11 @@
 
 // Section
 .section {
-  padding: $spacing-12 0;
+  padding: $spacing-10 0;
+
+  @media (min-width: $breakpoint-md) {
+    padding: $spacing-12 0;
+  }
 
   &--gray {
     background-color: $gray-50;
@@ -503,15 +583,23 @@
   }
 
   &__title {
-    font-size: $font-size-3xl;
+    font-size: $font-size-2xl;
     margin-bottom: $spacing-2;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: $font-size-3xl;
+    }
   }
 
   &__subtitle {
-    font-size: $font-size-lg;
+    font-size: $font-size-base;
     color: $gray-600;
     max-width: 600px;
     margin: 0 auto;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: $font-size-lg;
+    }
   }
 }
 

@@ -18,6 +18,8 @@ body {
   background-color: $white;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  // Safe area support for notched devices
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 // Typography

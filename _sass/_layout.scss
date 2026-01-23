@@ -91,7 +91,6 @@
 
 // Mobile nav
 .mobile-nav {
-  display: none;
   position: fixed;
   top: 64px;
   left: 0;
@@ -102,8 +101,16 @@
   padding: $spacing-4;
   overflow-y: auto;
 
+  // Animation - slide in from right
+  transform: translateX(100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform $transition-normal, opacity $transition-normal, visibility $transition-normal;
+
   &.open {
-    display: block;
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
   }
 
   @media (min-width: $breakpoint-md) {
@@ -131,12 +138,18 @@
   background-color: $gray-900;
   color: $gray-300;
   padding: $spacing-12 0 $spacing-8;
+  // Safe area support for notched devices
+  padding-bottom: calc(#{$spacing-8} + env(safe-area-inset-bottom));
 
   &__inner {
     display: grid;
     gap: $spacing-8;
 
     @media (min-width: $breakpoint-md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: $breakpoint-lg) {
       grid-template-columns: 2fr repeat(3, 1fr);
     }
   }
@@ -251,23 +264,35 @@
 
 // Page header
 .page-header {
-  padding: $spacing-10 0;
+  padding: $spacing-8 0;
   background-color: $gray-50;
   border-bottom: 1px solid $gray-200;
 
+  @media (min-width: $breakpoint-md) {
+    padding: $spacing-10 0;
+  }
+
   &__title {
-    font-size: $font-size-3xl;
+    font-size: $font-size-2xl;
     margin-bottom: $spacing-2;
 
     @media (min-width: $breakpoint-md) {
+      font-size: $font-size-3xl;
+    }
+
+    @media (min-width: $breakpoint-lg) {
       font-size: $font-size-4xl;
     }
   }
 
   &__description {
-    font-size: $font-size-lg;
+    font-size: $font-size-base;
     color: $gray-600;
     max-width: 700px;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: $font-size-lg;
+    }
   }
 
   &__breadcrumb {
@@ -333,8 +358,12 @@
   }
 
   &__title {
-    font-size: $font-size-3xl;
+    font-size: $font-size-2xl;
     margin-bottom: $spacing-2;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: $font-size-3xl;
+    }
   }
 
   &__tagline {
