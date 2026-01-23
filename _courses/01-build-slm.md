@@ -1,6 +1,6 @@
 ---
 layout: course
-id: "01-build-slm"
+course_id: "01-build-slm"
 number: "01"
 title: "Build Your Own Small Language Model"
 short_title: "Build SLM"

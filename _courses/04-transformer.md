@@ -1,6 +1,6 @@
 ---
 layout: course
-id: "04-transformer"
+course_id: "04-transformer"
 number: "04"
 title: "Assemble Your Transformer Architecture"
 short_title: "Transformers"

@@ -1,6 +1,6 @@
 ---
 layout: course
-id: "07-accelerate"
+course_id: "07-accelerate"
 number: "07"
 title: "Accelerate Your Model"
 short_title: "Acceleration"

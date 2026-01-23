@@ -1,6 +1,6 @@
 ---
 layout: course
-id: "03-neural-networks"
+course_id: "03-neural-networks"
 number: "03"
 title: "Design and Train Neural Networks"
 short_title: "Neural Networks"

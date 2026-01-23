@@ -1,6 +1,6 @@
 ---
 layout: course
-id: "06-align"
+course_id: "06-align"
 number: "06"
 title: "Align Your Model"
 short_title: "Alignment"

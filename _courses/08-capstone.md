@@ -1,6 +1,6 @@
 ---
 layout: course
-id: "08-capstone"
+course_id: "08-capstone"
 number: "08"
 title: "Capstone: Develop Your Model for Real-World Impact"
 short_title: "Capstone"

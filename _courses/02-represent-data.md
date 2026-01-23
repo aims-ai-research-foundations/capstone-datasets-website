@@ -1,6 +1,6 @@
 ---
 layout: course
-id: "02-represent-data"
+course_id: "02-represent-data"
 number: "02"
 title: "Represent Your Language Data"
 short_title: "Data Representation"

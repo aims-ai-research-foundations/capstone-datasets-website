@@ -1,6 +1,6 @@
 ---
 layout: course
-id: "05-finetune"
+course_id: "05-finetune"
 number: "05"
 title: "Finetune Your Model"
 short_title: "Fine-tuning"

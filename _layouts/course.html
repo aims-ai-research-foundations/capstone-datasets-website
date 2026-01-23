@@ -3,8 +3,8 @@ layout: default
 ---
 
 {% assign course = page %}
-{% assign course_data = site.data.courses | where: "id", course.id | first %}
-{% assign course_datasets = site.data.datasets | where_exp: "d", "d.courses contains course.id" %}
+{% assign course_data = site.data.courses | where: "id", course.course_id | first %}
+{% assign course_datasets = site.data.datasets | where_exp: "d", "d.courses contains course.course_id" %}
 
 <div class="course-detail__header" style="background: linear-gradient(135deg, {{ course.color }} 0%, {{ course.color }}dd 100%);">
   <div class="container">
@@ -107,7 +107,7 @@ layout: default
       {% if course_datasets.size > 0 %}
       <div class="grid grid--3">
         {% for dataset in site.data.datasets %}
-          {% if dataset.courses contains course.id %}
+          {% if dataset.courses contains course.course_id %}
           <div class="dataset-card">
             <div class="dataset-card__header">
               <h3 class="dataset-card__title">
