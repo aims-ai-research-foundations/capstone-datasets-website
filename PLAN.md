@@ -13,7 +13,7 @@ This document outlines the comprehensive plan for building a **Capstone Datasets
 - **30 Higher Educational Institutions (HEIs)** across 4 countries
 - **146 AI Champions** (lecturers)
 - **~31,000 students** over the project lifecycle
-- **7 courses** based on Google DeepMind's AI Research Foundations Curriculum
+- **8 courses** based on Google DeepMind's AI Research Foundations Curriculum
 
 ---
 
@@ -55,7 +55,7 @@ Provide a user-friendly, accessible platform for discovering and accessing datas
 
 ### 4.1 Dataset Categories
 
-Based on the 7-course curriculum structure:
+Based on the 8-course curriculum structure:
 
 ```
 datasets/
@@ -79,11 +79,15 @@ datasets/
 │   ├── domain-specific/
 │   ├── task-specific/
 │   └── few-shot-learning/
-├── 06-accelerate/             # Course 6: Accelerate Your Model
+├── 06-align/                  # Course 6: Align Your Model
+│   ├── preference-data/
+│   ├── human-feedback/
+│   └── safety-benchmarks/
+├── 07-accelerate/             # Course 7: Accelerate Your Model
 │   ├── optimization-benchmarks/
 │   ├── quantization-data/
 │   └── edge-deployment/
-└── 07-capstone/               # Course 7: Capstone Projects
+└── 08-capstone/               # Course 8: Capstone - Develop Your Model for Real-World Impact
     ├── healthcare/
     ├── agriculture/
     ├── finance/
@@ -135,11 +139,21 @@ datasets/
 - **Project Ideas**: Suggested capstone applications
 - **Ethical Considerations**: Bias, PII, limitations
 
-#### Course Pages (7 pages)
+#### Course Pages (8 pages)
 - Course overview and learning objectives
 - Recommended datasets for the course
 - Sample exercises and mini-projects
 - Links to course materials
+
+**Courses:**
+1. Build Your Own Small Language Model
+2. Represent Your Language Data
+3. Design and Train Neural Networks
+4. Assemble Your Transformer Architecture
+5. Finetune Your Model
+6. Align Your Model
+7. Accelerate Your Model
+8. Capstone: Develop Your Model for Real-World Impact
 
 #### Search
 - Full-text search across all datasets
@@ -247,7 +261,12 @@ capstone-datasets-website/
 ├── courses/
 │   ├── 01-build-slm.md
 │   ├── 02-represent-data.md
-│   └── ...
+│   ├── 03-neural-networks.md
+│   ├── 04-transformer.md
+│   ├── 05-finetune.md
+│   ├── 06-align.md
+│   ├── 07-accelerate.md
+│   └── 08-capstone.md
 ├── pages/
 │   ├── about.md
 │   ├── contribute.md
@@ -295,7 +314,7 @@ datasets:
     courses:
       - 02-represent-data
       - 05-finetune
-      - 07-capstone
+      - 08-capstone
 
     # Difficulty and use
     difficulty: intermediate  # beginner | intermediate | advanced
@@ -514,7 +533,7 @@ Each dataset must have:
 - [ ] Build dataset catalog page with filtering
 - [ ] Create dataset detail page template
 - [ ] Implement client-side search
-- [ ] Add 7 course pages
+- [ ] Add 8 course pages
 - [ ] Populate initial 20 datasets
 - [ ] Test on mobile devices
 - [ ] Accessibility audit
@@ -692,7 +711,7 @@ Each dataset must have:
 
   courses:
     primary: [02-represent-data, 05-finetune]
-    secondary: [07-capstone]
+    secondary: [08-capstone]
 
   quickstart:
     python: |
