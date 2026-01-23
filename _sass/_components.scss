@@ -660,9 +660,11 @@
 .code-block {
   position: relative;
   margin-bottom: $spacing-4;
-  // Contain overflow
+  // Contain horizontal overflow but allow internal scroll
   max-width: 100%;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
 
   &__header {
     display: flex;
