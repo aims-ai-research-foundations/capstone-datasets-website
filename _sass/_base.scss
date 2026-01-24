@@ -6,11 +6,18 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+  // Ensure full width and prevent horizontal overflow
+  width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
   padding: 0;
+  // Ensure body fills viewport width
+  width: 100%;
+  min-width: 100%;
+  position: relative;
   font-family: $font-sans;
   font-size: $font-size-base;
   line-height: $line-height-normal;
