@@ -525,13 +525,14 @@
 
   &__section {
     margin-bottom: $spacing-6;
-    // Contain any overflow
+    // Ensure content wraps properly instead of overflowing
     max-width: 100%;
-    overflow: hidden;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
 
     @media (min-width: $breakpoint-md) {
       margin-bottom: $spacing-8;
-      overflow: visible;
     }
 
     h2 {

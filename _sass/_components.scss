@@ -745,7 +745,8 @@
     margin: 0;
     padding: $spacing-3;
     border-radius: 0 0 $radius-lg $radius-lg;
-    // Explicit overflow handling
+    // Contain within viewport width
+    max-width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
 
@@ -755,10 +756,10 @@
 
     code {
       font-size: $font-size-xs;
-      // Don't wrap code - let it scroll
-      white-space: pre;
-      word-wrap: normal;
-      overflow-wrap: normal;
+      // Wrap code on mobile for better readability
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
 
       @media (min-width: $breakpoint-sm) {
         font-size: $font-size-sm;

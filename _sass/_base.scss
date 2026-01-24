@@ -29,6 +29,9 @@ body {
   padding-bottom: env(safe-area-inset-bottom);
   // Prevent horizontal overflow on mobile
   overflow-x: hidden;
+  // Ensure long words/URLs wrap instead of overflowing
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 // Typography
@@ -49,6 +52,9 @@ h6 { font-size: $font-size-base; }
 
 p {
   margin: 0 0 $spacing-4;
+  // Ensure text wraps properly on mobile
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 a {
@@ -70,6 +76,9 @@ ul, ol {
 
 li {
   margin-bottom: $spacing-2;
+  // Ensure list items wrap properly on mobile
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 // Code
@@ -91,13 +100,21 @@ pre {
   color: $gray-100;
   padding: $spacing-4;
   border-radius: $radius-lg;
-  overflow-x: auto;
   margin: 0 0 $spacing-4;
+  // Contain code blocks within viewport
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  // Allow code to wrap on mobile for better readability
+  white-space: pre-wrap;
+  word-wrap: break-word;
 
   code {
     background: none;
     padding: 0;
     font-size: inherit;
+    // Inherit wrapping behavior
+    white-space: inherit;
   }
 }
 
