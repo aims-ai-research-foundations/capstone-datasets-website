@@ -79,6 +79,16 @@
     gap: $spacing-3;
   }
 
+  // Header CTA is desktop-only; the `.btn` display rule outranks the
+  // generic `.hidden`/`.md\:block` utilities, so this needs its own class
+  &__cta {
+    display: none;
+
+    @media (min-width: $breakpoint-md) {
+      display: inline-flex;
+    }
+  }
+
   &__mobile-toggle {
     display: flex;
     align-items: center;

@@ -55,8 +55,8 @@ description: Browse our curated collection of datasets for AI Research Foundatio
         <span class="filters__label">Course:</span>
         <button class="filters__btn active" data-filter="course" data-value="all" aria-pressed="true">All</button>
         {% for course in site.data.courses %}
-        <button class="filters__btn" data-filter="course" data-value="{{ course.id }}" aria-pressed="false">
-          {{ course.number }}
+        <button class="filters__btn" data-filter="course" data-value="{{ course.id }}" aria-pressed="false" title="{{ course.title }}">
+          {{ course.number }} &middot; {{ course.short_title }}
         </button>
         {% endfor %}
       </div>
@@ -162,8 +162,19 @@ document.addEventListener('DOMContentLoaded', function() {
       // Update filter
       activeFilters[filterType] = value;
       applyFilters();
+      syncUrl();
     });
   });
+
+  // Keep the query string in sync so filtered views are shareable
+  function syncUrl() {
+    const qs = new URLSearchParams();
+    ['country', 'course', 'difficulty'].forEach(t => {
+      if (activeFilters[t] !== 'all') qs.set(t, activeFilters[t]);
+    });
+    const query = qs.toString();
+    history.replaceState(null, '', location.pathname + (query ? '?' + query : ''));
+  }
 
   // Search input handler
   searchInput.addEventListener('input', function() {
@@ -240,6 +251,7 @@ document.addEventListener('DOMContentLoaded', function() {
       btn.setAttribute('aria-pressed', isAll ? 'true' : 'false');
     });
     applyFilters();
+    syncUrl();
   };
 
   // Apply filters from query string (e.g. /datasets/?country=NG from homepage pills)
