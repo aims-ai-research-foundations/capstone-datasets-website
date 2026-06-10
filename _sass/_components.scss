@@ -40,13 +40,15 @@
     text-decoration: none;
   }
 
+  // Brand gold pill — primary action, matches the pilot-workshop CTA style
   &--primary {
-    background-color: $primary;
-    color: $white;
+    background-color: $accent;
+    color: $primary;
+    font-weight: $font-weight-bold;
 
     &:hover {
-      background-color: $primary-dark;
-      color: $white;
+      background-color: $accent-light;
+      color: $primary;
     }
   }
 
@@ -568,12 +570,41 @@
   }
 }
 
-// Hero
+// Hero — brand purple band with soft radial glows (pilot-workshop CTA treatment)
 .hero {
+  position: relative;
+  overflow: hidden;
   padding: $spacing-8 0; // Reduced padding on very small screens
   text-align: center;
-  background: linear-gradient(135deg, $primary-dark 0%, $primary 100%);
+  background: linear-gradient(135deg, $primary 0%, #4a2d7a 100%);
   color: $white;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -200px;
+    right: -150px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -180px;
+    left: -120px;
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+  }
 
   @media (min-width: $breakpoint-xs) {
     padding: $spacing-12 0;
@@ -581,6 +612,15 @@
 
   @media (min-width: $breakpoint-md) {
     padding: $spacing-16 0;
+  }
+
+  &__eyebrow {
+    font-size: $font-size-sm;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: $accent;
+    font-weight: $font-weight-bold;
+    margin-bottom: $spacing-3;
   }
 
   &__title {
@@ -768,35 +808,64 @@
   }
 }
 
-// Partners
+// Partners — uniform white logo tiles on the tinted band (pilot-workshop style)
 .partners {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: $spacing-8;
+  &__label {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: $font-size-xs;
+    color: $gray-600;
+    font-weight: $font-weight-bold;
+    margin-bottom: $spacing-6;
+  }
 
-  &__logo {
-    height: 40px;
-    max-width: 100px;
-    width: auto;
-    object-fit: contain;
-    opacity: 0.7;
-    transition: opacity $transition-fast;
-
-    &:hover {
-      opacity: 1;
-    }
-
-    @media (min-width: $breakpoint-sm) {
-      height: 48px;
-      max-width: 120px;
-    }
+  &__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-5;
+    max-width: 360px;
+    margin: 0 auto;
+    align-items: stretch;
 
     @media (min-width: $breakpoint-md) {
-      height: 56px;
-      max-width: none;
+      grid-template-columns: repeat(3, 1fr);
+      max-width: 920px;
     }
+
+    &--single {
+      @media (min-width: $breakpoint-md) {
+        grid-template-columns: 1fr;
+        max-width: 300px;
+      }
+    }
+  }
+
+  &__tile {
+    background: $white;
+    border: 1px solid $gray-200;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 110px;
+    padding: $spacing-5 $spacing-6;
+    transition: transform $transition-normal, border-color $transition-normal, box-shadow $transition-normal;
+
+    &:hover {
+      transform: translateY(-2px);
+      border-color: $primary;
+      box-shadow: 0 8px 24px rgba(54, 26, 84, 0.08);
+    }
+  }
+
+  &__logo {
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
   }
 }
 

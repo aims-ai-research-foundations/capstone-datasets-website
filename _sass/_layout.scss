@@ -1,4 +1,4 @@
-// Header
+// Header — solid brand-purple bar, white links, gold active underline
 .header {
   position: sticky;
   top: 0;
@@ -6,8 +6,9 @@
   right: 0;
   width: 100%;
   z-index: $z-sticky;
-  background-color: $white;
-  border-bottom: 1px solid $gray-200;
+  background-color: $primary;
+  border-bottom: none;
+  box-shadow: 0 2px 16px rgba(54, 26, 84, 0.28);
 
   &__inner {
     display: flex;
@@ -25,17 +26,24 @@
     align-items: center;
     gap: $spacing-3;
     text-decoration: none;
-    color: $gray-900;
+    color: $white;
     font-weight: $font-weight-bold;
     font-size: $font-size-lg;
 
     &:hover {
       text-decoration: none;
+      color: $white;
     }
 
     img {
-      height: 32px;
+      height: 38px;
       width: auto;
+    }
+
+    span {
+      padding-left: $spacing-3;
+      border-left: 1px solid rgba(255, 255, 255, 0.35);
+      line-height: 1.2;
     }
   }
 
@@ -50,8 +58,8 @@
   }
 
   &__link {
-    color: $gray-600;
-    font-weight: $font-weight-medium;
+    color: $white;
+    font-weight: $font-weight-semibold;
     text-decoration: none;
     padding: $spacing-2 0;
     border-bottom: 2px solid transparent;
@@ -59,12 +67,9 @@
 
     &:hover,
     &.active {
-      color: $primary;
+      color: $white;
       text-decoration: none;
-    }
-
-    &.active {
-      border-bottom-color: $primary;
+      border-bottom-color: $accent;
     }
   }
 
@@ -83,7 +88,7 @@
     padding: 0;
     background: none;
     border: none;
-    color: $gray-600;
+    color: $white;
     cursor: pointer;
 
     @media (min-width: $breakpoint-md) {
@@ -158,11 +163,11 @@
   }
 }
 
-// Footer
+// Footer — deep brand purple
 .footer {
   width: 100%;
-  background-color: $gray-900;
-  color: $gray-300;
+  background-color: $primary-dark;
+  color: rgba(255, 255, 255, 0.75);
   padding: $spacing-12 0 $spacing-8;
   // Safe area support for notched devices
   padding-bottom: calc(#{$spacing-8} + env(safe-area-inset-bottom));
@@ -205,9 +210,8 @@
     margin-bottom: $spacing-4;
 
     img {
-      height: 32px;
+      height: 36px;
       width: auto;
-      filter: brightness(0) invert(1);
     }
   }
 
@@ -238,12 +242,12 @@
     }
 
     a {
-      color: $gray-400;
+      color: rgba(255, 255, 255, 0.65);
       font-size: $font-size-sm;
       transition: color $transition-fast;
 
       &:hover {
-        color: $white;
+        color: $accent;
         text-decoration: none;
       }
     }
@@ -256,7 +260,7 @@
     gap: $spacing-4;
     padding-top: $spacing-8;
     margin-top: $spacing-8;
-    border-top: 1px solid $gray-800;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
     text-align: center;
 
     @media (min-width: $breakpoint-md) {
@@ -268,7 +272,7 @@
 
   &__copyright {
     font-size: $font-size-sm;
-    color: $gray-500;
+    color: rgba(255, 255, 255, 0.55);
   }
 
   &__partners {

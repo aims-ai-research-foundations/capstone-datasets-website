@@ -39,7 +39,8 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 0 $spacing-4;
   font-weight: $font-weight-bold;
   line-height: $line-height-tight;
-  color: $gray-900;
+  color: $primary;
+  letter-spacing: -0.01em;
 }
 
 // Fluid typography for base headings - scales smoothly across viewports

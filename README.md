@@ -2,6 +2,8 @@
 
 A static website for discovering and accessing curated datasets for AI Research Foundations capstone projects across Africa.
 
+**Live site:** https://aims-ai-research-foundations.github.io/capstone-datasets-website/
+
 ## Project Overview
 
 This website supports the **Africa AI Upskilling Initiative**, providing students and AI Champions from Higher Educational Institutions (HEIs) in Nigeria, Ghana, Kenya, and South Africa with easy access to curated datasets for their capstone projects.
@@ -65,10 +67,10 @@ capstone-datasets-website/
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on adding datasets and contributing to the website.
 
-## Related Repositories
+## Related Sites
 
-- [ai-foundations-datasets](https://github.com/Yassir-249/ai-foundations-datasets) - Dataset catalog with metadata
-- [ai-research-foundations](https://github.com/Yassir-249/ai-research-foundations) - Course materials and resources
+- [Pilot Workshop](https://aims-ai-research-foundations.github.io/pilot-workshop/) - AIMS AI Research Foundations pilot workshop site
+- [AI Research Foundations on Google Skills](https://skills.google/paths/3135) - The online curriculum
 
 ## License
 

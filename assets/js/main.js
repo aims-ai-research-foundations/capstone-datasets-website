@@ -73,7 +73,7 @@ function copyCode(button) {
   navigator.clipboard.writeText(text).then(function() {
     const originalText = button.textContent;
     button.textContent = 'Copied!';
-    button.style.color = '#10B981';
+    button.style.color = '#3D9E5A';
 
     setTimeout(function() {
       button.textContent = originalText;

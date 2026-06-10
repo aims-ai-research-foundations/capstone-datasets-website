@@ -1,35 +1,36 @@
-// Colors - Africa AI Upskilling Theme
-$primary: #1E40AF;        // Deep blue (trust, technology)
-$primary-light: #3B82F6;
-$primary-dark: #1E3A8A;
+// Colors - AIMS AI Research Foundations brand
+// Matches https://aims-ai-research-foundations.github.io/pilot-workshop/
+$primary: #361A54;        // AIMS brand purple
+$primary-light: #4D2670;
+$primary-dark: #2D1A4D;
 
-$secondary: #059669;      // Green (growth, Africa)
-$secondary-light: #10B981;
-$secondary-dark: #047857;
+$secondary: #2D7740;      // Green (growth)
+$secondary-light: #3D9E5A;
+$secondary-dark: #1F5A2E;
 
-$accent: #F59E0B;         // Amber (energy, innovation)
-$accent-light: #FBBF24;
-$accent-dark: #D97706;
+$accent: #FDD633;         // AIMS brand gold
+$accent-light: #FFE06B;
+$accent-dark: #E0A82E;
 
-// Neutrals
+// Neutrals (purple-tinted to match the brand lavender wash)
 $white: #FFFFFF;
-$gray-50: #F8FAFC;
-$gray-100: #F1F5F9;
-$gray-200: #E2E8F0;
-$gray-300: #CBD5E1;
-$gray-400: #94A3B8;
-$gray-500: #64748B;
-$gray-600: #475569;
-$gray-700: #334155;
-$gray-800: #1E293B;
-$gray-900: #0F172A;
+$gray-50: #F8F6FC;
+$gray-100: #F3EEFB;       // brand background tint
+$gray-200: #E5DEF0;
+$gray-300: #CBC3DA;
+$gray-400: #948CA8;
+$gray-500: #6E6685;
+$gray-600: #5B5570;       // brand muted text
+$gray-700: #443E58;
+$gray-800: #2B2540;
+$gray-900: #1A1A1A;       // brand body text
 $black: #000000;
 
 // Semantic colors
-$success: #10B981;
-$warning: #F59E0B;
-$error: #EF4444;
-$info: #3B82F6;
+$success: #3D9E5A;
+$warning: #E0A82E;
+$error: #B23A2E;
+$info: #4E7FD6;
 
 // Country colors
 $nigeria: #008751;
@@ -37,15 +38,15 @@ $south-africa: #007A4D;
 $kenya: #BB0000;
 $ghana: #EF3340;
 
-// Course colors
-$course-01: #3B82F6;
-$course-02: #8B5CF6;
-$course-03: #EC4899;
-$course-04: #F59E0B;
-$course-05: #10B981;
-$course-06: #EF4444;
-$course-07: #6366F1;
-$course-08: #059669;
+// Course colors (harmonised with the pilot-workshop day-theme palette)
+$course-01: #4E7FD6;
+$course-02: #8A5BD4;
+$course-03: #B23A2E;
+$course-04: #E0A82E;
+$course-05: #3D9E5A;
+$course-06: #2F5BAE;
+$course-07: #B86A1E;
+$course-08: #2D1A4D;
 
 // Typography
 $font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;

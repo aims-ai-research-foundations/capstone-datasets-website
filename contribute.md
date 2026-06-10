@@ -22,7 +22,7 @@ Have a dataset that would be useful for AI Research Foundations capstone project
 - Must include sufficient documentation
 
 **To propose a dataset:**
-1. [Open an issue](https://github.com/Yassir-249/capstone-datasets-website/issues/new) on our GitHub repository
+1. [Open an issue](https://github.com/aims-ai-research-foundations/capstone-datasets-website/issues/new) on our GitHub repository
 2. Include the dataset name, URL, and why it's relevant
 3. We'll review and add it to the catalogue
 
@@ -57,7 +57,7 @@ Found a problem? Let us know:
 - Accessibility issues
 - Suggestions for improvement
 
-[Open an issue on GitHub](https://github.com/Yassir-249/capstone-datasets-website/issues)
+[Open an issue on GitHub](https://github.com/aims-ai-research-foundations/capstone-datasets-website/issues)
 
 ## Dataset Quality Criteria
 
@@ -81,7 +81,7 @@ All contributors are expected to follow our code of conduct:
 
 ## Getting Started
 
-1. Fork the [repository](https://github.com/Yassir-249/capstone-datasets-website)
+1. Fork the [repository](https://github.com/aims-ai-research-foundations/capstone-datasets-website)
 2. Create a branch for your changes
 3. Make your contributions
 4. Submit a pull request
@@ -91,7 +91,7 @@ For major changes, please open an issue first to discuss what you'd like to chan
 ## Questions?
 
 If you have questions about contributing:
-- Open a [discussion](https://github.com/Yassir-249/capstone-datasets-website/discussions) on GitHub
-- Contact the maintainers at [info@aims.ac.za](mailto:info@aims.ac.za)
+- Open a [discussion](https://github.com/aims-ai-research-foundations/capstone-datasets-website/discussions) on GitHub
+- Contact the maintainers at [ai-research-foundations@aims.ac.za](mailto:ai-research-foundations@aims.ac.za)
 
 Thank you for helping make AI education more accessible across Africa!

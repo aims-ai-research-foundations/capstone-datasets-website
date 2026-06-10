@@ -6,6 +6,7 @@ title: Home
 <!-- Hero Section -->
 <section class="hero">
   <div class="container">
+    <p class="hero__eyebrow">AI Research Foundations</p>
     <h1 class="hero__title">Capstone Datasets</h1>
     <p class="hero__subtitle">
       Curated datasets for AI Research Foundations capstone projects.
@@ -130,28 +131,28 @@ title: Home
 </section>
 
 <!-- Partners Section -->
-<section class="section">
+<section class="section section--gray">
   <div class="container">
-    <div class="section__header">
-      <h2 class="section__title">Our Partners</h2>
-      <p class="section__subtitle">
-        The Africa AI Upskilling Initiative is supported by leading organizations
-      </p>
-    </div>
-
     <div class="partners">
-      <a href="https://www.aims.ac.za/" target="_blank" rel="noopener">
-        <img src="{{ '/assets/images/partners/aims-logo.png' | relative_url }}" alt="AIMS South Africa" class="partners__logo" loading="lazy">
-      </a>
-      <a href="https://www.fatefoundation.org/" target="_blank" rel="noopener">
-        <img src="{{ '/assets/images/partners/fate-logo.png' | relative_url }}" alt="FATE Foundation" class="partners__logo" loading="lazy">
-      </a>
-      <a href="https://www.google.org/" target="_blank" rel="noopener">
-        <img src="{{ '/assets/images/partners/google-org-logo.png' | relative_url }}" alt="Google.org" class="partners__logo" loading="lazy">
-      </a>
-      <a href="https://www.ucl.ac.uk/" target="_blank" rel="noopener">
-        <img src="{{ '/assets/images/partners/ucl-logo.png' | relative_url }}" alt="UCL" class="partners__logo" loading="lazy">
-      </a>
+      <p class="partners__label">In partnership with</p>
+      <div class="partners__row">
+        <a href="https://www.aims.ac.za/" target="_blank" rel="noopener" class="partners__tile" title="AIMS South Africa">
+          <img src="{{ '/assets/images/partners/aims-logo.png' | relative_url }}" alt="AIMS South Africa" class="partners__logo" loading="lazy">
+        </a>
+        <a href="https://www.ucl.ac.uk/" target="_blank" rel="noopener" class="partners__tile" title="University College London">
+          <img src="{{ '/assets/images/partners/ucl-logo.png' | relative_url }}" alt="UCL" class="partners__logo" loading="lazy">
+        </a>
+        <a href="https://www.fatefoundation.org/" target="_blank" rel="noopener" class="partners__tile" title="FATE Foundation">
+          <img src="{{ '/assets/images/partners/fate-logo.png' | relative_url }}" alt="FATE Foundation" class="partners__logo" loading="lazy">
+        </a>
+      </div>
+
+      <p class="partners__label" style="margin-top: 2.5rem;">With support from</p>
+      <div class="partners__row partners__row--single">
+        <a href="https://www.google.org/" target="_blank" rel="noopener" class="partners__tile" title="Google.org">
+          <img src="{{ '/assets/images/partners/google-org-logo.png' | relative_url }}" alt="Google.org" class="partners__logo" loading="lazy">
+        </a>
+      </div>
     </div>
   </div>
 </section>

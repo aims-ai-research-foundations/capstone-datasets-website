@@ -104,8 +104,8 @@ We link to canonical sources (Hugging Face, Zenodo, government portals, research
 ## Contact
 
 For questions about this dataset catalogue:
-- Open an issue on our [GitHub repository](https://github.com/Yassir-249/capstone-datasets-website)
-- Contact the AIMS South Africa team at [info@aims.ac.za](mailto:info@aims.ac.za)
+- Open an issue on our [GitHub repository](https://github.com/aims-ai-research-foundations/capstone-datasets-website)
+- Contact the AIMS South Africa team at [ai-research-foundations@aims.ac.za](mailto:ai-research-foundations@aims.ac.za)
 
 ## License
 

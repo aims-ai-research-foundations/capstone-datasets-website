@@ -19,8 +19,11 @@ footer:
         url: "/contribute/"
   - title: "Resources"
     links:
-      - title: "Google Cloud Skills Boost"
-        url: "https://www.cloudskillsboost.google/"
+      - title: "AI Research Foundations on Google Skills"
+        url: "https://skills.google/paths/3135"
+        external: true
+      - title: "Pilot Workshop"
+        url: "https://aims-ai-research-foundations.github.io/pilot-workshop/"
         external: true
       - title: "Hugging Face Datasets"
         url: "https://huggingface.co/datasets"

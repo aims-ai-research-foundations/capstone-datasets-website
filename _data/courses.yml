@@ -5,7 +5,7 @@
   description: "Learn the fundamentals of language modeling by building a small language model from scratch. This introductory course demystifies the creation of language models, emphasizing that you don't need massive compute resources to understand the fundamental principles of Generative AI."
   duration: "6 hours"
   icon: "cube"
-  color: "#3B82F6"
+  color: "#4E7FD6"
   key_topics:
     - "Fundamentals of language modeling"
     - "Evolution from n-gram models to Transformers"
@@ -36,7 +36,7 @@
     - "Completion of Course 01"
     - "Familiarity with linear algebra (vectors/matrices)"
   icon: "vector-square"
-  color: "#8B5CF6"
+  color: "#8A5BD4"
   key_topics:
     - "Tokenization: Breaking text into smaller units (tokens)"
     - "Embeddings: Representing tokens as vectors in high-dimensional space"
@@ -65,7 +65,7 @@
   description: "This course enters the 'engine room' of deep learning. Move from abstract concepts to the concrete mechanics of training neural networks, including supervised learning, classification, sentiment analysis, and Named Entity Recognition."
   duration: "4 hours"
   icon: "network-wired"
-  color: "#EC4899"
+  color: "#B23A2E"
   key_topics:
     - "Multilayer Perceptrons (MLPs): The building blocks of deep learning"
     - "The Training Loop: Forward pass, loss calculation, backpropagation"
@@ -94,7 +94,7 @@
   description: "This is the theoretical centerpiece of the curriculum. Explore the architecture that underpins modern Generative AI like Gemini and GPT. Understand attention mechanisms, positional encoding, and build your own transformer model."
   duration: "4 hours"
   icon: "microchip"
-  color: "#F59E0B"
+  color: "#E0A82E"
   key_topics:
     - "The Transformer: History and architecture"
     - "Self-Attention Mechanisms: How models weigh word importance"
@@ -123,7 +123,7 @@
   short_title: "Fine-tuning"
   description: "Moving from theory to application, this course addresses the reality that most researchers adapt existing foundation models rather than training from scratch. Learn transfer learning, fine-tuning techniques, and domain adaptation for African contexts."
   icon: "sliders"
-  color: "#10B981"
+  color: "#3D9E5A"
   key_topics:
     - "Transfer Learning: Principles of adapting pre-trained models"
     - "Fine-tuning Techniques: Full fine-tuning vs Parameter-Efficient (PEFT)"
@@ -153,7 +153,7 @@
   short_title: "Alignment"
   description: "This course tackles the critical challenge of making AI systems helpful, harmless, and honest. Learn to treat alignment as a technical engineering discipline, including RLHF, preference learning, bias evaluation, and safety techniques for African contexts."
   icon: "compass"
-  color: "#EF4444"
+  color: "#2F5BAE"
   key_topics:
     - "AI Alignment: Defining human values and intentions"
     - "RLHF (Reinforcement Learning from Human Feedback)"
@@ -183,7 +183,7 @@
   short_title: "Acceleration"
   description: "A functional model is useless if too slow or expensive to run. This course focuses on MLOps and optimization, particularly relevant for the African context where compute resources may be constrained and mobile deployment is essential."
   icon: "bolt"
-  color: "#6366F1"
+  color: "#B86A1E"
   key_topics:
     - "Inference Optimization: Reducing latency"
     - "Quantization: Reducing model precision (8-bit, 4-bit)"
@@ -212,7 +212,7 @@
   short_title: "Capstone"
   description: "The curriculum culminates in a comprehensive project that requires you to synthesize all previous learning. Build an end-to-end AI solution for real-world African challenges in healthcare, agriculture, climate, finance, or education."
   icon: "rocket"
-  color: "#059669"
+  color: "#2D1A4D"
   key_topics:
     - "Independent research and problem formulation"
     - "End-to-end model development pipeline"
