@@ -6,7 +6,7 @@ layout: default
 {% assign course_data = site.data.courses | where: "id", course.course_id | first %}
 {% assign course_datasets = site.data.datasets | where_exp: "d", "d.courses contains course.course_id" %}
 
-<div class="course-detail__header" style="background: linear-gradient(135deg, {{ course.color }} 0%, {{ course.color }}dd 100%);">
+<div class="course-detail__header" style="background: linear-gradient(135deg, #361A54 0%, #4a2d7a 100%); border-top: 4px solid {{ course.color }};">
   <div class="container">
     <nav class="page-header__breadcrumb" style="color: rgba(255,255,255,0.7);">
       <a href="{{ '/' | relative_url }}" style="color: rgba(255,255,255,0.7);">Home</a>

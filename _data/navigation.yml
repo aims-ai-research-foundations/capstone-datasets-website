@@ -31,14 +31,20 @@ footer:
       - title: "Masakhane NLP"
         url: "https://www.masakhane.io/"
         external: true
+      - title: "GitHub Repository"
+        url: "https://github.com/aims-ai-research-foundations/capstone-datasets-website"
+        external: true
   - title: "Partners"
     links:
       - title: "AIMS South Africa"
         url: "https://www.aims.ac.za/"
         external: true
+      - title: "University College London"
+        url: "https://www.ucl.ac.uk/"
+        external: true
       - title: "FATE Foundation"
         url: "https://www.fatefoundation.org/"
         external: true
-      - title: "Google DeepMind"
-        url: "https://deepmind.google/"
+      - title: "Google.org"
+        url: "https://www.google.org/"
         external: true

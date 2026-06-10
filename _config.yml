@@ -5,17 +5,11 @@ url: "https://aims-ai-research-foundations.github.io"
 baseurl: "/capstone-datasets-website"
 logo: "/assets/images/logos/logo.svg"
 
-# Social sharing image (1200x630 recommended)
-image: "/assets/images/og-image.png"
-
-# Twitter/X card settings
-twitter:
-  card: summary_large_image
-
 # Project info
 project:
   name: "Africa AI Upskilling Initiative"
   tagline: "Empowering 30,900 students across Africa with world-class AI education"
+  total_students: "30,900"
   countries:
     - name: "Nigeria"
       code: "NG"
@@ -78,6 +72,10 @@ defaults:
       type: "pages"
     values:
       layout: "page"
+  - scope:
+      path: ""
+    values:
+      image: "/assets/images/og-image.png"
 
 # Plugins
 plugins:

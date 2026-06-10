@@ -1,20 +1,21 @@
 {% comment %}
   Country Flag Component
   Usage: {% include country-flag.html code=country %}
-  Renders an emoji flag with title for the given country code
+  Renders a small text badge with the 2-letter country code.
+  (Emoji flags render as bare letter pairs on Windows, so we use styled badges instead.)
 {% endcomment %}
 {% case include.code %}
-  {% when "NG" %}<span title="Nigeria" aria-label="Nigeria">🇳🇬</span>
-  {% when "KE" %}<span title="Kenya" aria-label="Kenya">🇰🇪</span>
-  {% when "GH" %}<span title="Ghana" aria-label="Ghana">🇬🇭</span>
-  {% when "ZA" %}<span title="South Africa" aria-label="South Africa">🇿🇦</span>
-  {% when "ET" %}<span title="Ethiopia" aria-label="Ethiopia">🇪🇹</span>
-  {% when "RW" %}<span title="Rwanda" aria-label="Rwanda">🇷🇼</span>
-  {% when "UG" %}<span title="Uganda" aria-label="Uganda">🇺🇬</span>
-  {% when "TZ" %}<span title="Tanzania" aria-label="Tanzania">🇹🇿</span>
-  {% when "SN" %}<span title="Senegal" aria-label="Senegal">🇸🇳</span>
-  {% when "CM" %}<span title="Cameroon" aria-label="Cameroon">🇨🇲</span>
-  {% when "EG" %}<span title="Egypt" aria-label="Egypt">🇪🇬</span>
-  {% when "MA" %}<span title="Morocco" aria-label="Morocco">🇲🇦</span>
-  {% when "Pan-African" %}<span title="Pan-African" aria-label="Pan-African">🌍</span>
+  {% when "NG" %}<span class="flag-badge" title="Nigeria" aria-label="Nigeria">NG</span>
+  {% when "KE" %}<span class="flag-badge" title="Kenya" aria-label="Kenya">KE</span>
+  {% when "GH" %}<span class="flag-badge" title="Ghana" aria-label="Ghana">GH</span>
+  {% when "ZA" %}<span class="flag-badge" title="South Africa" aria-label="South Africa">ZA</span>
+  {% when "ET" %}<span class="flag-badge" title="Ethiopia" aria-label="Ethiopia">ET</span>
+  {% when "RW" %}<span class="flag-badge" title="Rwanda" aria-label="Rwanda">RW</span>
+  {% when "UG" %}<span class="flag-badge" title="Uganda" aria-label="Uganda">UG</span>
+  {% when "TZ" %}<span class="flag-badge" title="Tanzania" aria-label="Tanzania">TZ</span>
+  {% when "SN" %}<span class="flag-badge" title="Senegal" aria-label="Senegal">SN</span>
+  {% when "CM" %}<span class="flag-badge" title="Cameroon" aria-label="Cameroon">CM</span>
+  {% when "EG" %}<span class="flag-badge" title="Egypt" aria-label="Egypt">EG</span>
+  {% when "MA" %}<span class="flag-badge" title="Morocco" aria-label="Morocco">MA</span>
+  {% when "Pan-African" %}<span class="flag-badge" title="Pan-African" aria-label="Pan-African">PAN-AF</span>
 {% endcase %}

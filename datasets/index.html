@@ -34,7 +34,7 @@ description: Browse our curated collection of datasets for AI Research Foundatio
         <button class="filters__btn active" data-filter="country" data-value="all" aria-pressed="true">All</button>
         {% for country in site.project.countries %}
         <button class="filters__btn" data-filter="country" data-value="{{ country.code }}" aria-pressed="false">
-          {{ country.flag }} {{ country.name }}
+          {{ country.name }}
         </button>
         {% endfor %}
       </div>
@@ -77,6 +77,7 @@ description: Browse our curated collection of datasets for AI Research Foundatio
            data-tagline="{{ dataset.tagline | downcase }}"
            data-countries="{{ dataset.countries | join: ',' }}"
            data-difficulty="{{ dataset.difficulty }}"
+           data-languages="{% for lang in dataset.languages %}{{ lang.name | downcase }}{% unless forloop.last %},{% endunless %}{% endfor %}"
            data-tasks="{{ dataset.tasks | join: ',' }}"
            data-courses="{{ dataset.courses | join: ',' }}">
         <div class="dataset-card__header">
@@ -177,11 +178,16 @@ document.addEventListener('DOMContentLoaded', function() {
     cards.forEach(card => {
       let show = true;
 
-      // Search filter
+      // Search filter (matches name, tagline, languages, and tasks)
       if (activeFilters.search) {
         const name = card.dataset.name || '';
         const tagline = card.dataset.tagline || '';
-        if (!name.includes(activeFilters.search) && !tagline.includes(activeFilters.search)) {
+        const languages = card.dataset.languages || '';
+        const tasks = (card.dataset.tasks || '').toLowerCase();
+        if (!name.includes(activeFilters.search) &&
+            !tagline.includes(activeFilters.search) &&
+            !languages.includes(activeFilters.search) &&
+            !tasks.includes(activeFilters.search)) {
           show = false;
         }
       }
@@ -235,5 +241,22 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     applyFilters();
   };
+
+  // Apply filters from query string (e.g. /datasets/?country=NG from homepage pills)
+  const params = new URLSearchParams(location.search);
+  ['country', 'course', 'difficulty'].forEach(filterType => {
+    const value = params.get(filterType);
+    if (!value) return;
+    const btn = document.querySelector(`[data-filter="${filterType}"][data-value="${CSS.escape(value)}"]`);
+    if (!btn) return;
+    document.querySelectorAll(`[data-filter="${filterType}"]`).forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-pressed', 'false');
+    });
+    btn.classList.add('active');
+    btn.setAttribute('aria-pressed', 'true');
+    activeFilters[filterType] = value;
+  });
+  applyFilters();
 });
 </script>

@@ -840,7 +840,7 @@
   description: |
     Massive multilingual instruction fine-tuning dataset with human-annotated
     and translated instructions for many African languages.
-  source_url: "https://huggingface.co/datasets/cohere/aya_dataset"
+  source_url: "https://huggingface.co/datasets/CohereForAI/aya_dataset"
   source_type: "huggingface"
   languages:
     - { code: "multi", name: "65 languages including African LRLs" }
@@ -856,7 +856,7 @@
   quickstart: |
     from datasets import load_dataset
 
-    dataset = load_dataset("cohere/aya_dataset", split="train")
+    dataset = load_dataset("CohereForAI/aya_dataset", split="train")
   project_ideas:
     - title: "Yoruba Assistant"
       description: "Fine-tune a model to act as helpful assistant in Yoruba"
@@ -1160,8 +1160,10 @@
   description: |
     Video dataset for Kenyan Sign Language (KSL) to bridge communication barriers
     for deaf learners. 20,000 sign videos.
-  source_url: "https://www.maseno.ac.ke/stakeholder-workshop-ai4ksl"
-  source_type: "web"
+    The dataset is not publicly downloadable; access is arranged via the authors
+    (AI4KSL project, Maseno University) — see the paper for contact details.
+  source_url: "https://arxiv.org/abs/2410.18295"
+  source_type: "arxiv"
   languages:
     - { code: "ksl", name: "Kenyan Sign Language" }
   countries: ["KE"]
@@ -1316,7 +1318,7 @@
   description: |
     A reading comprehension dataset for Nigerian languages (Hausa, Igbo, Yoruba) based on high-school
     examination questions. Provides a realistic educational benchmark for testing model comprehension.
-  source_url: "https://huggingface.co/datasets/masakhane/naijarc"
+  source_url: "https://huggingface.co/datasets/aremuadeolajr/NaijaRC"
   source_type: "huggingface"
   paper_url: "https://arxiv.org/abs/2308.09768"
   languages:
@@ -1335,7 +1337,7 @@
   quickstart: |
     from datasets import load_dataset
 
-    dataset = load_dataset("masakhane/naijarc", "yor", split="test")
+    dataset = load_dataset("aremuadeolajr/NaijaRC", "yor", split="test")
     print(dataset['question'][:3])
   project_ideas:
     - title: "High School Exam Test"
@@ -1354,8 +1356,9 @@
   tagline: "Comprehensive Benchmark for African Languages"
   description: |
     A comprehensive benchmark suite for evaluating LLMs on African languages across multiple tasks.
-    Covers translation, classification, QA, and more for systematic model evaluation.
-  source_url: "https://huggingface.co/datasets/masakhane/irokobench"
+    IrokoBench is published as three Hugging Face datasets: masakhane/afrimmlu (knowledge QA),
+    masakhane/afrimgsm (math reasoning), and masakhane/afrixnli (natural language inference).
+  source_url: "https://huggingface.co/datasets/masakhane/afrimmlu"
   source_type: "huggingface"
   languages:
     - { code: "hau", name: "Hausa" }
@@ -1376,8 +1379,8 @@
   quickstart: |
     from datasets import load_dataset
 
-    # Load specific task subset
-    dataset = load_dataset("masakhane/irokobench", "yor_classification", split="test")
+    # IrokoBench is split across afrimmlu / afrimgsm / afrixnli
+    dataset = load_dataset("masakhane/afrimmlu", "yor", split="test")
   project_ideas:
     - title: "LLM Evaluation"
       description: "Benchmark popular LLMs (GPT-4, Llama, Gemini) on African languages"

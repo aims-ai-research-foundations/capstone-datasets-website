@@ -273,9 +273,25 @@
 
   &__countries {
     display: flex;
+    align-items: center;
+    flex-wrap: wrap;
     gap: $spacing-1;
-    font-size: $font-size-lg;
   }
+}
+
+// Country flag badge — 2-letter code chips (emoji flags don't render on Windows)
+.flag-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  background-color: $gray-100; // brand lavender tint
+  color: $primary;
+  border-radius: 4px;
+  padding: 2px 6px;
+  white-space: nowrap;
 }
 
 // Course Card

@@ -278,18 +278,26 @@
   &__partners {
     display: flex;
     align-items: center;
-    gap: $spacing-6;
+    gap: $spacing-4;
 
-    img {
-      height: 28px;
-      width: auto;
-      opacity: 0.6;
-      filter: brightness(0) invert(1);
+    a {
+      display: inline-flex;
+      align-items: center;
+      background-color: $white;
+      border-radius: 6px;
+      padding: $spacing-1 $spacing-2;
+      opacity: 0.85;
       transition: opacity $transition-fast;
 
       &:hover {
         opacity: 1;
       }
+    }
+
+    img {
+      height: 24px;
+      width: auto;
+      display: block;
     }
   }
 }
