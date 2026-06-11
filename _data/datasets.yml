@@ -51,8 +51,46 @@
   ethics:
     - "While curated to remove noise, web-crawled data may still contain biases"
     - "Religious text inclusion can skew domain distribution"
-  featured: true
+  featured: false
   date_added: "2026-01-23"
+
+# === Featured non-NLP newcomer (added 2026-06-11) ===
+- id: "malaria-cells"
+  name: "Malaria Cell Images"
+  tagline: "Parasitized vs Uninfected Blood Cell Images (NIH)"
+  description: |
+    Segmented blood-cell images split evenly between parasitized and uninfected cells, sourced from the US National Institutes of Health for automated malaria screening.
+    A clean, classic benchmark for getting started with medical image classification.
+  source_url: "https://www.kaggle.com/datasets/iarunava/cell-images-for-detecting-malaria"
+  source_type: "kaggle"
+  languages:
+    - { code: "en", name: "English (Metadata)" }
+  countries: ["Pan-African"]
+  tasks: ["image-classification", "computer-vision", "healthcare"]
+  size: "27,558 images (~339MB)"
+  format: ["Image"]
+  license: "Public Domain (NIH)"
+  difficulty: "beginner"
+  compute: "low"
+  colab_friendly: true
+  courses: ["03-neural-networks", "07-accelerate", "08-capstone"]
+  quickstart: |
+    import kagglehub
+
+    path = kagglehub.dataset_download("iarunava/cell-images-for-detecting-malaria")
+    print(path)  # folders: Parasitized/ and Uninfected/
+  project_ideas:
+    - title: "Baseline CNN Classifier"
+      description: "Train a ResNet or Inception model to classify parasitized vs uninfected cells."
+      difficulty: "beginner"
+    - title: "Edge Diagnostic Demo"
+      description: "Quantize the classifier and serve it through a local Streamlit app to simulate a clinic edge tool."
+      difficulty: "intermediate"
+  ethics:
+    - "This is a sanitized dataset; real blood smears carry artefacts and noise absent here."
+    - "False negatives in malaria screening carry serious clinical risk."
+  featured: true
+  date_added: "2026-06-11"
 
 - id: "mc4-african"
   name: "mC4 (African Subset)"
@@ -151,6 +189,44 @@
     - "News data may contain political biases specific to region and publication time"
   featured: true
   date_added: "2026-01-23"
+
+# === Featured non-NLP newcomer (added 2026-06-11) ===
+- id: "karaagro-maize"
+  name: "KaraAgro AI Maize"
+  tagline: "Annotated Maize Disease Images from Ghana"
+  description: |
+    Over 16,000 maize crop images with bounding-box annotations for diseases including maize streak and armyworm damage, curated by KaraAgro AI in Ghana.
+    Released CC0; canonical data lives on Harvard Dataverse (doi:10.7910/DVN/CXUMDS).
+  source_url: "https://datasetninja.com/kara-agro-ai-maize"
+  source_type: "web"
+  languages:
+    - { code: "en", name: "English (Metadata)" }
+  countries: ["GH"]
+  tasks: ["object-detection", "image-classification", "computer-vision"]
+  size: "16,552 images (~1.5GB)"
+  format: ["Image"]
+  license: "CC0 1.0"
+  difficulty: "intermediate"
+  compute: "medium"
+  colab_friendly: true
+  courses: ["03-neural-networks", "08-capstone"]
+  quickstart: |
+    # Download from Harvard Dataverse (CC0)
+    #   https://doi.org/10.7910/DVN/CXUMDS
+    # then load the images + bounding-box annotations with your CV framework
+    from torchvision.io import read_image
+  project_ideas:
+    - title: "Disease Detector"
+      description: "Train a YOLO or transformer-based detector to localise armyworm damage and frass on maize leaves."
+      difficulty: "intermediate"
+    - title: "Imbalance Study"
+      description: "Evaluate the detector on a heavily imbalanced disease subset and practise targeted data augmentation."
+      difficulty: "intermediate"
+  ethics:
+    - "Models must not be presented to farmers as definitive guarantees without agronomic oversight."
+    - "Camera-quality differences across regions can teach artefact bias rather than biology."
+  featured: true
+  date_added: "2026-06-11"
 
 - id: "naijavoices"
   name: "NaijaVoices"
@@ -1392,3 +1468,349 @@
     - "Standardized evaluation helps identify model biases"
   featured: false
   date_added: "2026-01-23"
+
+# === Agriculture / Vision (added 2026-06-11) ===
+
+- id: "sa-crop-type"
+  name: "South Africa Crop Type"
+  tagline: "Fused Sentinel-1/2 Imagery for Crop Mapping"
+  description: |
+    Fused Sentinel-1 (radar) and Sentinel-2 (multispectral) imagery for crop-field classification in South Africa's Western Cape, produced for the Radiant Earth Spot the Crop Challenge.
+    10 m resolution rasters with field-identification and crop-type labels.
+  source_url: "https://collections.eurodatacube.com/south-africa-crops-competition/"
+  source_type: "web"
+  languages:
+    - { code: "en", name: "English (Metadata)" }
+  countries: ["ZA"]
+  tasks: ["semantic-segmentation", "data-fusion", "computer-vision"]
+  size: "~10GB"
+  format: ["GeoTIFF"]
+  license: "CC BY 4.0"
+  difficulty: "advanced"
+  compute: "high"
+  colab_friendly: false
+  courses: ["03-neural-networks", "08-capstone"]
+  quickstart: |
+    # Browse and download tiles from Source Cooperative / Sentinel Hub:
+    #   https://collections.eurodatacube.com/south-africa-crops-competition/
+    # Read the GeoTIFF rasters with rasterio
+    import rasterio
+  project_ideas:
+    - title: "Optical + Radar Fusion"
+      description: "Build a model fusing Sentinel-2 optical and Sentinel-1 radar bands and show how radar penetrates cloud cover."
+      difficulty: "advanced"
+    - title: "Temporal Segmentation"
+      description: "Segment crop fields using the multi-date image stack across the growing season."
+      difficulty: "advanced"
+  ethics:
+    - "Spatial data on smallholder fields should be handled to avoid exposing localized economic vulnerabilities."
+  featured: false
+  date_added: "2026-06-11"
+
+- id: "ghana-croplands"
+  name: "Ghana Croplands Agronomy"
+  tagline: "Biophysical & Yield Measurements for Northern Ghana Maize"
+  description: |
+    Crop locations, leaf area index, leaf chlorophyll concentration, and yield for maize across three agroecological zones in northern Ghana (2020-2021).
+    Data files are on Zenodo (doi:10.5281/zenodo.6632083); the linked page is the peer-reviewed ESSD data descriptor.
+  source_url: "https://essd.copernicus.org/articles/14/5387/2022/"
+  source_type: "web"
+  languages:
+    - { code: "en", name: "English (Metadata)" }
+  countries: ["GH"]
+  tasks: ["regression", "yield-prediction", "geospatial"]
+  size: "<100MB"
+  format: ["CSV", "Shapefile"]
+  license: "CC BY 4.0"
+  difficulty: "intermediate"
+  compute: "low"
+  colab_friendly: true
+  courses: ["03-neural-networks", "08-capstone"]
+  quickstart: |
+    # Download the data files from Zenodo (CC BY 4.0):
+    #   https://doi.org/10.5281/zenodo.6632083
+    import pandas as pd
+    # df = pd.read_csv("ghana_croplands.csv")
+  project_ideas:
+    - title: "Mid-Season Yield Prediction"
+      description: "Predict end-of-season maize yield from mid-season biophysical parameters with a neural network."
+      difficulty: "intermediate"
+    - title: "Within-Field Uncertainty"
+      description: "Map yield-estimate uncertainty across fields to produce confidence intervals."
+      difficulty: "advanced"
+  ethics:
+    - "Aggregate precise farm locations before any republication to protect individual farmer data."
+  featured: false
+  date_added: "2026-06-11"
+
+# === Healthcare / Vision & Speech (added 2026-06-11) ===
+
+- id: "african-medical-records"
+  name: "African Medical Records (OCR)"
+  tagline: "Nigerian Handwritten Clinical Records for OCR"
+  description: |
+    Paired images and digital ground-truth text mapping diverse Nigerian clinical handwriting, built to support handwriting OCR and clinical text extraction in healthcare.
+  source_url: "https://huggingface.co/datasets/Nigeria-Health-data-OCR-pipeline/African-Medical-Records"
+  source_type: "huggingface"
+  languages:
+    - { code: "en", name: "English (Nigeria)" }
+  countries: ["NG"]
+  tasks: ["ocr", "computer-vision", "clinical-text-extraction"]
+  size: "<1K records"
+  format: ["Image", "Text"]
+  license: "CC-BY 4.0"
+  difficulty: "advanced"
+  compute: "medium"
+  colab_friendly: true
+  courses: ["03-neural-networks", "04-transformer", "08-capstone"]
+  quickstart: |
+    from datasets import load_dataset
+
+    dataset = load_dataset("Nigeria-Health-data-OCR-pipeline/African-Medical-Records", split="train")
+    print(dataset[0])
+  project_ideas:
+    - title: "Prescription Pipeline"
+      description: "Build an OCR-to-LLM pipeline that reads a handwritten prescription image and extracts drug and dosage."
+      difficulty: "advanced"
+    - title: "Handwriting OCR"
+      description: "Fine-tune a vision-text model on the clinical handwriting and report character error rate."
+      difficulty: "advanced"
+  ethics:
+    - "Handwriting carries biometric nuance; ensure complete de-identification of patient names."
+  featured: false
+  date_added: "2026-06-11"
+
+- id: "nigeria-colposcopy"
+  name: "Nigerian Colposcopy Images"
+  tagline: "Cervical Cancer Screening Images from Nigeria"
+  description: |
+    Multi-magnification digital colposcopy images from women at a Nigerian hospital, captured before and after acetic-acid application, for computer-aided cervical cancer screening.
+    Data files are hosted on Mendeley Data (doi:10.17632/j5mhfhxrwj.1).
+  source_url: "https://data.mendeley.com/datasets/j5mhfhxrwj/1"
+  source_type: "web"
+  paper_url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC12992497/"
+  languages:
+    - { code: "en", name: "English (Metadata)" }
+  countries: ["NG"]
+  tasks: ["image-classification", "computer-aided-diagnosis", "computer-vision"]
+  size: "3,356 images"
+  format: ["Image"]
+  license: "CC BY-NC 4.0"
+  difficulty: "intermediate"
+  compute: "medium"
+  colab_friendly: true
+  courses: ["03-neural-networks", "07-accelerate", "08-capstone"]
+  quickstart: |
+    # Download the images from Mendeley Data (CC BY-NC 4.0):
+    #   https://data.mendeley.com/datasets/j5mhfhxrwj/1
+    from torchvision.io import read_image
+  project_ideas:
+    - title: "Lesion Classifier"
+      description: "Train a lightweight CNN to flag normal vs abnormal cervical lesions, optimising inference for low-resource clinics."
+      difficulty: "intermediate"
+    - title: "Pre/Post Acetic Acid"
+      description: "Compare classification accuracy on pre- vs post-acetic-acid images."
+      difficulty: "intermediate"
+  ethics:
+    - "Highly sensitive medical imagery requiring strict privacy handling."
+    - "False negatives in oncology carry severe consequences; communicate model limits clearly."
+  featured: false
+  date_added: "2026-06-11"
+
+- id: "med-convo-nig"
+  name: "Med-Convo-Nig"
+  tagline: "Simulated Nigerian-Accented Medical Consultations"
+  description: |
+    Simulated doctor-patient tele-consultations recorded in Nigerian-accented English (about 4.2 hours of audio with transcripts), released by Intron Health.
+    Gated on Hugging Face: request access before loading.
+  source_url: "https://huggingface.co/datasets/intronhealth/med-convo-nig"
+  source_type: "huggingface"
+  languages:
+    - { code: "en", name: "English (Nigerian accent)" }
+  countries: ["NG"]
+  tasks: ["asr", "speech-recognition", "medical-transcription"]
+  size: "4.2 hours audio"
+  format: ["Audio", "Text"]
+  license: "CC BY-NC-SA 4.0"
+  difficulty: "intermediate"
+  compute: "medium"
+  colab_friendly: true
+  courses: ["05-finetune", "08-capstone"]
+  quickstart: |
+    from datasets import load_dataset
+
+    # Requires access approval on Hugging Face
+    dataset = load_dataset("intronhealth/med-convo-nig", split="train")
+  project_ideas:
+    - title: "Medical Whisper"
+      description: "Fine-tune Whisper on Nigerian medical terminology to improve transcription accuracy."
+      difficulty: "intermediate"
+    - title: "Speaker Diarization"
+      description: "Build a pipeline that separates doctor and patient speech automatically."
+      difficulty: "intermediate"
+  ethics:
+    - "Simulated data limits patient-privacy risk, but discuss ASR bias against regional accents in real care."
+  featured: false
+  date_added: "2026-06-11"
+
+# === Ecology / Vision (added 2026-06-11) ===
+
+- id: "snapshot-serengeti"
+  name: "Snapshot Serengeti"
+  tagline: "Camera-Trap Wildlife Images from Tanzania"
+  description: |
+    Camera-trap image series from Serengeti National Park, Tanzania, for species classification and ecological monitoring; roughly three-quarters of frames are empty, creating strong class imbalance.
+    The full archive is terabyte-scale, so use the provided metadata CSVs or a sampled subset for Colab.
+  source_url: "https://lila.science/datasets/snapshot-serengeti/"
+  source_type: "web"
+  languages:
+    - { code: "en", name: "English (Metadata)" }
+  countries: ["TZ"]
+  tasks: ["image-classification", "object-detection", "ecological-monitoring"]
+  size: "~5TB full (use a subset)"
+  format: ["Image", "CSV"]
+  license: "CDLA-Permissive-1.0"
+  difficulty: "advanced"
+  compute: "high"
+  colab_friendly: false
+  courses: ["03-neural-networks", "08-capstone"]
+  quickstart: |
+    # Browse metadata + download a subset from LILA (CDLA-Permissive):
+    #   https://lila.science/datasets/snapshot-serengeti/
+    import pandas as pd
+    # annotations = pd.read_json("SnapshotSerengeti_v2.json")
+  project_ideas:
+    - title: "Streaming Species Classifier"
+      description: "Stream a sampled subset into Colab to train a species classifier."
+      difficulty: "advanced"
+    - title: "Imbalance with Focal Loss"
+      description: "Tackle the ~76% empty-frame imbalance using focal loss."
+      difficulty: "advanced"
+  ethics:
+    - "Human images must be removed for privacy; discuss the surveillance implications of camera traps."
+  featured: false
+  date_added: "2026-06-11"
+
+# === Language & Speech (added 2026-06-11) ===
+
+- id: "african-next-voices"
+  name: "African Next Voices"
+  tagline: "Multilingual South African Speech (3000+ hrs)"
+  description: |
+    A large multilingual speech dataset for seven South African languages, combining scripted and unscripted speech across agriculture, health, and general-purpose domains.
+    Gated on Hugging Face (accept terms first). Very large; stream or use per-language subsets.
+  source_url: "https://huggingface.co/datasets/dsfsi-anv/za-african-next-voices"
+  source_type: "huggingface"
+  paper_url: "https://arxiv.org/abs/2512.02201"
+  languages:
+    - { code: "zul", name: "isiZulu" }
+    - { code: "xho", name: "isiXhosa" }
+    - { code: "sot", name: "Sesotho" }
+    - { code: "tsn", name: "Setswana" }
+    - { code: "nso", name: "Sepedi" }
+    - { code: "nbl", name: "isiNdebele" }
+    - { code: "ven", name: "Tshivenda" }
+  countries: ["ZA"]
+  tasks: ["asr", "speech-recognition"]
+  size: "3,000+ hours"
+  format: ["Audio", "Text"]
+  license: "CC BY 4.0"
+  difficulty: "advanced"
+  compute: "high"
+  colab_friendly: false
+  courses: ["05-finetune", "08-capstone"]
+  quickstart: |
+    from datasets import load_dataset
+
+    # Accept the dataset terms on Hugging Face first
+    ds = load_dataset("dsfsi-anv/za-african-next-voices", split="train", streaming=True)
+    print(next(iter(ds)))
+  project_ideas:
+    - title: "isiZulu Whisper"
+      description: "Fine-tune Whisper on a 10-hour isiZulu subset to adapt to local pronunciation."
+      difficulty: "advanced"
+    - title: "Scripted vs Unscripted"
+      description: "Compare ASR accuracy on scripted vs unscripted speech."
+      difficulty: "intermediate"
+  ethics:
+    - "Dataset terms prohibit text-to-speech, voice cloning, or voice synthesis use."
+    - "Community-collected data; respect consent and avoid biometric profiling."
+  featured: false
+  date_added: "2026-06-11"
+
+- id: "kencorpus"
+  name: "Kencorpus"
+  tagline: "Kenyan Languages Corpus: Swahili, Dholuo, Luhya"
+  description: |
+    A text and speech corpus for three Kenyan languages (Swahili, Dholuo, Luhya): 5.6M words and 177 hours of speech, plus 7,537 Swahili QA pairs, 13,400 translation sentences, and POS-tagged sets.
+    The Maseno project homepage is offline; data is mirrored on Harvard Dataverse.
+  source_url: "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/6N5V1K"
+  source_type: "dataverse"
+  paper_url: "https://arxiv.org/abs/2208.12081"
+  languages:
+    - { code: "swa", name: "Swahili" }
+    - { code: "luo", name: "Dholuo" }
+    - { code: "luy", name: "Luhya" }
+  countries: ["KE"]
+  tasks: ["machine-translation", "pos-tagging", "question-answering", "asr"]
+  size: "5.6M words / 177 hours"
+  format: ["Text", "Audio"]
+  license: "CC BY 4.0"
+  difficulty: "intermediate"
+  compute: "low"
+  colab_friendly: true
+  courses: ["02-represent-data", "04-transformer", "08-capstone"]
+  quickstart: |
+    # Download from Harvard Dataverse (CC BY 4.0):
+    #   https://doi.org/10.7910/DVN/6N5V1K
+    # text, QA, translation and POS files plus speech wavs
+  project_ideas:
+    - title: "Dholuo-Swahili MT"
+      description: "Build a Dholuo-to-Swahili translation transformer."
+      difficulty: "intermediate"
+    - title: "Swahili STT"
+      description: "Develop a Swahili speech-to-text pipeline and measure word error rate."
+      difficulty: "intermediate"
+  ethics:
+    - "Indigenous languages carry cultural heritage; develop with native-speaker consultation."
+  featured: false
+  date_added: "2026-06-11"
+
+- id: "common-voice-african"
+  name: "Common Voice (Swahili & Hausa)"
+  tagline: "Crowdsourced Read Speech for African Languages"
+  description: |
+    Mozilla Common Voice scripted-speech recordings for Swahili (~20GB) and Hausa, with speaker demographics. Crowdsourced read speech released into the public domain (CC0).
+    Stream from Hugging Face or pull a language subset to stay within Colab limits.
+  source_url: "https://mozilladatacollective.com/datasets/cmn3ailbd008nmb07mjyu3xro"
+  source_type: "web"
+  languages:
+    - { code: "swa", name: "Swahili" }
+    - { code: "hau", name: "Hausa" }
+  countries: ["KE", "NG"]
+  tasks: ["asr", "speech-recognition", "accent-classification"]
+  size: "Swahili ~20GB; Hausa smaller"
+  format: ["Audio", "Text"]
+  license: "CC0 1.0"
+  difficulty: "intermediate"
+  compute: "high"
+  colab_friendly: true
+  courses: ["05-finetune", "08-capstone"]
+  quickstart: |
+    from datasets import load_dataset
+
+    # Swahili ("sw") or Hausa ("ha")
+    ds = load_dataset("mozilla-foundation/common_voice_17_0", "sw", split="train", streaming=True)
+    print(next(iter(ds)))
+  project_ideas:
+    - title: "Hausa ASR Fairness"
+      description: "Train a Hausa ASR model and measure accuracy gaps across self-declared gender and age."
+      difficulty: "intermediate"
+    - title: "Accent Classifier"
+      description: "Build a model that classifies speaker accent from the audio."
+      difficulty: "intermediate"
+  ethics:
+    - "Demographic gaps (e.g. few female Hausa speakers in some releases) degrade performance for under-represented groups."
+  featured: false
+  date_added: "2026-06-11"
+

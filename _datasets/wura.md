@@ -49,6 +49,6 @@ project_ideas:
 ethics:
   - "While curated to remove noise, web-crawled data may still contain biases"
   - "Religious text inclusion can skew domain distribution"
-featured: true
+featured: false
 date_added: "2026-01-23"
 ---
