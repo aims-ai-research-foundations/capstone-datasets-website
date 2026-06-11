@@ -43,6 +43,12 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.01em;
 }
 
+// Display face carries the personality; reserved for page and section titles
+h1, h2 {
+  font-family: $font-display;
+  letter-spacing: -0.015em;
+}
+
 // Fluid typography for base headings - scales smoothly across viewports
 h1 { font-size: clamp(1.75rem, 3vw + 1rem, $font-size-4xl); }
 h2 { font-size: clamp(1.5rem, 2.5vw + 0.75rem, $font-size-3xl); }

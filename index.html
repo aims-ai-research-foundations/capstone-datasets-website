@@ -5,43 +5,34 @@ layout: default
 <!-- Hero Section -->
 <section class="hero">
   <div class="container">
-    <p class="hero__eyebrow">AI Research Foundations</p>
-    <h1 class="hero__title">Capstone Datasets</h1>
+    <p class="hero__eyebrow">AI Research Foundations &middot; Capstone Datasets</p>
+    <h1 class="hero__title">Find the right dataset for your students' capstone.</h1>
     <p class="hero__subtitle">
-      Contextualized datasets for capstone projects in the AI Research Foundations programme —
-      checked for licensing, access, and African relevance, ready for your students.
+      A curated catalogue for AI Champions and their students — every dataset checked
+      for licensing, open access, and African relevance, with Colab-ready starter code.
     </p>
-    <div class="hero__actions">
-      <a href="{{ '/datasets/' | relative_url }}" class="btn btn--primary btn--lg">
-        Browse Datasets
-      </a>
-      <a href="{{ '/courses/' | relative_url }}" class="btn btn--outline btn--lg">
-        View by Course
-      </a>
-    </div>
+    <form class="hero__search" action="{{ '/datasets/' | relative_url }}" method="get" role="search">
+      <input type="search" name="q" placeholder="Try &quot;Yoruba&quot;, &quot;crop disease&quot;, or &quot;speech&quot;" aria-label="Search datasets">
+      <button type="submit" class="btn btn--primary">Search</button>
+    </form>
+    <p class="hero__meta">
+      {{ site.data.datasets | size }} datasets &middot; 30+ African languages &middot;
+      mapped to all {{ site.data.courses | size }} courses &middot;
+      <a href="{{ '/courses/' | relative_url }}">browse by course</a>
+    </p>
   </div>
-</section>
 
-<!-- Stats Section -->
-<section class="section">
-  <div class="container">
-    <div class="stats">
-      <div class="stats__item">
-        <div class="stats__number">{{ site.data.datasets | size }}</div>
-        <div class="stats__label">Datasets</div>
+  {% assign strip_languages = "Yoruba|Hausa|Igbo|Swahili|Amharic|isiZulu|isiXhosa|Twi|Wolof|Kinyarwanda|Luganda|Shona|Somali|Oromo|Tigrinya|Sotho|Tswana|Nigerian Pidgin|Lingala|Chichewa|Bambara|Ewe|Fon|Kenyan Sign Language|Afrikaans|Malagasy" | split: "|" %}
+  <div class="hero__languages">
+    <div class="hero__languages-track">
+      {% for i in (1..2) %}
+      <div class="hero__languages-set" {% if i == 2 %}aria-hidden="true"{% endif %}>
+        {% for lang in strip_languages %}
+        {% assign q = lang | split: " " | first | downcase | remove_first: "isi" %}
+        <a href="{{ '/datasets/?q=' | append: q | relative_url }}" {% if i == 2 %}tabindex="-1"{% endif %}>{{ lang }}</a>
+        {% endfor %}
       </div>
-      <div class="stats__item">
-        <div class="stats__number">{{ site.project.countries | size }}</div>
-        <div class="stats__label">Countries</div>
-      </div>
-      <div class="stats__item">
-        <div class="stats__number">{{ site.data.courses | size }}</div>
-        <div class="stats__label">Courses</div>
-      </div>
-      <div class="stats__item">
-        <div class="stats__number">30+</div>
-        <div class="stats__label">African Languages</div>
-      </div>
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -49,18 +40,18 @@ layout: default
 <!-- Featured Datasets Section -->
 <section class="section section--gray">
   <div class="container">
-    <div class="section__header">
-      <h2 class="section__title">Featured Datasets</h2>
+    <div class="section__header section__header--left">
+      <p class="section__eyebrow">Start here</p>
+      <h2 class="section__title section__title--accent">Featured datasets</h2>
       <p class="section__subtitle">
-        Popular datasets for African language NLP and AI research
+        Strong first picks — well documented, openly licensed, and proven in teaching
       </p>
     </div>
 
     <div class="grid grid--3">
-      {% for dataset in site.data.datasets %}
-        {% if dataset.featured %}
-          {% include dataset-card.html dataset=dataset %}
-        {% endif %}
+      {% assign featured = site.data.datasets | where: "featured", true %}
+      {% for dataset in featured limit: 6 %}
+        {% include dataset-card.html dataset=dataset %}
       {% endfor %}
     </div>
 
@@ -75,8 +66,9 @@ layout: default
 <!-- Browse by Course Section -->
 <section class="section">
   <div class="container">
-    <div class="section__header">
-      <h2 class="section__title">Browse by Course</h2>
+    <div class="section__header section__header--left">
+      <p class="section__eyebrow">The curriculum</p>
+      <h2 class="section__title section__title--accent">Browse by course</h2>
       <p class="section__subtitle">
         Find datasets aligned with Google DeepMind's AI Research Foundations curriculum
       </p>
@@ -107,8 +99,9 @@ layout: default
 <!-- Browse by Country Section -->
 <section class="section section--gray">
   <div class="container">
-    <div class="section__header">
-      <h2 class="section__title">Browse by Country</h2>
+    <div class="section__header section__header--left">
+      <p class="section__eyebrow">Local context</p>
+      <h2 class="section__title section__title--accent">Browse by country</h2>
       <p class="section__subtitle">
         Datasets relevant to each of the programme's four target countries
       </p>

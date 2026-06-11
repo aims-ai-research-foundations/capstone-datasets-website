@@ -172,6 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
     ['country', 'course', 'difficulty'].forEach(t => {
       if (activeFilters[t] !== 'all') qs.set(t, activeFilters[t]);
     });
+    if (activeFilters.search) qs.set('q', activeFilters.search);
     const query = qs.toString();
     history.replaceState(null, '', location.pathname + (query ? '?' + query : ''));
   }
@@ -180,6 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
   searchInput.addEventListener('input', function() {
     activeFilters.search = this.value.toLowerCase();
     applyFilters();
+    syncUrl();
   });
 
   function applyFilters() {
@@ -254,8 +256,14 @@ document.addEventListener('DOMContentLoaded', function() {
     syncUrl();
   };
 
-  // Apply filters from query string (e.g. /datasets/?country=NG from homepage pills)
+  // Apply filters from query string (e.g. /datasets/?country=NG from homepage pills,
+  // /datasets/?q=yoruba from the hero search and language strip)
   const params = new URLSearchParams(location.search);
+  const q = params.get('q');
+  if (q) {
+    searchInput.value = q;
+    activeFilters.search = q.toLowerCase();
+  }
   ['country', 'course', 'difficulty'].forEach(filterType => {
     const value = params.get(filterType);
     if (!value) return;
