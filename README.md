@@ -6,12 +6,7 @@ A static website for discovering and accessing curated datasets for AI Research 
 
 ## Project Overview
 
-This website supports the **Africa AI Upskilling Initiative**, providing students and AI Champions from Higher Educational Institutions (HEIs) in Nigeria, Ghana, Kenya, and South Africa with easy access to curated datasets for their capstone projects.
-
-**Target Audience:**
-- 146 AI Champions (lecturers)
-- 146+ Teaching Assistants
-- ~31,000 STEM Students
+This website supports the **AI Research Foundations Train-the-Trainer programme**, providing AI Champions (HEI lecturers), their Teaching Assistants, and the STEM students they supervise across Nigeria, Ghana, Kenya, and South Africa with curated, contextualized datasets for capstone projects. It is the datasets companion to the AI Champion Lecturer Toolkit.
 
 ## Technology Stack
 
@@ -78,4 +73,4 @@ MIT License - See [LICENSE](LICENSE) for details.
 
 ---
 
-**Part of the Africa AI Upskilling Initiative**
+**Part of the AI Research Foundations Train-the-Trainer programme**

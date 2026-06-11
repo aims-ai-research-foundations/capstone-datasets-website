@@ -7,9 +7,8 @@ logo: "/assets/images/logos/logo.svg"
 
 # Project info
 project:
-  name: "Africa AI Upskilling Initiative"
-  tagline: "Empowering 30,900 students across Africa with world-class AI education"
-  total_students: "30,900"
+  name: "AI Research Foundations"
+  tagline: "Contextualized datasets for capstone projects across Nigeria, Ghana, Kenya, and South Africa"
   countries:
     - name: "Nigeria"
       code: "NG"
