@@ -20,6 +20,9 @@
       {% endfor %}
       <span class="dataset-card__badge dataset-card__badge--size">{{ include.dataset.size }}</span>
       <span class="dataset-card__badge dataset-card__badge--license">{{ include.dataset.license }}</span>
+      {% if include.dataset.difficulty %}
+      <span class="dataset-card__badge dataset-card__badge--difficulty">{{ include.dataset.difficulty }}</span>
+      {% endif %}
     </div>
 
     <div class="dataset-card__languages">
